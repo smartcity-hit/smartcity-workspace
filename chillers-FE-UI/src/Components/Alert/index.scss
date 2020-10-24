@@ -1,0 +1,42 @@
+.alert-content {
+    padding: 15px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.alert-content div {
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 20px;
+    &:not(.last):not(.first) {
+        border-right: 1px solid rgba(233, 233, 233, 0.4);
+    }
+}
+
+.alert-content .type {
+    font-size: 16px;
+    font-weight: 700;
+    padding-right: 10px;
+}
+
+.error {
+    background-color: rgb(160, 67, 64);
+}
+
+.warning {
+    background-color: rgb(185, 158, 34);
+}
+
+.info {
+    background-color: rgb(64, 122, 160);
+}
+
+.no-type {
+    background-color: rgb(121, 121, 121);
+}

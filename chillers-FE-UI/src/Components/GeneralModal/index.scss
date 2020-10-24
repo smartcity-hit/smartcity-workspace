@@ -1,0 +1,31 @@
+.modal-wrapper {
+  width: 70%;
+  max-width: 500px;
+  height: 30vh;
+  padding: 40px 50px !important;
+  justify-content: center;
+  .modal-title {
+    align-self: flex-start;
+    margin-left: 20px;
+  }
+  .modal-text {
+    align-self: flex-start;
+    margin-left: 24px;
+    font-weight: 600;
+  }
+  .btns {
+    align-self: flex-end;
+    margin-top: 30px;
+    margin-right: 40px;
+
+    .modal-btn {
+      &.primary-btn {
+        background-color: red;
+      }
+      &.secondary-btn {
+        background-color: gray;
+        margin-left: 15px;
+      }
+    }
+  }
+}

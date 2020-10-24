@@ -1,0 +1,34 @@
+.select-chillers-section-wrapper {
+	display: flex;
+	flex-direction: row;
+	width: 50%;
+	margin-bottom: 2rem;
+	.refresh-btn {
+		width: 100%;
+	}
+	select.chillers-select {
+		margin-right: 100px;
+		background: #2b98f0;
+		border: 2px solid white;
+		padding-right: 20px;
+		color: white;
+		font-size: 14px;
+		font-weight: bold;
+		border-radius: 10px;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none; /* Remove default arrow */
+		background-image: url('../../assets/icons/white-down-arrow.png'); /* Add custom arrow */
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position-x: right;
+		background-origin: content-box;
+		&:focus {
+			outline: none;
+		}
+		.chiller-option {
+			border-radius: 10px;
+			margin: 12px 0;
+		}
+	}
+}

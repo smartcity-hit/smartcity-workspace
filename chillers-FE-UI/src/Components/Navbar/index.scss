@@ -1,0 +1,107 @@
+.navbar-container {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    background: #17ead9; /* fallback for old browsers */
+    background: -webkit-linear-gradient(2deg, #17ead9 0%, #6078ea 100%); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(2deg, #17ead9 0%, #6078ea 100%); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    box-shadow: 0px 3px 13px rgba(0,0,0,0.5);
+
+    .nav-logo {
+        font-size: 30px;
+        margin-left: 20px;
+        cursor: pointer;
+    }
+    ul.nav-links {
+        display: flex;
+        flex-direction: row;
+        overflow: hidden;
+        height: 100%;
+        min-width: 225px;
+        margin: 0;
+        list-style-type: none;
+        padding-right: 7px;
+        li.nav-link {
+           display: flex;
+            justify-items: center;
+            border-radius: 5px;
+            height: 100%;
+            transition: color 0.5s linear;
+            &.active {
+                color: grey;
+            }
+            &:hover {
+                color: grey;
+
+            }
+            &:not(.last) {
+            padding-right: 7px;
+            border-right: 1px solid rgba(255, 255, 255, 0.3);
+            }  
+            a.nav-link-text {
+                text-decoration: none;
+                padding: 8px;
+                font-size: 25px;
+                margin: auto 0;
+                line-height: 19px;
+            }
+        }
+    }
+    .menu-dropdown {
+        position: relative;
+        cursor: pointer;
+        font-size: 20px;
+        display: flex;
+        flex-direction: column;
+        margin-right: 50px;
+        .user-btn {
+            label {
+                cursor: pointer;
+            }
+        }
+        ul.user-dropdown-list {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            background-color: #485761;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 10px;
+            left: -35px;
+            position: absolute;
+            top: 37px;
+            z-index: 1;
+            box-shadow: 0px 6px 12px 0px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            width: 140px;
+            height: 88px;
+            &.short {
+                height: 43px;
+            }
+            &.hidden {
+                height: 0px;
+                // visibility: hidden;
+                li.user-dropdown-item {
+                    visibility: hidden;
+                }
+                hr {
+                    visibility: hidden;
+                }
+            }
+
+            li.user-dropdown-item {
+                padding: 12px;
+                text-align: left;
+                width: 100%;
+                box-sizing: border-box;
+                &:hover { 
+                    color: #38B7E1;  
+                }
+            }
+        }
+    }
+}

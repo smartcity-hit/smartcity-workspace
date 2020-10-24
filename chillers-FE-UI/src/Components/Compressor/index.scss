@@ -1,0 +1,26 @@
+.compressor-wrapper {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 2px solid #a3bffa;
+    border-radius: 10px;
+    padding: 0 5px;
+    cursor: pointer;
+    .status-wrapper {
+        font-size: 15px;
+        .status {
+            cursor: pointer;
+            margin-left: 3px;
+            &.green {
+                color: green;
+            }
+            &.red {
+                color: red;
+            }
+        }
+    }
+    .alert {
+        font-size: 10px;
+    }
+}

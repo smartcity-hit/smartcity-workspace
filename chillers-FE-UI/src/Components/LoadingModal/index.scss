@@ -1,0 +1,28 @@
+.loading-modal-wrapper {
+	.loading {
+		span.dot {
+			width: 25px;
+			height: 25px;
+			margin: 0 5px;
+			background-color: #ffd957;
+			border-radius: 50%;
+			display: inline-block;
+			animation: dots 2s infinite ease-in-out;
+			&.turquoise {
+				background-color: #57ffa0;
+				animation-delay: 0.4s;
+			}
+			&.orange {
+				background-color: #ff8b57;
+				animation-delay: 0.8s;
+			}
+		}
+	}
+}
+
+@keyframes dots {
+	50% {
+		opacity: 0;
+		transform: scale(0.7) translateY(10px);
+	}
+}

@@ -1,0 +1,160 @@
+.App {
+	text-align: center;
+	height: 100%;
+}
+
+#root {
+	height: 100%;
+}
+
+.App-logo {
+	height: 40vmin;
+	pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.App-logo {
+		animation: App-logo-spin infinite 20s linear;
+	}
+}
+
+.App-header {
+	background-color: #282c34;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
+}
+
+.App-link {
+	color: #61dafb;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+button {
+	border: none;
+	outline: none;
+	cursor: pointer;
+	background-color: #2b98f0;
+	padding: 13px 20px;
+	border-radius: 7px;
+	box-shadow: 0 2px 6px #333;
+	transition: box-shadow 0.4s;
+	color: white;
+	font-family: Montserrat;
+	font-weight: 600;
+	&:focus {
+		border: 2px solid #b9b9b9;
+	}
+	&:disabled {
+		cursor: auto;
+		background-color: grey !important;
+		color: white !important;
+		box-shadow: none;
+		&:hover {
+			box-shadow: none;
+		}
+	}
+	&:hover {
+		box-shadow: 0 4px 8px #333;
+	}
+}
+
+input {
+	border: none;
+	outline: none;
+	border-radius: 5px;
+	padding: 8px 20px 8px 8px;
+	font-size: 14px;
+	font-family: Montserrat;
+	transition: all 0.3s linear;
+	&:focus {
+		box-shadow: 0px -2px 10px grey;
+	}
+}
+
+select {
+	width: 100%;
+	border: none;
+	outline-color: #61dafb;
+	padding: 8px 20px 8px 8px;
+	border-radius: 5px;
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+hr {
+	width: 100%;
+	opacity: 0.4;
+	margin: 0;
+}
+
+.full-height {
+	height: 100%;
+}
+
+.bold {
+	font-weight: 600;
+}
+
+.capitalize {
+	text-transform: capitalize;
+}
+
+.column {
+	display: flex;
+	flex-direction: column;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+}
+
+.app-modal {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	right: auto;
+	bottom: auto;
+	margin-right: -50%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border-radius: 18px;
+	padding: 50px 100px;
+	box-shadow: 0px 4px 8px grey;
+	z-index: 100;
+	background-color: white;
+	outline: none;
+}
+
+.modal-overlay {
+	background-color: rgba(0, 0, 0, 0.5);
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+@keyframes App-logo-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}

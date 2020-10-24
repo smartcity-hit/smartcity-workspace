@@ -1,0 +1,56 @@
+.user-list-wrapper {
+	width: 90%;
+	margin: auto;
+	background: linear-gradient(135deg, #17ead9 0%, #6078ea 100%);
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+	border-radius: 20px;
+	padding: 15px;
+	&:hover {
+		box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+	}
+	.table-wrapper {
+		border-collapse: collapse;
+		width: 100%;
+		text-align: justify;
+		color: white;
+		font-weight: bold;
+		.th-wrapper {
+			padding-left: 8px;
+			font-size: 20px;
+		}
+		.td-icons {
+			display: flex;
+			justify-content: flex-start;
+			.icon {
+				cursor: pointer;
+				margin-right: 20px;
+				&.edit-active {
+					color: indigo;
+				}
+			}
+		}
+		.tbody-wrapper {
+			.tr-wrapper {
+				height: 50px;
+				border-bottom: 1px solid white;
+				&:hover {
+					background: linear-gradient(135deg, #2ee4d5 0%, #6982ff 100%);
+				}
+				.td-wrapper {
+					input.user-field-input {
+						width: 85%;
+						background: transparent;
+						color: #fff;
+						font-size: 16px;
+						font-weight: bold;
+						padding: 8px;
+						&.active {
+							background-color: rgba(255, 255, 255, 0.7);
+							color: darkblue;
+						}
+					}
+				}
+			}
+		}
+	}
+}

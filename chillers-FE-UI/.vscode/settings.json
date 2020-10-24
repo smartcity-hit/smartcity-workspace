@@ -1,0 +1,48 @@
+{
+    "editor.fontSize": 14,
+    "editor.wordWrap": "on",
+    "workbench.iconTheme": "vscode-icons",
+    "workbench.startupEditor": "newUntitledFile",
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": true,
+    "prettier.singleQuote": true,
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact",
+        "typescript": "typescriptreact"
+    },
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true,
+        "**/.node_modules": true
+    },
+    "prettier.tabWidth": 4,
+    // "prettier.useTabs": true,
+    "prettier.printWidth": 115,
+    "git.confirmSync": false,
+    "git.enableSmartCommit": true,
+    "code-runner.runInTerminal": true,
+    "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4 }",
+    "C_Cpp.updateChannel": "Insiders",
+    "window.zoomLevel": 0,
+    "files.associations": {
+        "*.json": "jsonc"
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+        // "source.fixAll.tslint": true
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "java.semanticHighlighting.enabled": true
+}
