@@ -25,6 +25,11 @@ After getting the data, the server will save it to the related collection in the
 connect to Atlas-MongoDB with this google account
 https://cloud.mongodb.com/v2/5f5dbcf00d7e2200b26ece87#metrics/replicaSet/5f5dbdb3c3ea437e67300a09/explorer/chillers
 
+### How to connect H.i.T's remote linux server
+Open your CMD and enter the following `ssh -p 1194 chillers@192.114.5.159`
+After that, the server will ask you for a pwd, please enter `#Chill`.
+Now, you're connected to the remote server, to enter the directory of the modbus, please `cd modbus` and use the `npm start` command as written above.
+
 ---
 
 ## License
