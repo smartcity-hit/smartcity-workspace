@@ -9,6 +9,7 @@
         {
             "path": "..\\chillers-BE-MODBUS"
         }
+        
     ],
     "settings": {
         "files.exclude": {
