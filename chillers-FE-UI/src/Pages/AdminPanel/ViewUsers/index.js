@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { deleteUserById, editUser } from '../../../actions/user';
-import GeneralModal from '../../../Components/GeneralModal';
+import GeneralModal from '../../../Components/GeneralModal/GeneralModal';
 import './index.scss';
 
 const defaultEditedValues = {
