@@ -72,4 +72,3 @@ socket.on('connect', async function () {
 
   module.exports = socket.connect(options);
   // socket.connect(options);
-  // This is a test text
