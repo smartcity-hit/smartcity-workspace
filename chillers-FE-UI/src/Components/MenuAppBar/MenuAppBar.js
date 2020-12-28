@@ -25,6 +25,13 @@ import Collapse from '@material-ui/core/Collapse';
 import StarBorder from '@material-ui/icons/StarBorder';
 import ChillersMenuItem from "./MenuItems/ChillersMenuItem";
 import CountersMenuItem from "./MenuItems/CountersMenuItem";
+import ChillerHistory from '../../Pages/ChillerHistory';
+import waterCircuit from '../../Pages/WaterCircuit';
+import coolingCircuit from '../../Pages/CoolingCircuit';
+import { BroserRouter, Link, Switch, Route } from 'react-router-dom';
+
+
+
 
 const drawerWidth = 240;
 
@@ -175,9 +182,15 @@ export default function MenuAppBar() {
         })}
       >
         <div className={classes.drawerHeader} />
-        <Typography paragraph>
-          Hello, Admin.
-        </Typography>
+
+
+        <Switch>
+          <Route path="/WaterCircuit" component={waterCircuit} />
+          <Route path="/CoolingCircuit" component={coolingCircuit} />
+          <Route path="/ChilersHistory" component={ChillerHistory} />
+        </Switch>
+
+
       </main>
     </div>
   );

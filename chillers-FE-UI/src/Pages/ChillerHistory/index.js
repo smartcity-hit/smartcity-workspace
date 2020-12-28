@@ -197,7 +197,9 @@ const ChillerHistory = () => {
 				</div>
 			) : null}
 		</div>
+
 	);
+
 };
 
 export default ChillerHistory;

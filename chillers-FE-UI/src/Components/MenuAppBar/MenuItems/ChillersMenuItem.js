@@ -9,6 +9,12 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import List from "@material-ui/core/List";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { BroserRouter, Link, Switch, Route } from 'react-router-dom';
+import chillerHistory from '../../../Pages/ChillerHistory';
+import waterCircuit from '../../../Pages/WaterCircuit';
+import coolingCircuit from '../../../Pages/CoolingCircuit';
+import signOutUser from '../../../actions/user';
+
 
 const useStyles = makeStyles((theme) => ({
   nested: {
@@ -24,6 +30,7 @@ export default function ChillersMenuItem(props) {
   };
 
   return (
+
     <div>
       <ListItem button key="Chillers" onClick={handleClick}>
         <ListItemIcon>
@@ -32,16 +39,45 @@ export default function ChillersMenuItem(props) {
         <ListItemText primary="Chillers" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItem button className={classes.nested}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="Starred" />
-          </ListItem>
-        </List>
-      </Collapse>
+
+      <Link to="/waterCircuit">
+        <Collapse in={open} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItem button className={classes.nested}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary="Water circuit" />
+            </ListItem>
+          </List>
+        </Collapse>
+      </Link>
+
+      <Link to="/coolingCircuit">
+        <Collapse in={open} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItem button className={classes.nested}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary="Cooling circuit" />
+            </ListItem>
+          </List>
+        </Collapse>
+      </Link>
+
+      <Link to="/chillerHistory">
+        <Collapse in={open} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItem button className={classes.nested}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary="Chiller History" />
+            </ListItem>
+          </List>
+        </Collapse>
+      </Link>
     </div>
   )
 };

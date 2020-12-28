@@ -27,11 +27,11 @@ const WaterCircuit = () => {
 						{(index !== rowsArr.length - 1 && index !== 0) || !isArrowNeeded ? (
 							<BlueLine className="blue-line-icon line-horizontal"></BlueLine>
 						) : (
-							<div className="arrow arrow-horizontal" key={index}>
-								<div className="line"></div>
-								<div className="point"></div>
-							</div>
-						)}
+								<div className="arrow arrow-horizontal" key={index}>
+									<div className="line"></div>
+									<div className="point"></div>
+								</div>
+							)}
 					</div>
 				))}
 			</div>
@@ -43,9 +43,8 @@ const WaterCircuit = () => {
 				{columnsArr.map((val, index) => (
 					<div className="line-container" key={index}>
 						<BlueLine
-							className={`blue-line-icon line-vertical ${
-								index === columnsArr.length - 1 ? 'last' : ''
-							}`}
+							className={`blue-line-icon line-vertical ${index === columnsArr.length - 1 ? 'last' : ''
+								}`}
 						></BlueLine>
 					</div>
 				))}
@@ -70,6 +69,7 @@ const WaterCircuit = () => {
 	if (allChillers && allChillers.length) {
 		activeChiller = allChillers[activeChillerIndex];
 	}
+
 
 	return (
 		<div className="water-circuit-wrapper">
@@ -137,6 +137,7 @@ const WaterCircuit = () => {
 			</div>
 		</div>
 	);
+
 };
 
 export default WaterCircuit;
