@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 
-import './index.scss';
+import './LoadingModal.scss';
 
 Modal.setAppElement('#root');
 

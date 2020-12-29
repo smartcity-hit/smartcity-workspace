@@ -1,8 +1,8 @@
 import React from 'react';
 
-import './index.scss';
+import './Chiller.scss';
 
-class Chiller extends React.Component {
+class Chiller extends Component {
     state = {
         // HARDCODED
         status: 'idle',

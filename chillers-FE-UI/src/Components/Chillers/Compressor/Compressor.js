@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Alert from '../Alert';
 
-import './index.scss';
+import './Compressor.scss';
 
 export default class Compressor extends Component {
     status = { on: 'Running', off: 'Off' };

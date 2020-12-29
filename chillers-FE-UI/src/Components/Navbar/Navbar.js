@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { signOutUser } from '../../actions/user';
 
-import './index.scss';
+import './Navbar.scss';
 
 const Navbar = () => {
 
