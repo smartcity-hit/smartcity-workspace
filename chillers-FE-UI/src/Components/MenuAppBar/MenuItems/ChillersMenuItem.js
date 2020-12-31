@@ -9,6 +9,8 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import List from "@material-ui/core/List";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { BroserRouter,Link, Switch, Route } from 'react-router-dom';
+
 
 const useStyles = makeStyles((theme) => ({
   nested: {
@@ -32,16 +34,48 @@ export default function ChillersMenuItem(props) {
         <ListItemText primary="Chillers" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
+
+      <Link to="/waterCircuit">
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           <ListItem button className={classes.nested}>
             <ListItemIcon>
               <StarBorder />
             </ListItemIcon>
-            <ListItemText primary="Starred" />
+            <ListItemText primary="Water circuit" />
           </ListItem>
         </List>
       </Collapse>
+     </Link>
+
+     
+     <Link to="/CoolingCircuit">
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+              <StarBorder />
+            </ListItemIcon>
+            <ListItemText primary="Cooling circuit" />
+          </ListItem>
+        </List>
+      </Collapse>
+     </Link>
+
+     
+     <Link to="/ChilersHistory">
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItem button className={classes.nested}>
+            <ListItemIcon>
+              <StarBorder />
+            </ListItemIcon>
+            <ListItemText primary="Chillers history" />
+          </ListItem>
+        </List>
+      </Collapse>
+     </Link>
     </div>
   )
 };
+

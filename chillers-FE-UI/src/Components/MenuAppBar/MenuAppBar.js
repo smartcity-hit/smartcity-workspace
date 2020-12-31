@@ -23,8 +23,12 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Collapse from '@material-ui/core/Collapse';
 import StarBorder from '@material-ui/icons/StarBorder';
-import ChillersMenuItem from "./MenuItems/ChillersMenuItem";
-import CountersMenuItem from "./MenuItems/CountersMenuItem";
+import { BroserRouter, Link,Route ,Switch} from 'react-router-dom';
+import ChillersMenuItem from "../MenuAppBar/menuItems/ChillersMenuItem";
+import CountersMenuItem from "../MenuAppBar/menuItems/CountersMenuItem";
+import waterCircuit from "../../Pages/WaterCircuit";
+import coolingCircuit from "../../Pages/CoolingCircuit";
+import ChilersHistory from "../../Pages/ChillerHistory";
 
 const drawerWidth = 240;
 
@@ -175,9 +179,13 @@ export default function MenuAppBar() {
         })}
       >
         <div className={classes.drawerHeader} />
-        <Typography paragraph>
-          Hello, Admin.
-        </Typography>
+        
+        <Switch>
+          <Route path="/WaterCircuit" component={waterCircuit} />
+          <Route path="/CoolingCircuit" component={coolingCircuit} />
+          <Route path="/ChilersHistory" component={ChilersHistory} />
+        </Switch>
+      
       </main>
     </div>
   );
