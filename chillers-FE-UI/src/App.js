@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter,Switch } from 'react-router-dom';
 
 import LoadingModal from './Components/LoadingModal/LoadingModal';
 import MenuAppBar from './Components/MenuAppBar/MenuAppBar';
@@ -10,9 +10,10 @@ import { initChiller } from './actions/chiller';
 import Routes from './routes/routes';
 
 import './App.scss';
+import LoginPage from './Pages/LoginPage';
 
 const App = () => {
-	const { loading } = useSelector((state) => state.user);
+	const { userData, loading } = useSelector((state) => state.user);
 	const { chillerLoading } = useSelector((state) => state.chiller);
 	const dispatch = useDispatch();
 
@@ -20,11 +21,23 @@ const App = () => {
 		dispatch(initEnvironment());
 		dispatch(initChiller());
 	}, [dispatch]);
+
 	return (
 		<div className="App">
 			<LoadingModal isModalOpen={loading || chillerLoading} />
 			<BrowserRouter>
-				<MenuAppBar />
+				{userData ? < MenuAppBar/> : ''}
+				<Routes />
+				{/* userData && ? (
+					<Alert
+						type="error"
+						description="An error occurred while trying to cool the water"
+						code={1234}
+						source="Chiller 1/A"
+					/>
+				) : (
+					''
+				)*/}
 			</BrowserRouter>
 		</div>
 	);

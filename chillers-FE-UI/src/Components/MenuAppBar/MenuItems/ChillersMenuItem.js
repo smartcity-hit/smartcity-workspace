@@ -10,7 +10,10 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import List from "@material-ui/core/List";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { BroserRouter,Link, Switch, Route } from 'react-router-dom';
-
+import { useHistory, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useCallback, useEffect, useState } from 'react';
+import { signOutUser } from '../../../actions/user';
 
 const useStyles = makeStyles((theme) => ({
   nested: {
@@ -18,15 +21,45 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ChillersMenuItem(props) {
+const ChillersMenuItem = () => {
+
+    const history = useHistory();
+  const { pathname } = useLocation();
+  const dispatch = useDispatch();
+  const { userData } = useSelector(state => state.user);
+  
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleClick = () => {
     setOpen(!open);
   };
 
+
+
+  const handleDocumentClick = useCallback((e) => {
+      if (open && e.target.id !== 'user-btn-label') {
+        setOpen(false);
+      }
+  }, [open]);
+
+  useEffect(() => {
+      document.body.addEventListener('click', handleDocumentClick);
+      return (() => {
+          document.body.removeEventListener('click', handleDocumentClick);
+      });
+  }, [handleDocumentClick])
+
+  const toggleUserDropdown = () => {
+    setOpen(!open);
+  }
+
+  const onClickSignOut = () => {
+      dispatch(signOutUser());
+  }
+
   return (
     <div>
+      
       <ListItem button key="Chillers" onClick={handleClick}>
         <ListItemIcon>
           <KitchenOutlinedIcon />
@@ -38,7 +71,7 @@ export default function ChillersMenuItem(props) {
       <Link to="/waterCircuit">
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItem button className={classes.nested}>
+          <ListItem button className={`nav-link ${pathname.includes('waterCircuit') ? 'active' : ''}`}>
             <ListItemIcon>
               <StarBorder />
             </ListItemIcon>
@@ -49,10 +82,10 @@ export default function ChillersMenuItem(props) {
      </Link>
 
      
-     <Link to="/CoolingCircuit">
+     <Link to="/coolingCircuit">
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItem button className={classes.nested}>
+          <ListItem button className={`nav-link ${pathname.includes('coolingCircuit') ? 'active' : ''}`}>
             <ListItemIcon>
               <StarBorder />
             </ListItemIcon>
@@ -63,10 +96,10 @@ export default function ChillersMenuItem(props) {
      </Link>
 
      
-     <Link to="/ChilersHistory">
+     <Link to="/chillerHistory">
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItem button className={classes.nested}>
+          <ListItem button className={`nav-link last ${pathname.includes('chillerHistory') ? 'active' : ''}`}>
             <ListItemIcon>
               <StarBorder />
             </ListItemIcon>
@@ -79,3 +112,4 @@ export default function ChillersMenuItem(props) {
   )
 };
 
+export default ChillersMenuItem;

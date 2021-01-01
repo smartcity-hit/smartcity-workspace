@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-
+import MenuAppBar from "../../Components/MenuAppBar/MenuAppBar"
 import { signInUser } from '../../actions/user';
 
 import './index.scss';
@@ -18,7 +18,7 @@ const LoginPage = () => {
 
 	useEffect(() => {
 		if (userData) {
-			history.push('/');
+			history.push('/MenuAppBar');
 		}
 	}, [userData, history]);
 

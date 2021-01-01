@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MenuAppBar() {
+const MenuAppBar = () =>{
   const classes = useStyles();
   const theme = useTheme();
   const [openMenuAppBar, setOpenMenuAppBar] = React.useState(false);
@@ -180,13 +180,11 @@ export default function MenuAppBar() {
       >
         <div className={classes.drawerHeader} />
         
-        <Switch>
-          <Route path="/WaterCircuit" component={waterCircuit} />
-          <Route path="/CoolingCircuit" component={coolingCircuit} />
-          <Route path="/ChilersHistory" component={ChilersHistory} />
-        </Switch>
+      
       
       </main>
     </div>
   );
 }
+
+export default MenuAppBar;
