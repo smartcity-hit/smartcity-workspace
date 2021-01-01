@@ -14,6 +14,7 @@ const options = {
   'port' : port
 };
 
+
 socket.on('connect', async function () {
   try {
     console.log('MODBUS SERVER IS CONNECTED');
@@ -35,7 +36,7 @@ socket.on('connect', async function () {
         chillerState: data[7],
         chillerName: "chiller1"
       };
-      
+
       if (dataToStore) {
       const ChillerI = mongoose.model('Chillers', chillersSchema, 'chillers');
       const chillerData = new ChillerI(dataToStore);
