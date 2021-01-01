@@ -1,6 +1,7 @@
 const Modbus = require('jsmodbus');
 const mongoose = require('mongoose');
-const { chillersSchema } = require('./utils/chillersService');
+const { chillersSchema } = require('./utils/schemas');
+
 // Initialize of TCP ModBus connection.
 const net = require('net');
 const socket = new net.Socket();
@@ -31,10 +32,12 @@ socket.on('connect', async function () {
         controlPoint: data[4],
         unitPrecentActiveCapacity: data[5],
         demandLimit: data[6],
-        chillerState: data[7]
+        chillerState: data[7],
+        chillerName: "chiller1"
       };
+      
       if (dataToStore) {
-      const ChillerI= mongoose.model('Chilller1', chillersSchema, 'chiller1');
+      const ChillerI = mongoose.model('Chillers', chillersSchema, 'chillers');
       const chillerData = new ChillerI(dataToStore);
       await chillerData.save();
       console.log('SAVED_DATA');

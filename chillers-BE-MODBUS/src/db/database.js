@@ -9,7 +9,6 @@ async function myDbConnection() {
     mongoose.set('useNewUrlParser',true);
     mongoose.set('useCreateIndex',true);
     const uri = process.env.DB_URI;
-    // const uri = 'mongodb://localhost:27017/chillers';
     let connectionPromise = await mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     if (mongoose.connection) {
         logger.info('Connected Successfully to DB');
