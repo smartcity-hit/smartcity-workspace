@@ -9,6 +9,12 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import List from "@material-ui/core/List";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { BroserRouter, Link, Switch, Route } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useCallback, useEffect, useState } from 'react';
+import { signOutUser } from '../../../actions/user';
+
 
 const useStyles = makeStyles((theme) => ({
   nested: {
@@ -17,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CountersMenuItem(props) {
+  const { pathname } = useLocation();
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleClick = () => {
@@ -32,22 +39,36 @@ export default function CountersMenuItem(props) {
         <ListItemText primary="Counters" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItem button className={classes.nested}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="Item1" />
-          </ListItem>
-          <ListItem button className={classes.nested}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="Item2" />
-          </ListItem>
-        </List>
-      </Collapse>
+
+
+      <Link to="/CountersAlerts">
+        <Collapse in={open} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItem button className={`nav-link ${pathname.includes('CountersAlerts') ? 'active' : ''}`}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary="Alerts" />
+            </ListItem>
+          </List>
+        </Collapse>
+      </Link>
+
+      <Link to="/CountersDevices">
+        <Collapse in={open} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItem button className={`nav-link ${pathname.includes('CountersDevices') ? 'active' : ''}`}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary="Devices" />
+            </ListItem>
+          </List>
+        </Collapse>
+      </Link>
+
     </div>
   )
 };
+
+export { CountersMenuItem };

@@ -25,6 +25,9 @@ import Collapse from '@material-ui/core/Collapse';
 import StarBorder from '@material-ui/icons/StarBorder';
 import ChillersMenuItem from "./MenuItems/ChillersMenuItem";
 import CountersMenuItem from "./MenuItems/CountersMenuItem";
+import CountersAlerts from '../../Pages/Alerts';
+import CountersDevices from '../../Pages/Devices';
+import { BroserRouter, Link, Switch, Route } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -89,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MenuAppBar() {
+export function MenuAppBar() {
   const classes = useStyles();
   const theme = useTheme();
   const [openMenuAppBar, setOpenMenuAppBar] = React.useState(false);
@@ -178,6 +181,12 @@ export default function MenuAppBar() {
         <Typography paragraph>
           Hello, Admin.
         </Typography>
+
+        <Switch>
+          <Route path="/CountersAlerts" component={CountersAlerts} />
+          <Route path="/CountersDevices" component={CountersDevices} />
+        </Switch>
+
       </main>
     </div>
   );

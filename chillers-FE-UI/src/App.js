@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import LoadingModal from './Components/LoadingModal/LoadingModal';
-import MenuAppBar from './Components/MenuAppBar/MenuAppBar';
+import { MenuAppBar } from './Components/MenuAppBar/MenuAppBar';
 
 import { initEnvironment } from './actions/user';
 import { initChiller } from './actions/chiller';
