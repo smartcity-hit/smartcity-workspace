@@ -24,8 +24,8 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import Collapse from '@material-ui/core/Collapse';
 import StarBorder from '@material-ui/icons/StarBorder';
 import { BroserRouter, Link,Route ,Switch} from 'react-router-dom';
-import ChillersMenuItem from "../MenuAppBar/menuItems/ChillersMenuItem";
-import CountersMenuItem from "../MenuAppBar/menuItems/CountersMenuItem";
+import ChillersMenuItem from "../MenuAppBar/MenuItems/ChillersMenuItem";
+import CountersMenuItem from "../MenuAppBar/MenuItems/CountersMenuItem";
 import waterCircuit from "../../Pages/WaterCircuit";
 import coolingCircuit from "../../Pages/CoolingCircuit";
 import ChilersHistory from "../../Pages/ChillerHistory";
@@ -111,6 +111,10 @@ const MenuAppBar = () =>{
     setOpenMenuAppBar(false);
   };
 
+  const handleMenuClose = () => {
+    setOpenCollapsed(false);
+  };
+
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -179,8 +183,6 @@ const MenuAppBar = () =>{
         })}
       >
         <div className={classes.drawerHeader} />
-        
-      
       
       </main>
     </div>

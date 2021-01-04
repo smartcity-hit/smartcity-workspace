@@ -14,6 +14,8 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback, useEffect, useState } from 'react';
 import { signOutUser } from '../../../actions/user';
+import MenuAppBar from "../MenuAppBar";
+import handleDrawerClose from "../MenuAppBar";
 
 const useStyles = makeStyles((theme) => ({
   nested: {
@@ -23,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ChillersMenuItem = () => {
 
-    const history = useHistory();
+  const history = useHistory();
   const { pathname } = useLocation();
   const dispatch = useDispatch();
   const { userData } = useSelector(state => state.user);
@@ -49,13 +51,14 @@ const ChillersMenuItem = () => {
       });
   }, [handleDocumentClick])
 
-  const toggleUserDropdown = () => {
-    setOpen(!open);
-  }
-
   const onClickSignOut = () => {
       dispatch(signOutUser());
   }
+
+  const handelClose=()=>{
+    setOpen(false);
+  }
+
 
   return (
     <div>
@@ -71,8 +74,8 @@ const ChillersMenuItem = () => {
       <Link to="/waterCircuit">
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItem button className={`nav-link ${pathname.includes('waterCircuit') ? 'active' : ''}`}>
-            <ListItemIcon>
+          <ListItem button className={`${pathname.includes('waterCircuit') ? 'active' : ''}`}>
+            <ListItemIcon onClick={handleDocumentClick}>
               <StarBorder />
             </ListItemIcon>
             <ListItemText primary="Water circuit" />
@@ -85,8 +88,8 @@ const ChillersMenuItem = () => {
      <Link to="/coolingCircuit">
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItem button className={`nav-link ${pathname.includes('coolingCircuit') ? 'active' : ''}`}>
-            <ListItemIcon>
+          <ListItem button  className={` ${pathname.includes('coolingCircuit') ? 'active' : ''}`}>
+            <ListItemIcon onClick={handelClose}>
               <StarBorder />
             </ListItemIcon>
             <ListItemText primary="Cooling circuit" />
@@ -99,8 +102,8 @@ const ChillersMenuItem = () => {
      <Link to="/chillerHistory">
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItem button className={`nav-link last ${pathname.includes('chillerHistory') ? 'active' : ''}`}>
-            <ListItemIcon>
+          <ListItem button className={`${pathname.includes('chillerHistory') ? 'active' : ''}`}>
+            <ListItemIcon onClick={handelClose}>
               <StarBorder />
             </ListItemIcon>
             <ListItemText primary="Chillers history" />

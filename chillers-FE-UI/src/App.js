@@ -28,16 +28,7 @@ const App = () => {
 			<BrowserRouter>
 				{userData ? < MenuAppBar/> : ''}
 				<Routes />
-				{/* userData && ? (
-					<Alert
-						type="error"
-						description="An error occurred while trying to cool the water"
-						code={1234}
-						source="Chiller 1/A"
-					/>
-				) : (
-					''
-				)*/}
+				{}
 			</BrowserRouter>
 		</div>
 	);

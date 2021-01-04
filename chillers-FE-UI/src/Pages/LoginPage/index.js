@@ -18,7 +18,7 @@ const LoginPage = () => {
 
 	useEffect(() => {
 		if (userData) {
-			history.push('/MenuAppBar');
+			history.push('/');
 		}
 	}, [userData, history]);
 

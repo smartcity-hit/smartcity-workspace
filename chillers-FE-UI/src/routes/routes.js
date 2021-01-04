@@ -19,12 +19,12 @@ const Routes = () => {
         path="/"
         exact
         render={() =>
-          userData ? <Redirect to="/MenuAppBar" /> : <Redirect to="/signin" />
+          userData ? <Redirect to="/" exact /> : <Redirect to="/signin" />
         }
       />
       <Route path="/signin" exact component={LoginPage} />
       <PrivateRoute
-        path="/MenuAppBar"
+        path="/"
         exact
         isAuthorized={!!userData}
         component={MenuAppBar}
