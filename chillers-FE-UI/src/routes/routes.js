@@ -8,8 +8,7 @@ import LoginPage from '../Pages/LoginPage';
 import AdminPanel from '../Pages/AdminPanel';
 import PrivateRoute from './privateRoute';
 import chillerHistory from '../Pages/ChillerHistory';
-import Alerts from '../Pages/Alerts';
-import { MenuAppBar } from "../Components/MenuAppBar/MenuAppBar";
+import MenuAppBar from "../Components/MenuAppBar/MenuAppBar";
 
 const Routes = () => {
   const { userData } = useSelector((state) => state.user);
@@ -20,14 +19,14 @@ const Routes = () => {
         path="/"
         exact
         render={() =>
-          userData ? <Redirect to="/MenuAppBar" /> : <Redirect to="/signin" />
+          userData ? <Redirect to="/" exact /> : <Redirect to="/signin" />
         }
       />
 
 
       <Route path="/signin" exact component={LoginPage} />
       <PrivateRoute
-        path="/MenuAppBar"
+        path="/"
         exact
         isAuthorized={!!userData}
         component={MenuAppBar}
@@ -44,7 +43,6 @@ const Routes = () => {
         isAuthorized={!!userData}
         component={Devices}
       />
-
       <PrivateRoute
         path="/waterCircuit"
         exact

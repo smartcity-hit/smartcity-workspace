@@ -23,11 +23,12 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Collapse from '@material-ui/core/Collapse';
 import StarBorder from '@material-ui/icons/StarBorder';
-import ChillersMenuItem from "./MenuItems/ChillersMenuItem";
-import CountersMenuItem from "./MenuItems/CountersMenuItem";
-import CountersAlerts from '../../Pages/Alerts';
-import CountersDevices from '../../Pages/Devices';
-import { BroserRouter, Link, Switch, Route } from 'react-router-dom';
+import { BroserRouter, Link,Route ,Switch} from 'react-router-dom';
+import ChillersMenuItem from "../MenuAppBar/MenuItems/ChillersMenuItem";
+import CountersMenuItem from "../MenuAppBar/MenuItems/CountersMenuItem";
+import waterCircuit from "../../Pages/WaterCircuit";
+import coolingCircuit from "../../Pages/CoolingCircuit";
+import ChilersHistory from "../../Pages/ChillerHistory";
 
 const drawerWidth = 240;
 
@@ -92,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export function MenuAppBar() {
+const MenuAppBar = () =>{
   const classes = useStyles();
   const theme = useTheme();
   const [openMenuAppBar, setOpenMenuAppBar] = React.useState(false);
@@ -108,6 +109,10 @@ export function MenuAppBar() {
 
   const handleDrawerClose = () => {
     setOpenMenuAppBar(false);
+  };
+
+  const handleMenuClose = () => {
+    setOpenCollapsed(false);
   };
 
   return (
@@ -178,16 +183,10 @@ export function MenuAppBar() {
         })}
       >
         <div className={classes.drawerHeader} />
-        <Typography paragraph>
-          Hello, Admin.
-        </Typography>
-
-        <Switch>
-          <Route path="/CountersAlerts" component={CountersAlerts} />
-          <Route path="/CountersDevices" component={CountersDevices} />
-        </Switch>
-
+      
       </main>
     </div>
   );
 }
+
+export default MenuAppBar;
