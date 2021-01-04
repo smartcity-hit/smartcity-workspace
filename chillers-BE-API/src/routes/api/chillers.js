@@ -3,8 +3,8 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const auth = require('../../middleware/auth');
-const { getChillersCollections, dropCollection, createChillerModelAndCollection, getChillersSettings } = require('../../utils/chillersService');
-const { ChillersNames } = require('../../models/chillers');
+const { getChillersNames, dropCollection, createChillerModelAndCollection, getChillersSettings } = require('../../utils/chillersService');
+const { Devices } = require('../../models/chillers');
 const logger = require('../../utils/logger');
 
 const getAllChillers = async (req, res) => {
@@ -19,7 +19,7 @@ const getAllChillers = async (req, res) => {
             throw new Error('User is not an Admin.');
         }
         const chillers = [];
-        const chillersNames = await getChillersCollections();
+        const chillersNames = await getChillersNames();
         for (let index = 0; index < chillersNames.length; index++) {
             // Iterate over chillers names, for each name -> find model -> get latest data -> push to chillers array
             const chillerName = chillersNames[index].charAt(0).toUpperCase() + chillersNames[0].slice(1);
@@ -49,17 +49,6 @@ const getAllChillersSettings= async (req, res) => {
             throw new Error('User is not an Admin.');
         }
         const chillers = await getChillersSettings();
-        // for (let index = 0; index < chillersNames.length; index++) {
-        //     // Iterate over chillers names, for each name -> find model -> get latest data -> push to chillers array
-        //     const chillerName = chillersNames[index];
-        //     const name = chillerName.charAt(0).toUpperCase() + chillerName.slice(1); // uppercase first letter
-        //     const ChillerI = mongoose.models[name]; // get the model by name
-        //     let chillerInfo = await ChillerI.find().limit(1).sort({ _id: -1 });
-        //     chillerInfo = chillerInfo[0].convertData();
-        //     let data = {}
-        //     data[`Chiller${index + 1}`] = chillerInfo;
-        //     chillers.push(data);
-        // }
         logger.info('getAllChillers:', chillers);
         res.status(200).json({ chillers });
     }
@@ -106,7 +95,7 @@ const createChiller = async (req, res) => {
         // if (loggedInUser.userType !== '1') {
         //     throw new Error('User is not an Admin.');
         // }
-        const chillersNames = await getChillersCollections();
+        const chillersNames = await getChillersNames();
         let id;
         if (chillersNames.length === 0) { // no chillers in db
             id = 1;
@@ -114,12 +103,12 @@ const createChiller = async (req, res) => {
             id = Number(chillersNames[chillersNames.length - 1].split('r')[1]) + 1;
         }
         const name = `chiller${id}`;
-        const { host, port, unitId } = req.body;
-        const chillerName = new ChillersNames({ name, host, port, unitId });
-        await chillerName.save();
+        const { host, port, unitId, deviceType } = req.body;
+        const chillerDeviceSettings = new Devices({ name, host, port, unitId, deviceType });
+        await chillerDeviceSettings.save();
         await createChillerModelAndCollection(id, name);
-        logger.info('createChiller:', chillerName);
-        res.status(200).json({ chillerName });
+        logger.info('createChiller:', chillerDeviceSettings);
+        res.status(200).json({ chillerDeviceSettings });
     } catch(err) {
         logger.error(`createChiller failed: ${err.message}`);
         res.status(400).json({ code: err.code, message: err.message });
@@ -139,7 +128,7 @@ const deleteChiller = async (req, res) => {
             throw new Error('User is not an Admin.');
         }
         const { name } = req.params;
-        const chiller = await ChillersNames.findOne({ name });
+        const chiller = await Devices.findOne({ name });
         if (!chiller) {
             throw new Error('Couldn\'t delete chiller - chiller was not found!')
         }
@@ -232,7 +221,7 @@ const editChiller = async (req, res) => {
             throw new Error('User is not an Admin.');
         }
         const id = parseInt(req.params.id);
-        const specificChiller = await ChillersNames.find({name: `chiller${id}`}).limit(1);
+        const specificChiller = await Devices.find({name: `chiller${id}`}).limit(1);
         if (!specificChiller) {
             throw new Error('Couldn\'t find chiller - chiller Model was not found!')
         }
