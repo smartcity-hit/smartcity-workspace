@@ -1,9 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
-
 import Alerts from '../Pages/Alerts';
-import Devices from '../Pages/Devices';
 import CoolingCircuit from '../Pages/CoolingCircuit';
 import WaterCircuit from '../Pages/WaterCircuit';
 import LoginPage from '../Pages/LoginPage';
@@ -38,12 +36,6 @@ const Routes = () => {
         exact
         isAuthorized={!!userData}
         component={Alerts}
-      />
-      <PrivateRoute
-        path="/CountersDevices"
-        exact
-        isAuthorized={!!userData}
-        component={Devices}
       />
       <PrivateRoute
         path="/waterCircuit"
