@@ -8,7 +8,7 @@
 	background: linear-gradient(to top, #6da9d1, #b4ddec, white);
 	padding-bottom: 30px;
 
-	.water-circuit-row {
+	.alerts-row {
 		display: flex;
 		flex-direction: row;
 		.left-column {
@@ -29,7 +29,7 @@
 		}
 	}
 
-	.water-circuit-column {
+	.alerts-column {
 		display: flex;
 		flex-direction: column;
 	}
@@ -128,7 +128,7 @@
 			}
 		}
 	}
-	.water-circuit-internal {
+	.alerts-internal {
 		position: absolute;
 		top: 160px;
 		.blue-line-icon {
