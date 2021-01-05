@@ -2,7 +2,7 @@ import React from 'react';
 import './index.scss';
 
 const Alerts = () => (
-  <div className="alerts-wrapper">
+  <div>
     This is Alerts page Hello!
   </div>
 );

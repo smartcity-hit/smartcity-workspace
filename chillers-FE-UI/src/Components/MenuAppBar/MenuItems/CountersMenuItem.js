@@ -8,13 +8,9 @@ import KitchenOutlinedIcon from '@material-ui/icons/KitchenOutlined';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import List from "@material-ui/core/List";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { BroserRouter, Link, Switch, Route } from 'react-router-dom';
-
-import { useHistory, useLocation } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { useCallback, useEffect, useState } from 'react';
-import { signOutUser } from '../../../actions/user';
+import { makeStyles } from "@material-ui/core/styles";
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -55,18 +51,16 @@ export default function CountersMenuItem(props) {
         </Collapse>
       </Link>
 
-      <Link to="/CountersDevices">
-        <Collapse in={open} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItem button className={`nav-link ${pathname.includes('CountersDevices') ? 'active' : ''}`}>
-              <ListItemIcon>
-                <StarBorder />
-              </ListItemIcon>
-              <ListItemText primary="Devices" />
-            </ListItem>
-          </List>
-        </Collapse>
-      </Link>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItem button className={`nav-link ${pathname.includes('CountersDevices') ? 'active' : ''}`}>
+            <ListItemIcon>
+              <StarBorder />
+            </ListItemIcon>
+            <ListItemText primary="Devices" />
+          </ListItem>
+        </List>
+      </Collapse>
 
     </div>
   )
