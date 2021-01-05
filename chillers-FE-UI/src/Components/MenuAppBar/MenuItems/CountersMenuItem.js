@@ -8,8 +8,10 @@ import KitchenOutlinedIcon from '@material-ui/icons/KitchenOutlined';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import List from "@material-ui/core/List";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { BroserRouter, Link, Switch, Route } from 'react-router-dom';
+import { makeStyles } from "@material-ui/core/styles";
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
 
 const useStyles = makeStyles((theme) => ({
   nested: {
@@ -18,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CountersMenuItem(props) {
+  const { pathname } = useLocation();
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleClick = () => {
@@ -33,22 +36,34 @@ export default function CountersMenuItem(props) {
         <ListItemText primary="Counters" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
+
+
+      <Link to="/CountersAlerts">
+        <Collapse in={open} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItem button className={`nav-link ${pathname.includes('CountersAlerts') ? 'active' : ''}`}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary="Alerts" />
+            </ListItem>
+          </List>
+        </Collapse>
+      </Link>
+
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItem button className={classes.nested}>
+          <ListItem button className={`nav-link ${pathname.includes('CountersDevices') ? 'active' : ''}`}>
             <ListItemIcon>
               <StarBorder />
             </ListItemIcon>
-            <ListItemText primary="Item1" />
-          </ListItem>
-          <ListItem button className={classes.nested}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="Item2" />
+            <ListItemText primary="Devices" />
           </ListItem>
         </List>
       </Collapse>
+
     </div>
   )
 };
+
+export { CountersMenuItem };

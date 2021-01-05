@@ -2,13 +2,15 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 
+import Alerts from '../Pages/Alerts';
+import Devices from '../Pages/Devices';
 import CoolingCircuit from '../Pages/CoolingCircuit';
 import WaterCircuit from '../Pages/WaterCircuit';
 import LoginPage from '../Pages/LoginPage';
 import AdminPanel from '../Pages/AdminPanel';
 import PrivateRoute from './privateRoute';
 import chillerHistory from '../Pages/ChillerHistory';
-import MenuAppBar from "../Components/MenuAppBar/MenuAppBar";
+import { MenuAppBar } from "../Components/MenuAppBar/MenuAppBar";
 
 const Routes = () => {
   const { userData } = useSelector((state) => state.user);
@@ -22,12 +24,26 @@ const Routes = () => {
           userData ? <Redirect to="/" exact /> : <Redirect to="/signin" />
         }
       />
+
+
       <Route path="/signin" exact component={LoginPage} />
       <PrivateRoute
         path="/"
         exact
         isAuthorized={!!userData}
         component={MenuAppBar}
+      />
+      <PrivateRoute
+        path="/CountersAlerts"
+        exact
+        isAuthorized={!!userData}
+        component={Alerts}
+      />
+      <PrivateRoute
+        path="/CountersDevices"
+        exact
+        isAuthorized={!!userData}
+        component={Devices}
       />
       <PrivateRoute
         path="/waterCircuit"
@@ -52,7 +68,7 @@ const Routes = () => {
         exact
         isAuthorized={!!userData}
         component={chillerHistory}
-        />
+      />
     </div>
   );
 };
