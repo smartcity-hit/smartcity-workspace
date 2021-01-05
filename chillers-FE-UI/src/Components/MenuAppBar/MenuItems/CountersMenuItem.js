@@ -11,6 +11,12 @@ import List from "@material-ui/core/List";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { BroserRouter, Link, Switch, Route } from 'react-router-dom';
 
+import { useHistory, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useCallback, useEffect, useState } from 'react';
+import { signOutUser } from '../../../actions/user';
+
+
 const useStyles = makeStyles((theme) => ({
   nested: {
     paddingLeft: theme.spacing(4),

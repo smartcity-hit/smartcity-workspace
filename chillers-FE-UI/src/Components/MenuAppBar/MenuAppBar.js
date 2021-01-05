@@ -23,7 +23,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Collapse from '@material-ui/core/Collapse';
 import StarBorder from '@material-ui/icons/StarBorder';
-import { BroserRouter, Link,Route ,Switch} from 'react-router-dom';
+import { BroserRouter, Link, Route, Switch } from 'react-router-dom';
 import ChillersMenuItem from "../MenuAppBar/MenuItems/ChillersMenuItem";
 import CountersMenuItem from "../MenuAppBar/MenuItems/CountersMenuItem";
 import waterCircuit from "../../Pages/WaterCircuit";
@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MenuAppBar = () =>{
+const MenuAppBar = () => {
   const classes = useStyles();
   const theme = useTheme();
   const [openMenuAppBar, setOpenMenuAppBar] = React.useState(false);
@@ -183,10 +183,10 @@ const MenuAppBar = () =>{
         })}
       >
         <div className={classes.drawerHeader} />
-      
+
       </main>
     </div>
   );
 }
 
-export default MenuAppBar;
+export { MenuAppBar };
