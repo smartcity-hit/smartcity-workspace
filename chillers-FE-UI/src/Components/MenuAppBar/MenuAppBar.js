@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles, useTheme, withTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
@@ -29,6 +29,9 @@ import CountersMenuItem from "../MenuAppBar/MenuItems/CountersMenuItem";
 import waterCircuit from "../../Pages/WaterCircuit";
 import coolingCircuit from "../../Pages/CoolingCircuit";
 import ChilersHistory from "../../Pages/ChillerHistory";
+import { signOutUser } from '../../actions/user';
+import { useDispatch, useSelector } from 'react-redux';
+import './MenuAppBar.scss';
 
 const drawerWidth = 240;
 
@@ -96,6 +99,7 @@ const useStyles = makeStyles((theme) => ({
 const MenuAppBar = () =>{
   const classes = useStyles();
   const theme = useTheme();
+  const dispatch = useDispatch();
   const [openMenuAppBar, setOpenMenuAppBar] = React.useState(false);
   const [openCollapsed, setOpenCollapsed] = React.useState(true);
 
@@ -111,9 +115,9 @@ const MenuAppBar = () =>{
     setOpenMenuAppBar(false);
   };
 
-  const handleMenuClose = () => {
-    setOpenCollapsed(false);
-  };
+  const onClickSignOut = () => {
+    dispatch(signOutUser());
+}
 
   return (
     <div className={classes.root}>
@@ -139,7 +143,9 @@ const MenuAppBar = () =>{
               <li><a href="/home">H.I.T Smart City</a></li>
             </ul>
           </nav>
-          <ExitToAppOutlinedIcon />
+          <IconButton className={classes.menuButton}>
+          <ExitToAppOutlinedIcon onClick={onClickSignOut}  />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer
