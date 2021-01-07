@@ -6,6 +6,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
+import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -16,9 +17,21 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
+import AccountTreeOutlinedIcon from '@material-ui/icons/AccountTreeOutlined';
 import PeopleOutlinedIcon from '@material-ui/icons/PeopleOutlined';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import Collapse from '@material-ui/core/Collapse';
+import StarBorder from '@material-ui/icons/StarBorder';
+import { BroserRouter, Link,Route ,Switch} from 'react-router-dom';
 import ChillersMenuItem from "../MenuAppBar/MenuItems/ChillersMenuItem";
 import CountersMenuItem from "../MenuAppBar/MenuItems/CountersMenuItem";
+import waterCircuit from "../../Pages/WaterCircuit";
+import coolingCircuit from "../../Pages/CoolingCircuit";
+import ChilersHistory from "../../Pages/ChillerHistory";
+import { signOutUser } from '../../actions/user';
+import { useDispatch, useSelector } from 'react-redux';
+import './MenuAppBar.scss';
 
 const drawerWidth = 240;
 
@@ -83,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MenuAppBar = () => {
+const MenuAppBar = () =>{
   const classes = useStyles();
   const theme = useTheme();
   const dispatch = useDispatch();
@@ -176,10 +189,10 @@ const MenuAppBar = () => {
         })}
       >
         <div className={classes.drawerHeader} />
-
+      
       </main>
     </div>
   );
 }
 
-export { MenuAppBar };
+export default MenuAppBar;
