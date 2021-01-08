@@ -19,6 +19,8 @@ import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
 import PeopleOutlinedIcon from '@material-ui/icons/PeopleOutlined';
 import ChillersMenuItem from "../MenuAppBar/MenuItems/ChillersMenuItem";
 import CountersMenuItem from "../MenuAppBar/MenuItems/CountersMenuItem";
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -85,6 +87,7 @@ const useStyles = makeStyles((theme) => ({
 
 const MenuAppBar = () => {
   const classes = useStyles();
+  const { pathname } = useLocation();
   const theme = useTheme();
   const [openMenuAppBar, setOpenMenuAppBar] = React.useState(false);
   const [openCollapsed, setOpenCollapsed] = React.useState(true);
@@ -105,8 +108,11 @@ const MenuAppBar = () => {
     setOpenCollapsed(false);
   };
 
+  
+  // LocationManagement is not implemented yet!
   return (
     <div className={classes.root}>
+
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -132,6 +138,8 @@ const MenuAppBar = () => {
           <ExitToAppOutlinedIcon />
         </Toolbar>
       </AppBar>
+
+
       <Drawer
         className={classes.drawer}
         variant="persistent"
@@ -156,17 +164,32 @@ const MenuAppBar = () => {
           <ChillersMenuItem />
         </List>
         <Divider />
+
+        <Link to="/AdminPanel">
         <List>
-          {["User Management", "Location Management"].map((text, index) => (
-            <ListItem button key={text}>
+        <ListItem button key={`nav-link ${pathname.includes('AdminPanel') ? 'active' : ''}`}>
               <ListItemIcon>
-                {index % 2 === 0 ? <PeopleOutlinedIcon /> : <LocationOnOutlinedIcon />}
+                <PeopleOutlinedIcon />
               </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+              <ListItemText primary="User Management" />
+              </ListItem>
         </List>
+        </Link>
+
+        
+        <Link to="/LocationManagement">
+        <List>
+        <ListItem button key={`nav-link ${pathname.includes('LocationManagement') ? 'active' : ''}`}>
+              <ListItemIcon>
+                <LocationOnOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Location Management" />
+              </ListItem>
+        </List>
+        </Link>
       </Drawer>
+
+
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: openMenuAppBar
