@@ -21,6 +21,7 @@ import ChillersMenuItem from "../MenuAppBar/MenuItems/ChillersMenuItem";
 import CountersMenuItem from "../MenuAppBar/MenuItems/CountersMenuItem";
 import { BroserRouter,Link, Switch, Route } from 'react-router-dom';
 import { useHistory, useLocation } from 'react-router-dom';
+import {useDispatch} from "react-redux";
 
 const drawerWidth = 240;
 
