@@ -91,7 +91,8 @@ const MenuAppBar = () => {
   const { pathname } = useLocation();
   const [openMenuAppBar, setOpenMenuAppBar] = React.useState(false);
   const [openCollapsed, setOpenCollapsed] = React.useState(true);
-
+  const dispatch = useDispatch();
+  
   const handleClick = () => {
     setOpenCollapsed(!openCollapsed);
   };
@@ -107,6 +108,10 @@ const MenuAppBar = () => {
   const handleMenuClose = () => {
     setOpenCollapsed(false);
   };
+
+  const onClickSignOut=()=>{
+    dispatch(signOutUser());
+  }
 
   return (
     <div className={classes.root}>
@@ -132,7 +137,9 @@ const MenuAppBar = () => {
               <li><a href="/home">H.I.T Smart City</a></li>
             </ul>
           </nav>
-          <ExitToAppOutlinedIcon />
+          <IconButton color="inherit" className={classes.menuButton}>
+          <ExitToAppOutlinedIcon onClick={onClickSignOut}  />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer
