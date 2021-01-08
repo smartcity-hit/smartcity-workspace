@@ -19,6 +19,8 @@ import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
 import PeopleOutlinedIcon from '@material-ui/icons/PeopleOutlined';
 import ChillersMenuItem from "../MenuAppBar/MenuItems/ChillersMenuItem";
 import CountersMenuItem from "../MenuAppBar/MenuItems/CountersMenuItem";
+import { BroserRouter,Link, Switch, Route } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -86,6 +88,7 @@ const useStyles = makeStyles((theme) => ({
 const MenuAppBar = () => {
   const classes = useStyles();
   const theme = useTheme();
+  const { pathname } = useLocation();
   const [openMenuAppBar, setOpenMenuAppBar] = React.useState(false);
   const [openCollapsed, setOpenCollapsed] = React.useState(true);
 
@@ -157,15 +160,23 @@ const MenuAppBar = () => {
         </List>
         <Divider />
         <List>
-          {["User Management", "Location Management"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <PeopleOutlinedIcon /> : <LocationOnOutlinedIcon />}
+          <ListItem button>
+            <ListItemIcon>
+                <PeopleOutlinedIcon />
               </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+            <ListItemText primary="User Management" />
+          </ListItem>
         </List>
+        <Link to="/locationManagement">
+        <List>
+          <ListItem button  className={` ${pathname.includes('locationManagement') ? 'active' : ''}`}>
+            <ListItemIcon>
+                <LocationOnOutlinedIcon />
+              </ListItemIcon>
+            <ListItemText primary="Location Management" />
+          </ListItem>
+        </List>
+        </Link>
       </Drawer>
       <main
         className={clsx(classes.content, {

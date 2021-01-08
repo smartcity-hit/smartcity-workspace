@@ -1,0 +1,54 @@
+body {
+    font-family: "Quicksand", sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    color: #4d4d4d;
+    text-align: center;
+    
+  }
+  
+  #title {
+    text-align: center;
+  }
+  
+  #management {
+    text-align: center;
+    border-collapse: collapse;
+    border: 3px solid #ddd;
+  }
+  
+  #management td,
+  #management th {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+  }
+  
+  #management tr:hover {
+    background-color: #ddd;
+  }
+  
+  #management th {
+    padding: 10px;
+    text-align: center;
+    background-color: #4b50ac;
+    color: white;
+  }
+  
+  .button {
+    border: none;
+    outline: none;
+    font-size: 11px;
+    font-family: "Quicksand", sans-serif;
+    color: #f44336;
+    padding: 3px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid #f44336;
+    background-color: transparent;
+  }
+  
+  .button:active {
+    border: 1px solid blue;
+  }
