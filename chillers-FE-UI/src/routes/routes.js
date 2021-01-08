@@ -9,6 +9,8 @@ import AdminPanel from '../Pages/AdminPanel';
 import PrivateRoute from './privateRoute';
 import chillerHistory from '../Pages/ChillerHistory';
 import { MenuAppBar } from "../Components/MenuAppBar/MenuAppBar";
+import LocationManagement from '../Pages/LocationManagement/LocationManagement';
+
 
 const Routes = () => {
   const { userData } = useSelector((state) => state.user);
@@ -37,6 +39,12 @@ const Routes = () => {
         isAuthorized={!!userData}
         component={Alerts}
       />
+     <PrivateRoute
+        path="/locationManagement"
+        exact
+        isAuthorized={!!userData}
+        component={LocationManagement}
+      />  
       <PrivateRoute
         path="/waterCircuit"
         exact
