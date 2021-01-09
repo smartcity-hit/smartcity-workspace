@@ -19,9 +19,10 @@ import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
 import PeopleOutlinedIcon from '@material-ui/icons/PeopleOutlined';
 import ChillersMenuItem from "../MenuAppBar/MenuItems/ChillersMenuItem";
 import CountersMenuItem from "../MenuAppBar/MenuItems/CountersMenuItem";
-import { BroserRouter,Link, Switch, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useHistory, useLocation } from 'react-router-dom';
-import {useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
+
 
 const drawerWidth = 240;
 
@@ -88,12 +89,12 @@ const useStyles = makeStyles((theme) => ({
 
 const MenuAppBar = () => {
   const classes = useStyles();
-  const theme = useTheme();
   const { pathname } = useLocation();
+  const theme = useTheme();
   const [openMenuAppBar, setOpenMenuAppBar] = React.useState(false);
   const [openCollapsed, setOpenCollapsed] = React.useState(true);
   const dispatch = useDispatch();
-  
+
   const handleClick = () => {
     setOpenCollapsed(!openCollapsed);
   };
@@ -110,12 +111,14 @@ const MenuAppBar = () => {
     setOpenCollapsed(false);
   };
 
-  const onClickSignOut=()=>{
+  const onClickSignOut = () => {
     dispatch(signOutUser());
   }
 
+
   return (
     <div className={classes.root}>
+
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -139,10 +142,12 @@ const MenuAppBar = () => {
             </ul>
           </nav>
           <IconButton color="inherit" className={classes.menuButton}>
-          <ExitToAppOutlinedIcon onClick={onClickSignOut}  />
+            <ExitToAppOutlinedIcon onClick={onClickSignOut} />
           </IconButton>
         </Toolbar>
       </AppBar>
+
+
       <Drawer
         className={classes.drawer}
         variant="persistent"
@@ -167,25 +172,33 @@ const MenuAppBar = () => {
           <ChillersMenuItem />
         </List>
         <Divider />
-        <List>
-          <ListItem button>
-            <ListItemIcon>
+
+        <Link to="/AdminPanel">
+          <List>
+
+            <ListItem button key={`nav-link ${pathname.includes('AdminPanel') ? 'active' : ''}`}>
+              <ListItemIcon>
                 <PeopleOutlinedIcon />
               </ListItemIcon>
-            <ListItemText primary="User Management" />
-          </ListItem>
-        </List>
+              <ListItemText primary="User Management" />
+            </ListItem>
+          </List>
+        </Link>
+
         <Link to="/locationManagement">
-        <List>
-          <ListItem button  className={` ${pathname.includes('locationManagement') ? 'active' : ''}`}>
-            <ListItemIcon>
+          <List>
+            <ListItem button className={` ${pathname.includes('locationManagement') ? 'active' : ''}`}>
+              <ListItemIcon>
                 <LocationOnOutlinedIcon />
               </ListItemIcon>
-            <ListItemText primary="Location Management" />
-          </ListItem>
-        </List>
+              <ListItemText primary="Location Management" />
+            </ListItem>
+          </List>
         </Link>
+
       </Drawer>
+
+
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: openMenuAppBar
