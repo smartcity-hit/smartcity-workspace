@@ -21,6 +21,10 @@ import ChillersMenuItem from "../MenuAppBar/MenuItems/ChillersMenuItem";
 import CountersMenuItem from "../MenuAppBar/MenuItems/CountersMenuItem";
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import { BroserRouter,Link, Switch, Route } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
+import {useDispatch} from "react-redux";
+
 
 const drawerWidth = 240;
 
@@ -89,9 +93,11 @@ const MenuAppBar = () => {
   const classes = useStyles();
   const { pathname } = useLocation();
   const theme = useTheme();
+  const { pathname } = useLocation();
   const [openMenuAppBar, setOpenMenuAppBar] = React.useState(false);
   const [openCollapsed, setOpenCollapsed] = React.useState(true);
-
+  const dispatch = useDispatch();
+  
   const handleClick = () => {
     setOpenCollapsed(!openCollapsed);
   };
@@ -108,8 +114,11 @@ const MenuAppBar = () => {
     setOpenCollapsed(false);
   };
 
-  
-  // LocationManagement is not implemented yet!
+  const onClickSignOut=()=>{
+    dispatch(signOutUser());
+  }
+
+
   return (
     <div className={classes.root}>
 
@@ -135,7 +144,9 @@ const MenuAppBar = () => {
               <li><a href="/home">H.I.T Smart City</a></li>
             </ul>
           </nav>
-          <ExitToAppOutlinedIcon />
+          <IconButton color="inherit" className={classes.menuButton}>
+          <ExitToAppOutlinedIcon onClick={onClickSignOut}  />
+          </IconButton>
         </Toolbar>
       </AppBar>
 
@@ -167,6 +178,7 @@ const MenuAppBar = () => {
 
         <Link to="/AdminPanel">
         <List>
+
         <ListItem button key={`nav-link ${pathname.includes('AdminPanel') ? 'active' : ''}`}>
               <ListItemIcon>
                 <PeopleOutlinedIcon />
@@ -175,18 +187,18 @@ const MenuAppBar = () => {
               </ListItem>
         </List>
         </Link>
-
         
-        <Link to="/LocationManagement">
+        <Link to="/locationManagement">
         <List>
-        <ListItem button key={`nav-link ${pathname.includes('LocationManagement') ? 'active' : ''}`}>
-              <ListItemIcon>
+          <ListItem button  className={` ${pathname.includes('locationManagement') ? 'active' : ''}`}>
+            <ListItemIcon>
                 <LocationOnOutlinedIcon />
               </ListItemIcon>
-              <ListItemText primary="Location Management" />
-              </ListItem>
+            <ListItemText primary="Location Management" />
+          </ListItem>
         </List>
         </Link>
+
       </Drawer>
 
 
