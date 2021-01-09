@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from 'react';
 import clsx from "clsx";
+import './MenuAppBar.scss';
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -19,7 +20,7 @@ import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
 import PeopleOutlinedIcon from '@material-ui/icons/PeopleOutlined';
 import ChillersMenuItem from "../MenuAppBar/MenuItems/ChillersMenuItem";
 import CountersMenuItem from "../MenuAppBar/MenuItems/CountersMenuItem";
-import { Link } from 'react-router-dom';
+import { BroserRouter, Link, Switch, Route } from 'react-router-dom';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 
@@ -30,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex"
   },
+  "menu-app-bar": {},
   appBar: {
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
@@ -88,6 +90,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MenuAppBar = () => {
+  const [activeTab, setActiveTab] = useState(0);
   const classes = useStyles();
   const { pathname } = useLocation();
   const theme = useTheme();
@@ -115,6 +118,9 @@ const MenuAppBar = () => {
     dispatch(signOutUser());
   }
 
+  const onClickTab = (tabClicked) => {
+    setActiveTab(tabClicked);
+  }
 
   return (
     <div className={classes.root}>
@@ -125,8 +131,9 @@ const MenuAppBar = () => {
         className={clsx(classes.appBar, {
           [classes.appBarShift]: openMenuAppBar
         })}
+
       >
-        <Toolbar className={classes.temp}>
+        <Toolbar className={classes.temp + " menu-app-bar"}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -174,9 +181,9 @@ const MenuAppBar = () => {
         <Divider />
 
         <Link to="/AdminPanel">
-          <List>
+          <List className="menu-app-bar">
 
-            <ListItem button key={`nav-link ${pathname.includes('AdminPanel') ? 'active' : ''}`}>
+            <ListItem button className={`nav-link ${pathname.includes('AdminPanel') && activeTab === 0 ? 'active' : ''}`} onClick={() => { onClickTab(0) }}>
               <ListItemIcon>
                 <PeopleOutlinedIcon />
               </ListItemIcon>
@@ -186,8 +193,8 @@ const MenuAppBar = () => {
         </Link>
 
         <Link to="/locationManagement">
-          <List>
-            <ListItem button className={` ${pathname.includes('locationManagement') ? 'active' : ''}`}>
+          <List className="menu-app-bar">
+            <ListItem button className={`nav-link ${pathname.includes('locationManagement') && activeTab === 1 ? 'active' : ''}`} onClick={() => { onClickTab(1) }}>
               <ListItemIcon>
                 <LocationOnOutlinedIcon />
               </ListItemIcon>
