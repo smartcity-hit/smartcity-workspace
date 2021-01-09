@@ -1,7 +1,7 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
 const logger = require('../utils/logger');
-const { loadMongooseModels } = require('../utils/chillersService');
+const { loadMongooseModels } = require('../services/dbService');
 
 async function myDbConnection() {
 

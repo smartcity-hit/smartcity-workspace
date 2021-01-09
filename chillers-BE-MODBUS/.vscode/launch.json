@@ -14,14 +14,5 @@
       "program": "${workspaceFolder}\\src\\index.js",
       "outputCapture": "std"
     }
-    // {
-    //   "type": "node",
-    //   "request": "launch",
-    //   "name": "Launch modbus",
-    //   "skipFiles": [
-    //     "<node_internals>/**"
-    //   ],
-    //   "program": "${workspaceFolder}\\modbus.js"
-    // }
   ]
 }

@@ -1,18 +1,18 @@
 const express = require('express');
-const myDbConnection = require('./db/database'); // connection to db
-const modbusConnection = require('./modbus'); // connection to modbus
-
 const app = express();
+const myDbConnection = require('./db/database'); // connection to db
+//const chillersService = require('./services/chillersService');
+const countersService = require('./services/countersService');
+const counters = require('./utils/constants/counters');
+const PORT = process.env.PORT || 3200;
 
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}...`);
+});
 app.use(express.json());
 
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  next();
-});
-
- //modbusConnection()
-
-module.exports = app;
+var cs;
+//counters.forEach(counter => {
+  cs = new countersService({'host': '172.16.11.194', 'name': 'counter1'});
+  cs.connectToCounter();
+//})
