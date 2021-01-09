@@ -20,10 +20,8 @@ import PeopleOutlinedIcon from '@material-ui/icons/PeopleOutlined';
 import ChillersMenuItem from "../MenuAppBar/MenuItems/ChillersMenuItem";
 import CountersMenuItem from "../MenuAppBar/MenuItems/CountersMenuItem";
 import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
-import { BroserRouter,Link, Switch, Route } from 'react-router-dom';
 import { useHistory, useLocation } from 'react-router-dom';
-import {useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 
 
 const drawerWidth = 240;
@@ -93,11 +91,10 @@ const MenuAppBar = () => {
   const classes = useStyles();
   const { pathname } = useLocation();
   const theme = useTheme();
-  const { pathname } = useLocation();
   const [openMenuAppBar, setOpenMenuAppBar] = React.useState(false);
   const [openCollapsed, setOpenCollapsed] = React.useState(true);
   const dispatch = useDispatch();
-  
+
   const handleClick = () => {
     setOpenCollapsed(!openCollapsed);
   };
@@ -114,7 +111,7 @@ const MenuAppBar = () => {
     setOpenCollapsed(false);
   };
 
-  const onClickSignOut=()=>{
+  const onClickSignOut = () => {
     dispatch(signOutUser());
   }
 
@@ -145,7 +142,7 @@ const MenuAppBar = () => {
             </ul>
           </nav>
           <IconButton color="inherit" className={classes.menuButton}>
-          <ExitToAppOutlinedIcon onClick={onClickSignOut}  />
+            <ExitToAppOutlinedIcon onClick={onClickSignOut} />
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -177,26 +174,26 @@ const MenuAppBar = () => {
         <Divider />
 
         <Link to="/AdminPanel">
-        <List>
+          <List>
 
-        <ListItem button key={`nav-link ${pathname.includes('AdminPanel') ? 'active' : ''}`}>
+            <ListItem button key={`nav-link ${pathname.includes('AdminPanel') ? 'active' : ''}`}>
               <ListItemIcon>
                 <PeopleOutlinedIcon />
               </ListItemIcon>
               <ListItemText primary="User Management" />
-              </ListItem>
-        </List>
+            </ListItem>
+          </List>
         </Link>
-        
+
         <Link to="/locationManagement">
-        <List>
-          <ListItem button  className={` ${pathname.includes('locationManagement') ? 'active' : ''}`}>
-            <ListItemIcon>
+          <List>
+            <ListItem button className={` ${pathname.includes('locationManagement') ? 'active' : ''}`}>
+              <ListItemIcon>
                 <LocationOnOutlinedIcon />
               </ListItemIcon>
-            <ListItemText primary="Location Management" />
-          </ListItem>
-        </List>
+              <ListItemText primary="Location Management" />
+            </ListItem>
+          </List>
         </Link>
 
       </Drawer>
