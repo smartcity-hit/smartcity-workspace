@@ -31,7 +31,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex"
   },
-  "menu-app-bar": {},
   appBar: {
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
