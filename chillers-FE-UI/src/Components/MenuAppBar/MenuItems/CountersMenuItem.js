@@ -50,10 +50,10 @@ export default function CountersMenuItem(props) {
           </List>
         </Collapse>
       </Link>
-
+      <Link to="/CounterDevices">
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItem button className={`nav-link ${pathname.includes('CountersDevices') ? 'active' : ''}`}>
+          <ListItem button className={`nav-link ${pathname.includes('CounterDevices') ? 'active' : ''}`}>
             <ListItemIcon>
               <StarBorder />
             </ListItemIcon>
@@ -61,7 +61,7 @@ export default function CountersMenuItem(props) {
           </ListItem>
         </List>
       </Collapse>
-
+      </Link>
     </div>
   )
 };
