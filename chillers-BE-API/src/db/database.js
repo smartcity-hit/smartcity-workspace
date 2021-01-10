@@ -2,7 +2,8 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const Users = require('../models/users');
 const logger = require('../utils/logger');
-const { loadMongooseModels } = require('../utils/chillersService');
+const { loadMongooseModels } = require('../utils/schemas');
+
 
 async function myDbConnection() {
   try {

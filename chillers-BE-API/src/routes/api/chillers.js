@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const auth = require('../../middleware/auth');
-const { getChillersNames, dropCollection, createChillerModelAndCollection, getChillersSettings } = require('../../utils/chillersService');
+const { getChillersNames, dropCollection, createChillerModelAndCollection, getChillersSettings } = require('../../utils/schemas');
 const { Devices } = require('../../models/chillers');
 const logger = require('../../utils/logger');
 
