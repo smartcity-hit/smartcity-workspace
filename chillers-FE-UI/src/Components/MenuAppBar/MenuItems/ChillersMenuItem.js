@@ -42,7 +42,6 @@ const ChillersMenuItem = () => {
 
   const handleDocumentClick = useCallback((e) => {
     if (open && e.target.id !== 'user-btn-label') {
-      setOpen(false);
     }
   }, [open]);
 
