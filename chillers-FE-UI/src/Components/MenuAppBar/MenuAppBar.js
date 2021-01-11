@@ -6,7 +6,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -17,18 +16,13 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
-import AccountTreeOutlinedIcon from '@material-ui/icons/AccountTreeOutlined';
 import PeopleOutlinedIcon from '@material-ui/icons/PeopleOutlined';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import Collapse from '@material-ui/core/Collapse';
-import StarBorder from '@material-ui/icons/StarBorder';
-import { BroserRouter, Link,Route ,Switch} from 'react-router-dom';
 import ChillersMenuItem from "../MenuAppBar/MenuItems/ChillersMenuItem";
 import CountersMenuItem from "../MenuAppBar/MenuItems/CountersMenuItem";
-import waterCircuit from "../../Pages/WaterCircuit";
-import coolingCircuit from "../../Pages/CoolingCircuit";
-import ChilersHistory from "../../Pages/ChillerHistory";
+import { Link } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+
 
 const drawerWidth = 240;
 
@@ -93,11 +87,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MenuAppBar = () =>{
+const MenuAppBar = () => {
   const classes = useStyles();
+  const { pathname } = useLocation();
   const theme = useTheme();
   const [openMenuAppBar, setOpenMenuAppBar] = React.useState(false);
   const [openCollapsed, setOpenCollapsed] = React.useState(true);
+  const dispatch = useDispatch();
 
   const handleClick = () => {
     setOpenCollapsed(!openCollapsed);
@@ -115,8 +111,14 @@ const MenuAppBar = () =>{
     setOpenCollapsed(false);
   };
 
+  const onClickSignOut = () => {
+    dispatch(signOutUser());
+  }
+
+
   return (
     <div className={classes.root}>
+
       <CssBaseline />
       <AppBar
         position="fixed"
@@ -139,9 +141,13 @@ const MenuAppBar = () =>{
               <li><a href="/home">H.I.T Smart City</a></li>
             </ul>
           </nav>
-          <ExitToAppOutlinedIcon />
+          <IconButton color="inherit" className={classes.menuButton}>
+            <ExitToAppOutlinedIcon onClick={onClickSignOut} />
+          </IconButton>
         </Toolbar>
       </AppBar>
+
+
       <Drawer
         className={classes.drawer}
         variant="persistent"
@@ -166,27 +172,43 @@ const MenuAppBar = () =>{
           <ChillersMenuItem />
         </List>
         <Divider />
-        <List>
-          {["User Management", "Location Management"].map((text, index) => (
-            <ListItem button key={text}>
+
+        <Link to="/AdminPanel">
+          <List>
+
+            <ListItem button key={`nav-link ${pathname.includes('AdminPanel') ? 'active' : ''}`}>
               <ListItemIcon>
-                {index % 2 === 0 ? <PeopleOutlinedIcon /> : <LocationOnOutlinedIcon />}
+                <PeopleOutlinedIcon />
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary="User Management" />
             </ListItem>
-          ))}
-        </List>
+          </List>
+        </Link>
+
+        <Link to="/locationManagement">
+          <List>
+            <ListItem button className={` ${pathname.includes('locationManagement') ? 'active' : ''}`}>
+              <ListItemIcon>
+                <LocationOnOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Location Management" />
+            </ListItem>
+          </List>
+        </Link>
+
       </Drawer>
+
+
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: openMenuAppBar
         })}
       >
         <div className={classes.drawerHeader} />
-      
+
       </main>
     </div>
   );
 }
 
-export default MenuAppBar;
+export { MenuAppBar };
