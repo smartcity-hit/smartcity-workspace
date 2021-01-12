@@ -98,8 +98,60 @@ const devicesSchema = new mongoose.Schema(
   { timestamps: true, versionKey: false}
 );
 
+const countersSchema = new mongoose.Schema(
+  {
+    ip: {
+      type: String,
+      required: true,
+      unique: true
+    },
+    i1: {
+      type: String,
+      required: true
+    },
+    i2: {
+      type: Number,
+      required: true
+    },
+    i3: {
+      type: Number,
+      required: true
+    },
+    n_v1: {
+      type: Number,
+      required: true
+    },
+    n_v2: {
+      type: Number,
+      required: true
+    },
+    n_v3: {
+      type: Number,
+      required: true
+    },
+    v1_v2: {
+      type: Number,
+      required: true
+    },
+    v1_v3: {
+      type: Number,
+      required: true
+    },
+    v2_v3: {
+      type: Number,
+      required: true
+    },
+    cos: {
+      type: Number,
+      required: true
+    }
+  },
+  { timestamps: true, versionKey: false}
+);
+
 module.exports = {
   chillersSchema,
   chillersNamesSchema,
-  devicesSchema
+  devicesSchema,
+  countersSchema
 };

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { chillersSchema, chillersNamesSchema, devicesSchema } = require('../utils/schemas')
+const { devicesSchema } = require('../utils/schemas')
 
 /**
  * * all is imported from Chiller Service
