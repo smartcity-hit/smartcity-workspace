@@ -59,7 +59,6 @@ class CountersService{
     connectToCounter(){
       console.log('connecting to ' + this.name);
       this.socket.connect(this.options);
-      this.socket.close;
     }
 
     onConnect = async function() {
@@ -73,9 +72,10 @@ class CountersService{
         const c5 = client.readHoldingRegisters(7140, 2);
         const c6 = client.readHoldingRegisters(273, 2);
  
-        await Promise.all([c1, c2, c3, c4, c5, c6]).then((values) => {
+        Promise.all([c1, c2, c3, c4, c5, c6]).then((values) => {
           values.map(value => {
             console.log(value.response._body._values);
+            self.socket.end();
           });
         }).catch(error => {
           console.log(error);

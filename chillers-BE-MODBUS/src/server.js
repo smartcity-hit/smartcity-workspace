@@ -16,7 +16,7 @@ app.use(express.json());
 //countersService('172.16.11.194')
 var cs;
 counters.forEach(counter => {
-cs = new countersService({ 'host': counter.ip, 'name': 'counter1' });
+cs = new countersService({ 'host': counter.ip, 'name': counter.name });
 cs.connectToCounter();
 //countersService(counter.ip)
 })
