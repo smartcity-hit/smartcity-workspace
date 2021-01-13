@@ -27,24 +27,19 @@ const Routes = () => {
 
 
       <Route path="/signin" exact component={LoginPage} />
-      <PrivateRoute
-        path="/"
-        exact
-        isAuthorized={!!userData}
-        component={MenuAppBar}
-      />
+
       <PrivateRoute
         path="/CountersAlerts"
         exact
         isAuthorized={!!userData}
         component={Alerts}
       />
-     <PrivateRoute
+      <PrivateRoute
         path="/locationManagement"
         exact
         isAuthorized={!!userData}
         component={LocationManagement}
-      />  
+      />
       <PrivateRoute
         path="/AdminPanel"
         exact
