@@ -9,13 +9,11 @@ class CountersService{
         };
 
         this.name = counter.name;
-        this.client;
-        this.socket;
         this.unitId = 1;
         this.initialModbusConnection();
     }
 
-    initialModbusConnection = function(){
+    initialModbusConnection(){
         this.socket = new net.Socket();
         this.client = new Modbus.client.TCP(this.socket, this.unitId);
         // what will happend on error 
@@ -27,7 +25,7 @@ class CountersService{
         this.socket.on('close', this.onClose);
         // what will happend on connect
         this.socket.on('data', this.onData);
-        this.socket.on('connect', this.onConnect);
+        this.socket.on('connect', this.onConnect());
     }
 
     onTimeout = function(){
@@ -52,39 +50,29 @@ class CountersService{
       console.log('on close');
     }
 
-    connectToCounter() {
+    connectToCounter(){
       console.log('connecting to ' + this.name);
       this.socket.connect(this.options);
+      //this.tempFunc()
     }
 
-    onConnect = async function () {
+    onConnect = async function() {
+      const client = this.client;
       try {
-        console.log('MODBUS SERVER IS CONNECTED');
-        let dataToStore;
-        await this.client.readHoldingRegisters(0,8).then(async (res) => {
-          // Consoling the registers from 0 to 8 (9 total)
-          console.log(res.response._body._values);
-          // Parsing the data
-          const data = res.response._body._values;
-          dataToStore = {
-            dateTime: new Date(),
-            enteringWaterTemp: data[0],
-            leavingWaterTemp: data[1],
-            firstCircuitPressure: data[2],
-            secondCiruitPressure: data[3],
-            controlPoint: data[4],
-            unitPrecentActiveCapacity: data[5],
-            demandLimit: data[6],
-            chillerState: data[7],
-            chillerName: "chiller1"
-          };
-    
-          if (dataToStore) {
-          const ChillerI = mongoose.model('Chillers', chillersSchema, 'chillers');
-          const chillerData = new ChillerI(dataToStore);
-          await chillerData.save();
-          console.log('SAVED_DATA');
-        }
+        console.log('on connect');
+        const c1 = client.readHoldingRegisters(7537, 2);
+        const c2 = client.readHoldingRegisters(7136, 2);
+        const c3 = client.readHoldingRegisters(7138, 2);
+        const c4 = client.readHoldingRegisters(7539, 2);
+        const c5 = client.readHoldingRegisters(7140, 2);
+        const c6 = client.readHoldingRegisters(273, 2);
+ 
+        Promise.all([c1, c2, c3, c4, c5, c6]).then((values) => {
+          values.map(value => {
+            console.log(value.response._body._values);
+          });
+        }).catch(error => {
+          console.log(error);
         });
       }
       catch(e) {
