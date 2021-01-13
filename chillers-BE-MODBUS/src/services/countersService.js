@@ -1,6 +1,7 @@
 const net = require('net');
 const Modbus = require('jsmodbus');
 
+var self;
 class CountersService{
     constructor(counter){
         this.options = {
@@ -10,54 +11,59 @@ class CountersService{
 
         this.name = counter.name;
         this.unitId = 1;
+        self = this;
         this.initialModbusConnection();
     }
 
     initialModbusConnection(){
         this.socket = new net.Socket();
         this.client = new Modbus.client.TCP(this.socket, this.unitId);
-        // what will happend on error 
+        // what will happen on error 
         this.socket.on('error', (error)=> { this.onError(error) });
-        // what will happend on timeout 
+        // what will happen on timeout 
         this.socket.on('timeout', this.onTimeout);
-        // what will happend on close 
+        // what will happen on close 
         this.socket.on('end', this.onEnd);
         this.socket.on('close', this.onClose);
-        // what will happend on connect
+        // what will happen on connect
         this.socket.on('data', this.onData);
-        this.socket.on('connect', this.onConnect());
+        this.socket.on('connect', this.onConnect);
     }
 
     onTimeout = function(){
-      console.log('on timeout ' + this.name);
+      console.log('on timeout ' + self.name);
     }
 
     onEnd = function(){
-      console.log('on end ' + this.name);
+      console.log('on end ' + self.name);
     }
   
-    onData = function(){
-      this.socket.write('Server Reply: ' + data);
+    onData = function(data){
+      self.socket.write('Server Reply: ' + data);
     }
   
     onError = function(error){
-      console.log('on error ' + this.name);
+      console.log('on error ' + self.name);
       console.log(error);
-      this.socket.end('socket can send some more data but it will be ended');
+      self.socket.end('socket can send some more data but it will be ended');
     }
 
     onClose = function(){
       console.log('on close');
+      setTimeout(() => {
+        console.log('Reconnecting..');
+        self.socket.connect(self.options);
+      }, 5000);
     }
 
     connectToCounter(){
       console.log('connecting to ' + this.name);
       this.socket.connect(this.options);
-      //this.tempFunc()
+      this.socket.close;
     }
 
     onConnect = async function() {
-      const client = this.client;
+      const client = self.client;
       try {
         console.log('on connect');
         const c1 = client.readHoldingRegisters(7537, 2);
@@ -67,7 +73,7 @@ class CountersService{
         const c5 = client.readHoldingRegisters(7140, 2);
         const c6 = client.readHoldingRegisters(273, 2);
  
-        Promise.all([c1, c2, c3, c4, c5, c6]).then((values) => {
+        await Promise.all([c1, c2, c3, c4, c5, c6]).then((values) => {
           values.map(value => {
             console.log(value.response._body._values);
           });
