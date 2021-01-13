@@ -3,7 +3,7 @@ const app = express();
 const myDbConnection = require('./db/database'); // connection to db
 //const chillersService = require('./services/chillersService');
 //const countersService = require('./services/countersService');
-const countersService = require('./services/tempcounter');
+const countersService = require('./services/tempService');
 const counters = require('./utils/constants/counters');
 const PORT = process.env.PORT || 3200;
 
