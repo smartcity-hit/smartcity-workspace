@@ -8,7 +8,7 @@ class CountersService{
             'host': counter.host,
             'port': 502
         };
-
+        console.log(counter.host);
         this.name = counter.name;
         this.unitId = 1;
         self = this;
@@ -21,7 +21,7 @@ class CountersService{
         // what will happen on error 
         this.socket.on('error', (error)=> { this.onError(error) });
         // what will happen on timeout 
-        this.socket.on('timeout', this.onTimeout);
+        //this.socket.on('timeout', this.onTimeout);
         // what will happen on close 
         this.socket.on('end', this.onEnd);
         this.socket.on('close', this.onClose);
@@ -50,10 +50,10 @@ class CountersService{
 
     onClose = function(){
       console.log('on close');
-      setTimeout(() => {
-        console.log('Reconnecting..');
-        self.socket.connect(self.options);
-      }, 5000);
+      // setTimeout(() => {
+      //   console.log('Reconnecting..');
+      //   self.socket.connect(self.options);
+      // }, 5000);
     }
 
     connectToCounter(){
@@ -75,7 +75,6 @@ class CountersService{
         Promise.all([c1, c2, c3, c4, c5, c6]).then((values) => {
           values.map(value => {
             console.log(value.response._body._values);
-            self.socket.end();
           });
         }).catch(error => {
           console.log(error);
