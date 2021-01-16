@@ -41,12 +41,6 @@ const Routes = () => {
         component={LocationManagement}
       />
       <PrivateRoute
-        path="/AdminPanel"
-        exact
-        isAuthorized={!!userData}
-        component={AdminPanel}
-      />
-      <PrivateRoute
         path="/waterCircuit"
         exact
         isAuthorized={!!userData}
@@ -59,7 +53,7 @@ const Routes = () => {
         component={CoolingCircuit}
       />
       <PrivateRoute
-        path="/adminPanel"
+        path="/AdminPanel"
         exact
         isAuthorized={!!userData && userData.userType === 1}
         component={AdminPanel}
