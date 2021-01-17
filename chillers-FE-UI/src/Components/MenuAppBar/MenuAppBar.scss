@@ -1,0 +1,13 @@
+.menu-app-bar {
+    .nav-link {
+      
+      cursor: pointer;
+      transition: all 0.3s linear;
+      &.active {
+        background-color: #DFD8D8;
+        .nav-link-name {
+          color: rgb(161, 31, 31);
+        }
+        }
+      }
+    }

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from 'react';
+import '../MenuAppBar.scss';
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -21,12 +22,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CountersMenuItem(props) {
   const { pathname } = useLocation();
+  const [activeTab, setActiveTab] = useState(0);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleClick = () => {
     setOpen(!open);
   };
 
+  const onClickTab = (tabClicked) => {
+    setActiveTab(tabClicked);
+  }
   return (
     <div>
       <ListItem button key="Counters" onClick={handleClick}>
@@ -40,8 +45,8 @@ export default function CountersMenuItem(props) {
 
       <Link to="/CountersAlerts">
         <Collapse in={open} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItem button className={`nav-link ${pathname.includes('CountersAlerts') ? 'active' : ''}`}>
+          <List className="menu-app-bar" component="div" disablePadding>
+            <ListItem button className={`nav-link ${pathname.includes('CountersAlerts') && activeTab === 0 ? 'active' : ''}`} onClick={() => { onClickTab(0) }}>
               <ListItemIcon>
                 <StarBorder />
               </ListItemIcon>
@@ -52,8 +57,9 @@ export default function CountersMenuItem(props) {
       </Link>
       <Link to="/CounterDevices">
       <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItem button className={`nav-link ${pathname.includes('CounterDevices') ? 'active' : ''}`}>
+
+        <List className="menu-app-bar" component="div" disablePadding>
+          <ListItem button className={`nav-link ${pathname.includes('CountersDevices') && activeTab === 1 ? 'active' : ''}`} onClick={() => { onClickTab(1) }}>
             <ListItemIcon>
               <StarBorder />
             </ListItemIcon>
