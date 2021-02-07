@@ -141,14 +141,14 @@ const MenuAppBar = () => {
             className={clsx(classes.menuButton, openMenuAppBar && classes.hide)}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton >
           <nav>
             <ul>
               <li><a href="/home">H.I.T Smart City</a></li>
             </ul>
           </nav>
-          <IconButton color="inherit" className={classes.menuButton}>
-            <ExitToAppOutlinedIcon onClick={onClickSignOut} />
+          <IconButton onClick={onClickSignOut} color="inherit" className={classes.menuButton}>
+            <ExitToAppOutlinedIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
