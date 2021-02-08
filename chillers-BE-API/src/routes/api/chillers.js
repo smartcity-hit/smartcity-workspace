@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const auth = require('../../middleware/auth');
-const { getChillersNames, dropCollection, createChillerModelAndCollection, getChillersSettings } = require('../../utils/chillersService');
+const { getChillersNames, dropCollection, createChillerModelAndCollection, getChillersSettings, getChillerDataById } = require('../../utils/chillersService');
 const { Devices } = require('../../models/chillers');
 const logger = require('../../utils/logger');
 
@@ -21,13 +21,15 @@ const getAllChillers = async (req, res) => {
         const chillers = [];
         const chillersNames = await getChillersNames();
         for (let index = 0; index < chillersNames.length; index++) {
-            // Iterate over chillers names, for each name -> find model -> get latest data -> push to chillers array
-            const chillerName = chillersNames[index].chillersNames[0].slice(1);
-            const ChillerI = mongoose.models[chillerName]; // get the model by name
-            let chillerInfo = await ChillerI.find().limit(1).sort({ _id: -1 });
+            // Loading chillers model from mongo -> get latest data -> push to chillers array
+            const chillerName = chillersNames[index];
+            const Chillers = mongoose.models['chillers']; // get the model by name- change to all chillers
+            let chillerInfo = await Chillers.find( { chillerName: `${chillerName}` }).limit(1).sort({ _id: -1 });
             chillerInfo = chillerInfo[0].convertData();
             chillers.push(chillerInfo);
+
         }
+       
         logger.info('getAllChillers:', chillers);
         res.status(200).json(chillers);
     }
@@ -70,14 +72,16 @@ const getByChillerId = async (req, res) => {
             throw new Error('User is not an Admin.');
         }
         const id = parseInt(req.params.id);
-        const ChillerI = mongoose.models[`Chiller${id}`];// getting the correct model by the chiller id
-        if (!ChillerI) {
-            throw new Error('Couldn\'t find chiller by Id - chiller Model was not found!')
+        const Chillers = mongoose.models['chillers']; // get chillers model
+        let chillerData = await Chillers.find( { chillerName: `chiller${id}` } ).limit(1).sort({ _id: -1 });// get the latest document from the model collection
+        //const ChillerData = await getChillerDataById(id); // getting the correct model by the chiller id
+        if (!chillerData) {
+            throw new Error('Couldn\'t find chiller by Id - there is no data for this chiller!')
         }
-        let chillerInfo = await ChillerI.find().limit(1).sort({ _id: -1 }); // get the latest document from the model collection
-        chillerInfo = chillerInfo[0].convertData();
-        logger.info('getByChillerId:', chillerInfo);
-        res.status(200).json(chillerInfo);
+        //let chillerInfo = await ChillerData.find().limit(1).sort({ _id: -1 }); // get the latest document from the model collection
+        chillerData = chillerData[0].convertData();
+        logger.info('getByChillerId:', chillerData);
+        res.status(200).json(chillerData);
     } catch (err) {
         logger.error(`getByChillerId failed: ${err.message}`);
         res.status(400).json({ code: err.code, message: err.message });

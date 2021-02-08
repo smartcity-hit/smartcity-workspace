@@ -81,10 +81,19 @@ const getChillersSettings= async () => {
    */
     const ChillersDeviceSettings = mongoose.model('Devices', devicesSchema, 'devices');
     const collections = await ChillersDeviceSettings.find( { deviceType: "1" } );
-  const names = [];
   
     return collections;
-  }
+}
+  
+const getChillerDataById = async (id) => {
+    /**
+   * * This function will get all chiller's settings from db and return them in array
+   */
+  const Chillers = mongoose.model('Chillers', chillersSchema, 'chillers');
+  const chillerData = await Chillers.find( {chillerName: `chiller${id}`} )
+  
+  return chillerData;
+}
 
 const loadMongooseModels = async () => {
   /**
@@ -93,7 +102,7 @@ const loadMongooseModels = async () => {
   const chillersNames = await getChillersNames();
   chillersNames.forEach((name, index) => {
     const id = index + 1;
-    createChillersModel(name);
+    createChillersModel();
   });
 }
 
@@ -116,9 +125,9 @@ const createChillersModelAndCollection = async (name) => {
   await chillers.save();
 }
 
-const createChillersModel = async (name) => {
+const createChillersModel = async () => {
 /**
- * * This function will create mongoose model by id and name
+ * * This function will create mongoose model
  */
   const Chillers = mongoose.model("chillers", chillersSchema, 'chillers');
 
@@ -130,6 +139,7 @@ module.exports = {
   changeCollectionName,
   getChillersNames,
   getChillersSettings,
+  getChillerDataById,
   createChillerModel: createChillersModel,
   chillersSchema,
   chillersNamesSchema,
