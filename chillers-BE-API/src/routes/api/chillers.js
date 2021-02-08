@@ -22,7 +22,7 @@ const getAllChillers = async (req, res) => {
         const chillersNames = await getChillersNames();
         for (let index = 0; index < chillersNames.length; index++) {
             // Iterate over chillers names, for each name -> find model -> get latest data -> push to chillers array
-            const chillerName = chillersNames[index].charAt(0).toUpperCase() + chillersNames[0].slice(1);
+            const chillerName = chillersNames[index].chillersNames[0].slice(1);
             const ChillerI = mongoose.models[chillerName]; // get the model by name
             let chillerInfo = await ChillerI.find().limit(1).sort({ _id: -1 });
             chillerInfo = chillerInfo[0].convertData();
