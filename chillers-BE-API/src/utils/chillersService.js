@@ -85,16 +85,6 @@ const getChillersSettings= async () => {
     return collections;
 }
   
-const getChillerDataById = async (id) => {
-    /**
-   * * This function will get all chiller's settings from db and return them in array
-   */
-  const Chillers = mongoose.model('Chillers', chillersSchema, 'chillers');
-  const chillerData = await Chillers.find( {chillerName: `chiller${id}`} )
-  
-  return chillerData;
-}
-
 const loadMongooseModels = async () => {
   /**
    * * This function runs when connecting to db successfuly
@@ -139,7 +129,6 @@ module.exports = {
   changeCollectionName,
   getChillersNames,
   getChillersSettings,
-  getChillerDataById,
   createChillerModel: createChillersModel,
   chillersSchema,
   chillersNamesSchema,
