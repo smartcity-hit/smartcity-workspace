@@ -20,14 +20,13 @@ const getAllChillers = async (req, res) => {
         }
         const chillers = [];
         const chillersNames = await getChillersNames();
+        const Chillers = mongoose.models['chillers']; // get the model of all chillers
         for (let index = 0; index < chillersNames.length; index++) {
-            // Loading chillers model from mongo -> get latest data -> push to chillers array
+            // foreach chillerName -> get latest data -> push to chillers array
             const chillerName = chillersNames[index];
-            const Chillers = mongoose.models['chillers']; // get the model by name- change to all chillers
             let chillerInfo = await Chillers.find( { chillerName: `${chillerName}` }).limit(1).sort({ _id: -1 });
             chillerInfo = chillerInfo[0].convertData();
             chillers.push(chillerInfo);
-
         }
        
         logger.info('getAllChillers:', chillers);
@@ -60,7 +59,7 @@ const getAllChillersSettings= async (req, res) => {
     }
 }
 
-const getByChillerId = async (req, res) => {
+const getChillerById = async (req, res) => {
     /**
    * * Route: GET '/api/1/chillers/get/:id'
    * * Response: chiller: data-Object
@@ -74,11 +73,9 @@ const getByChillerId = async (req, res) => {
         const id = parseInt(req.params.id);
         const Chillers = mongoose.models['chillers']; // get chillers model
         let chillerData = await Chillers.find( { chillerName: `chiller${id}` } ).limit(1).sort({ _id: -1 });// get the latest document from the model collection
-        //const ChillerData = await getChillerDataById(id); // getting the correct model by the chiller id
         if (!chillerData) {
             throw new Error('Couldn\'t find chiller by Id - there is no data for this chiller!')
         }
-        //let chillerInfo = await ChillerData.find().limit(1).sort({ _id: -1 }); // get the latest document from the model collection
         chillerData = chillerData[0].convertData();
         logger.info('getByChillerId:', chillerData);
         res.status(200).json(chillerData);
@@ -251,7 +248,7 @@ router.get('/get/settings', auth, getAllChillersSettings);
 router.get('/get', auth, getAllChillers);
 router.post('/create', createChiller);
 router.delete('/delete/:name', deleteChiller);
-router.get('/get/:id', auth, getByChillerId)
+router.get('/get/:id', auth, getChillerById)
 router.get('/history/:id/:startDate/:endDate', auth, getHistoryById);
 router.get('/daterange/:id', auth, getChillerDateRange);
 router.patch('/edit/:id', auth, editChiller);
