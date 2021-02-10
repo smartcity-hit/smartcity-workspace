@@ -72,6 +72,9 @@ const getChillerById = async (req, res) => {
         }
         const id = parseInt(req.params.id);
         const Chillers = mongoose.models['chillers']; // get chillers model
+        if (!Chillers) {
+            throw new Error('Couldn\'t find chiller by Id - chillers model dosent exist!')
+        }
         let chillerData = await Chillers.find( { chillerName: `chiller${id}` } ).limit(1).sort({ _id: -1 });// get the latest document from the model collection
         if (!chillerData) {
             throw new Error('Couldn\'t find chiller by Id - there is no data for this chiller!')
@@ -158,15 +161,15 @@ const getHistoryById = async (req, res) => {
         const id = parseInt(req.params.id);
         const startDate = new Date(req.params.startDate);
         const endDate = new Date(req.params.endDate).setHours(23,59,59,999); // Setting to end of day
-        const ChillerI = mongoose.models[`Chiller${id}`];// getting the correct model by the chiller id
-        if (!ChillerI) {
+        const Chillers = mongoose.models[`chillers`];// getting chillers model
+        if (!Chillers) {
             throw new Error('Couldn\'t find chiller by Id - chiller Model was not found!')
         }
         if (startDate > endDate) { // In case dates are not ordered asc
             throw new Error('Start date cannot be bigger than end date.');
         }
         // get all the documents from the model collection
-        let allDocs = await ChillerI.find({
+        let allDocs = await Chillers.find({ "chillerName": `chiller${id}`,
             "createdAt": { "$gte": startDate, "$lt": endDate }
         });
         // Looping though all documents
@@ -193,11 +196,11 @@ const getChillerDateRange = async (req, res) => {
             throw new Error('User is not an Admin.');
         }
         const id = parseInt(req.params.id);
-        const ChillerI = mongoose.models[`Chiller${id}`];// getting the correct model by the chiller id
-        if (!ChillerI) {
-            throw new Error('Couldn\'t find chiller by Id - chiller Model was not found!')
+        const Chillers = mongoose.models['chillers'];// getting chillers model 
+        if (!Chillers) {
+            throw new Error('Couldn\'t find chiller by Id - chillers model dosent exist!')
         }
-        const oldestRecord = await ChillerI.find().limit(1).sort({ _id: 1 });
+        const oldestRecord = await Chillers.find( { chillerName: `chiller${id}` } ).limit(1).sort({ _id: 1 });
         const chillersCreatedDate = oldestRecord[0].get("createdAt");
         const data = {}
         data[`Chiller${id}`] = { initial_date: chillersCreatedDate};
