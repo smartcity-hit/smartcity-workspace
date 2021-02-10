@@ -81,11 +81,10 @@ const getChillersSettings= async () => {
    */
     const ChillersDeviceSettings = mongoose.model('Devices', devicesSchema, 'devices');
     const collections = await ChillersDeviceSettings.find( { deviceType: "1" } );
-  const names = [];
   
     return collections;
-  }
-
+}
+  
 const loadMongooseModels = async () => {
   /**
    * * This function runs when connecting to db successfuly
@@ -93,16 +92,16 @@ const loadMongooseModels = async () => {
   const chillersNames = await getChillersNames();
   chillersNames.forEach((name, index) => {
     const id = index + 1;
-    createChillerModel(id, name);
+    createChillersModel();
   });
 }
 
-const createChillerModelAndCollection = async (id, name) => {
+const createChillersModelAndCollection = async (name) => {
 /**
- * * This function will create a new Chiller Model & Collection in db
+ * * This function will create a new Chillers Model & Collection in db
  */
-  const ChillerI = await createChillerModel(id,name);
-  const chiller = new ChillerI({
+  const Chillers = await createChillersModel(name);
+  const chillers = new Chillers({
     enteringWaterTemp: 0,
     leavingWaterTemp: 0,
     enteringGasTemp: 0,
@@ -111,27 +110,30 @@ const createChillerModelAndCollection = async (id, name) => {
     controlPoint: 0,
     demandLimit: 0,
     chillerState: 0,
-    chillerName: "chiller1"
+    chillerName: `${name}`
   });
-  await chiller.save();
+  await chillers.save();
 }
-const createChillerModel = async (id, name) => {
+
+const createChillersModel = async () => {
 /**
- * * This function will create mongoose model by id and name
+ * * This function will create mongoose model
  */
-  const ChillerI = mongoose.model(`Chiller${id}`, chillersSchema, name);
-  return ChillerI;
+  const Chillers = mongoose.model("chillers", chillersSchema, 'chillers');
+
+
+  return Chillers;
 }
 
 module.exports = {
   changeCollectionName,
   getChillersNames,
   getChillersSettings,
-  createChillerModel,
+  createChillerModel: createChillersModel,
   chillersSchema,
   chillersNamesSchema,
   devicesSchema,
   dropCollection,
-  createChillerModelAndCollection,
+  createChillerModelAndCollection: createChillersModelAndCollection,
   loadMongooseModels
 };

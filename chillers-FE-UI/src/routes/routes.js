@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 import Alerts from '../Pages/Alerts';
+import Counterdevices from '../Pages/CounterDevices';
 import CoolingCircuit from '../Pages/CoolingCircuit';
 import WaterCircuit from '../Pages/WaterCircuit';
 import LoginPage from '../Pages/LoginPage';
@@ -27,31 +28,27 @@ const Routes = () => {
 
 
       <Route path="/signin" exact component={LoginPage} />
-      <PrivateRoute
-        path="/"
-        exact
-        isAuthorized={!!userData}
-        component={MenuAppBar}
-      />
+
       <PrivateRoute
         path="/CountersAlerts"
         exact
         isAuthorized={!!userData}
         component={Alerts}
       />
-     <PrivateRoute
+      <PrivateRoute
         path="/locationManagement"
         exact
         isAuthorized={!!userData}
         component={LocationManagement}
-      />  
-      <PrivateRoute
-        path="/AdminPanel"
-        exact
-        isAuthorized={!!userData}
-        component={AdminPanel}
       />
       <PrivateRoute
+        path="/Counterdevices"
+        exact
+        isAuthorized={!!userData}
+        component={Counterdevices}
+      />
+      <PrivateRoute
+        main
         path="/waterCircuit"
         exact
         isAuthorized={!!userData}
@@ -64,7 +61,7 @@ const Routes = () => {
         component={CoolingCircuit}
       />
       <PrivateRoute
-        path="/adminPanel"
+        path="/AdminPanel"
         exact
         isAuthorized={!!userData && userData.userType === 1}
         component={AdminPanel}

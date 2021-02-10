@@ -20,14 +20,15 @@ const getAllChillers = async (req, res) => {
         }
         const chillers = [];
         const chillersNames = await getChillersNames();
+        const Chillers = mongoose.models['chillers']; // get the model of all chillers
         for (let index = 0; index < chillersNames.length; index++) {
-            // Iterate over chillers names, for each name -> find model -> get latest data -> push to chillers array
-            const chillerName = chillersNames[index].charAt(0).toUpperCase() + chillersNames[0].slice(1);
-            const ChillerI = mongoose.models[chillerName]; // get the model by name
-            let chillerInfo = await ChillerI.find().limit(1).sort({ _id: -1 });
+            // foreach chillerName -> get latest data -> push to chillers array
+            const chillerName = chillersNames[index];
+            let chillerInfo = await Chillers.find( { chillerName: `${chillerName}` }).limit(1).sort({ _id: -1 });
             chillerInfo = chillerInfo[0].convertData();
             chillers.push(chillerInfo);
         }
+       
         logger.info('getAllChillers:', chillers);
         res.status(200).json(chillers);
     }
@@ -58,7 +59,7 @@ const getAllChillersSettings= async (req, res) => {
     }
 }
 
-const getByChillerId = async (req, res) => {
+const getChillerById = async (req, res) => {
     /**
    * * Route: GET '/api/1/chillers/get/:id'
    * * Response: chiller: data-Object
@@ -70,14 +71,17 @@ const getByChillerId = async (req, res) => {
             throw new Error('User is not an Admin.');
         }
         const id = parseInt(req.params.id);
-        const ChillerI = mongoose.models[`Chiller${id}`];// getting the correct model by the chiller id
-        if (!ChillerI) {
-            throw new Error('Couldn\'t find chiller by Id - chiller Model was not found!')
+        const Chillers = mongoose.models['chillers']; // get chillers model
+        if (!Chillers) {
+            throw new Error('Couldn\'t find chiller by Id - chillers model dosent exist!')
         }
-        let chillerInfo = await ChillerI.find().limit(1).sort({ _id: -1 }); // get the latest document from the model collection
-        chillerInfo = chillerInfo[0].convertData();
-        logger.info('getByChillerId:', chillerInfo);
-        res.status(200).json(chillerInfo);
+        let chillerData = await Chillers.find( { chillerName: `chiller${id}` } ).limit(1).sort({ _id: -1 });// get the latest document from the model collection
+        if (!chillerData) {
+            throw new Error('Couldn\'t find chiller by Id - there is no data for this chiller!')
+        }
+        chillerData = chillerData[0].convertData();
+        logger.info('getByChillerId:', chillerData);
+        res.status(200).json(chillerData);
     } catch (err) {
         logger.error(`getByChillerId failed: ${err.message}`);
         res.status(400).json({ code: err.code, message: err.message });
@@ -157,15 +161,15 @@ const getHistoryById = async (req, res) => {
         const id = parseInt(req.params.id);
         const startDate = new Date(req.params.startDate);
         const endDate = new Date(req.params.endDate).setHours(23,59,59,999); // Setting to end of day
-        const ChillerI = mongoose.models[`Chiller${id}`];// getting the correct model by the chiller id
-        if (!ChillerI) {
+        const Chillers = mongoose.models[`chillers`];// getting chillers model
+        if (!Chillers) {
             throw new Error('Couldn\'t find chiller by Id - chiller Model was not found!')
         }
         if (startDate > endDate) { // In case dates are not ordered asc
             throw new Error('Start date cannot be bigger than end date.');
         }
         // get all the documents from the model collection
-        let allDocs = await ChillerI.find({
+        let allDocs = await Chillers.find({ "chillerName": `chiller${id}`,
             "createdAt": { "$gte": startDate, "$lt": endDate }
         });
         // Looping though all documents
@@ -192,11 +196,11 @@ const getChillerDateRange = async (req, res) => {
             throw new Error('User is not an Admin.');
         }
         const id = parseInt(req.params.id);
-        const ChillerI = mongoose.models[`Chiller${id}`];// getting the correct model by the chiller id
-        if (!ChillerI) {
-            throw new Error('Couldn\'t find chiller by Id - chiller Model was not found!')
+        const Chillers = mongoose.models['chillers'];// getting chillers model 
+        if (!Chillers) {
+            throw new Error('Couldn\'t find chiller by Id - chillers model dosent exist!')
         }
-        const oldestRecord = await ChillerI.find().limit(1).sort({ _id: 1 });
+        const oldestRecord = await Chillers.find( { chillerName: `chiller${id}` } ).limit(1).sort({ _id: 1 });
         const chillersCreatedDate = oldestRecord[0].get("createdAt");
         const data = {}
         data[`Chiller${id}`] = { initial_date: chillersCreatedDate};
@@ -247,7 +251,7 @@ router.get('/get/settings', auth, getAllChillersSettings);
 router.get('/get', auth, getAllChillers);
 router.post('/create', createChiller);
 router.delete('/delete/:name', deleteChiller);
-router.get('/get/:id', auth, getByChillerId)
+router.get('/get/:id', auth, getChillerById)
 router.get('/history/:id/:startDate/:endDate', auth, getHistoryById);
 router.get('/daterange/:id', auth, getChillerDateRange);
 router.patch('/edit/:id', auth, editChiller);
