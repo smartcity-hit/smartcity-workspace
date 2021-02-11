@@ -9,7 +9,6 @@ const { devicesSchema, countersSchema } = require('../utils/schemas')
 const Devices = mongoose.model('Devices', devicesSchema, 'devices');
 const collections = Devices.find({ deviceType: "2" });
 
-
 const Counters = mongoose.model('Counters', countersSchema, 'counters');
 
 

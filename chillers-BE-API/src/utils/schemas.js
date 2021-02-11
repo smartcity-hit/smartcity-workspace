@@ -100,13 +100,8 @@ const devicesSchema = new mongoose.Schema(
 
 const countersSchema = new mongoose.Schema(
   {
-    ip: {
-      type: String,
-      required: true,
-      unique: true
-    },
     i1: {
-      type: String,
+      type: Number,
       required: true
     },
     i2: {
@@ -144,6 +139,11 @@ const countersSchema = new mongoose.Schema(
     cos: {
       type: Number,
       required: true
+    },
+    counterName: {
+      type: String,
+      required: true,
+      unique: true
     }
   },
   { timestamps: true, versionKey: false}

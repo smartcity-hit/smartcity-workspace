@@ -90,7 +90,7 @@ const loadMongooseModels = async () => {
    * * This function runs when connecting to db successfuly
    */
   const chillersNames = await getChillersNames();
-  chillersNames.forEach((name, index) => {
+  chillersNames.forEach((index) => {
     const id = index + 1;
     createChillersModel();
   });
