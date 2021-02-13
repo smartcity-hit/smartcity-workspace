@@ -23,6 +23,7 @@ import CountersMenuItem from "../MenuAppBar/MenuItems/CountersMenuItem";
 import { BroserRouter, Link, Switch, Route } from 'react-router-dom';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useDispatch } from "react-redux";
+import { signOutUser } from '../../actions/user';
 
 
 const drawerWidth = 240;

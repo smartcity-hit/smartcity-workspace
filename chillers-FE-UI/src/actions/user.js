@@ -1,4 +1,5 @@
 import store from '../store';
+import counterService from '../services/countersService'
 
 import {
   SIGN_IN_SUCCESS,
@@ -15,7 +16,7 @@ import {
   USER_MODIFY_ERROR,
 } from '../constants/types';
 import userUtils from '../utils/userUtils';
-import { appApiBaseUrl, getRequestOptions } from '../services/ApiService';
+import { appApiBaseUrl, getRequestOptions } from '../utils/apiUtils';
 import { getAllChillersData } from './chiller';
 export const initEnvironment = () => async (dispatch) => {
   const token = localStorage.getItem('token');
@@ -85,7 +86,7 @@ export const signInUser = ({ userId, password }) => async (dispatch) => {
         type: SIGN_IN_SUCCESS,
         payload: { user, token },
       });
-      dispatch(getAllChillersData());
+      dispatch(getAllChillersData())
     } else {
       throw data;
     }

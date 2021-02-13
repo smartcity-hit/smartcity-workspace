@@ -5,7 +5,7 @@ import {
   ALL_CHILLERS_DATA_FETCHED,
   CHILLER_DATA_FETCHED,
 } from '../constants/types';
-import { appApiBaseUrl, getRequestOptions } from '../services/ApiService';
+import { appApiBaseUrl, getRequestOptions } from '../utils/apiUtils';
 import store from '../store';
 
 /* Temporary */
