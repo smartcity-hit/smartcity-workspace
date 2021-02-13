@@ -30,44 +30,44 @@ const Routes = () => {
       <Route path="/signin" exact component={LoginPage} />
 
       <PrivateRoute
-        path="/CountersAlerts"
+        path="/counters/alerts"
         exact
         isAuthorized={!!userData}
         component={Alerts}
       />
       <PrivateRoute
-        path="/locationManagement"
+        path="/location-management"
         exact
         isAuthorized={!!userData}
         component={LocationManagement}
       />
       <PrivateRoute
-        path="/Counterdevices"
+        path="/counters/devices"
         exact
         isAuthorized={!!userData}
         component={Counterdevices}
       />
       <PrivateRoute
         main
-        path="/waterCircuit"
+        path="/chillers/water-circuit"
         exact
         isAuthorized={!!userData}
         component={WaterCircuit}
       />
       <PrivateRoute
-        path="/coolingCircuit"
+        path="/chillers/cooling-circuit"
         exact
         isAuthorized={!!userData}
         component={CoolingCircuit}
       />
       <PrivateRoute
-        path="/AdminPanel"
+        path="/admin-panel"
         exact
         isAuthorized={!!userData && userData.userType === 1}
         component={AdminPanel}
       />
       <PrivateRoute
-        path='/chillerHistory'
+        path='/chillers/chiller-history'
         exact
         isAuthorized={!!userData}
         component={chillerHistory}

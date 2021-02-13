@@ -179,10 +179,10 @@ const MenuAppBar = () => {
         </List>
         <Divider />
 
-        <Link to="/AdminPanel">
+        <Link to="/admin-panel">
           <List className="menu-app-bar">
 
-            <ListItem button className={`nav-link ${pathname.includes('AdminPanel') && activeTab === 0 ? 'active' : ''}`} onClick={() => { onClickTab(0) }}>
+            <ListItem button className={`nav-link ${pathname.includes('admin-panel') && activeTab === 0 ? 'active' : ''}`} onClick={() => { onClickTab(0) }}>
               <ListItemIcon>
                 <PeopleOutlinedIcon />
               </ListItemIcon>
@@ -191,9 +191,9 @@ const MenuAppBar = () => {
           </List>
         </Link>
 
-        <Link to="/locationManagement">
+        <Link to="/location-management">
           <List className="menu-app-bar">
-            <ListItem button className={`nav-link ${pathname.includes('locationManagement') && activeTab === 1 ? 'active' : ''}`} onClick={() => { onClickTab(1) }}>
+            <ListItem button className={`nav-link ${pathname.includes('location-management') && activeTab === 1 ? 'active' : ''}`} onClick={() => { onClickTab(1) }}>
               <ListItemIcon>
                 <LocationOnOutlinedIcon />
               </ListItemIcon>
