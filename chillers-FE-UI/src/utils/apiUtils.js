@@ -1,6 +1,7 @@
 export const appApiBaseUrl = process.env.REACT_APP_API_URL || 'http://localhost:3200';
 
 export const getRequestOptions = (method = 'GET') => {
+    debugger;
     const token = localStorage.getItem('token');
     if (!token) {
         console.log('No token available');

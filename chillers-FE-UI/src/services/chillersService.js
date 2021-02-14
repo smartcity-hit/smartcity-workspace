@@ -1,5 +1,8 @@
-import { SET_CHILLER_LOADING, STOP_CHILLER_LODAING } from '../constants/types';
-import store from '../store';
+import {
+	SET_CHILLER_LOADING,
+	STOP_CHILLER_LODAING
+} from '../redux/Chiller-Details/chiller-details-types';
+import store from '../redux/store';
 import { appApiBaseUrl, getRequestOptions } from '../utils/apiUtils';
 
 export default {

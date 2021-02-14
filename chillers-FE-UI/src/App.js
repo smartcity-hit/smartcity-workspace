@@ -5,13 +5,11 @@ import { BrowserRouter, Switch } from 'react-router-dom';
 import LoadingModal from './Components/LoadingModal/LoadingModal';
 import { MenuAppBar } from './Components/MenuAppBar/MenuAppBar';
 
-import { initEnvironment } from './actions/user';
-import { initChiller } from './actions/chiller';
+import { initEnvironment } from './redux/User-Details/user-details-actions';
+import { initChiller } from './redux/Chiller-Details/chiller-details-actions';
 import Routes from './routes/routes';
-import { initCounter } from './actions/counters';
-
+import { initCounters } from './redux/Counters-List/counters-list-actions';
 import './App.scss';
-import LoginPage from './Pages/LoginPage';
 
 const App = () => {
 	const { userData, loading } = useSelector((state) => state.user);
@@ -21,7 +19,7 @@ const App = () => {
 	useEffect(() => {
 		dispatch(initEnvironment());
 		dispatch(initChiller());
-		dispatch(initCounter());
+		//dispatch(initCounters());
 	}, [dispatch]);
 
 	return (

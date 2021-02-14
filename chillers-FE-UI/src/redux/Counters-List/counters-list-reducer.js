@@ -1,3 +1,5 @@
+import * as actionTypes from './counters-list-types';
+
 const initialState = {
     counters: [],
     numOfCounters: 0,
@@ -7,24 +9,23 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case 'counters/initCounter':
+        case actionTypes.INIT_COUNTERS:
             return {
                 ...state
             };
-        case 'counters/setIsLoading':
-            debugger
+        case actionTypes.GET_COUNTERS_REQUEST:
             return {
                 ...state,
                 isLoading: true,
             };
-        case 'counters/getCountersFetched':
+        case actionTypes.GET_COUNTERS_SUCCESS:
             return {
                 ...state,
                 counters: action.payload,
                 numOfCounters: action.payload && action.payload.length,
                 isLoading: false
             };
-        case 'counters/getCountersError':
+        case actionTypes.GET_COUNTERS_FAIL:
             return {
                 ...state,
                 isLoading: false,

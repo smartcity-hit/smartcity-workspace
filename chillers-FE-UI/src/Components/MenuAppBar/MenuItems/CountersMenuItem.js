@@ -12,7 +12,8 @@ import List from "@material-ui/core/List";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-
+import { connect } from 'react-redux';
+import { getCounters } from '../../../redux/Counters-List/counters-list-actions';
 
 const useStyles = makeStyles((theme) => ({
   nested: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CountersMenuItem(props) {
+const CountersMenuItem = () => {
   const { pathname } = useLocation();
   const [activeTab, setActiveTab] = useState(0);
   const classes = useStyles();
@@ -56,20 +57,22 @@ export default function CountersMenuItem(props) {
         </Collapse>
       </Link>
       <Link to="/CounterDevices">
-      <Collapse in={open} timeout="auto" unmountOnExit>
+        <Collapse in={open} timeout="auto" unmountOnExit>
 
-        <List className="menu-app-bar" component="div" disablePadding>
-          <ListItem button className={`nav-link ${pathname.includes('CountersDevices') && activeTab === 1 ? 'active' : ''}`} onClick={() => { onClickTab(1) }}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="Devices" />
-          </ListItem>
-        </List>
-      </Collapse>
+          <List className="menu-app-bar" component="div" disablePadding>
+            <ListItem button className={`nav-link ${pathname.includes('CountersDevices') && activeTab === 1 ? 'active' : ''}`} onClick={() => {
+              onClickTab(1)
+            }}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary="Devices" />
+            </ListItem>
+          </List>
+        </Collapse>
       </Link>
     </div>
   )
 };
 
-export { CountersMenuItem };
+export default (CountersMenuItem);
