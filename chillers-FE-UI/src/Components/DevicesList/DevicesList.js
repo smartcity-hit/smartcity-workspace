@@ -8,6 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import { object } from 'prop-types';
 
 const columns = [
   { id: 'name', label: 'Name', minWidth: 100 },
@@ -25,9 +26,6 @@ function createData(name, ip, createdDate) {
   return { name, ip, createdDate };
 }
 
-const rows = [
-  createData('counter1','172.16.11.203','12/01/2021'),
-];
 
 const useStyles = makeStyles({
   root: {
@@ -43,11 +41,23 @@ const useStyles = makeStyles({
   },
 });
 
- const DevicesList = () => {
+ const DevicesList = ({rows}) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
+  
+	var newRows = [];
+	Object.keys(rows).forEach((key) => {
+		newRows.push(
+			createData(
+				rows[key].name,
+				rows[key].ip,
+				rows[key].createdDate
+			)
+		);
+    });
+    
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -75,7 +85,7 @@ const useStyles = makeStyles({
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+            {Object.keys(rows).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
               return (
                 <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                   {columns.map((column) => {

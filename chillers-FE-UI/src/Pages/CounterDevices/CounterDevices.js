@@ -6,7 +6,7 @@ import DevicesList from '../../Components/DevicesList/DevicesList';
 const CounterDevices=()=>{
     return(
     <div>
-    <DevicesList />
+    <DevicesList rows={'counter1','172.16.11.302','12/01/21'}/>
     </div>
     );
 };
