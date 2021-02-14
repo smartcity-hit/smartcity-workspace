@@ -8,7 +8,7 @@ const { Devices, Counters } = require('../../models/counters');
 const { getCountersSettings } = require('../../utils/countersService');
 
 
-const getAllCountersSettings = async (req, res) => {
+const getCounterDevicesById = async (req, res) => {
    /**
    * * Route: GET '/api/1/counters/get/settings'
    * * Response: chillers: Array
@@ -56,10 +56,6 @@ const getCounterHistoryById = async (req, res) => {
     let allDocs = await CountersData.find({ "counterName": `counter${id}`,
         "createdAt": { "$gte": startDate, "$lt": endDate }
     });
-    // Looping though all documents
-    // for (let i = 0; i < allDocs.length; i++) {
-    //     allDocs[i].convertData();
-    // }
     res.status(200).json(allDocs);
 } catch (err) {
     logger.error(`getCounterHistoryById failed: ${err.message}`);
@@ -81,10 +77,6 @@ const getCounterDateRange = async (req, res) => {
         throw new Error('User is not an Admin.');
     }
     const id = parseInt(req.params.id);
-   // const Counters = mongoose.models['counters'];// getting counters model 
-   // if (!Counters) {
-   //     throw new Error('Couldn\'t find counter by Id - counters model dosent exist!')
-   // }
     const oldestRecord = await Counters.find( { counterName: `counter${id}` } ).limit(1).sort({ _id: 1 });
     const counterCreatedDate = oldestRecord[0].get("createdAt");
     const data = {}
@@ -98,7 +90,7 @@ const getCounterDateRange = async (req, res) => {
 };
 
 router.get('/history/:id/:startDate/:endDate', auth, getCounterHistoryById);
-router.get('/get/settings', auth, getAllCountersSettings);
+router.get('/get/devices', auth, getCounterDevicesById);
 router.get('/daterange/:id', auth, getCounterDateRange);
 
 module.exports = router;
