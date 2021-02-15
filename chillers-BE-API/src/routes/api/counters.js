@@ -30,11 +30,11 @@ catch (err) {
 
 };
 
-const getCounterHistoryById = async (req, res) => {
+const getCounterById = async (req, res) => {
        /**
-   * * Route: GET /history/:id/:startDate/:endDate'
+   * * Route: GET /data/:id/:startDate/:endDate'
    * * Response: counter: Array
-   * * Description: getting counter's history between given dates
+   * * Description: getting counter's data between given dates
    * * 
    */
   try {
@@ -58,7 +58,7 @@ const getCounterHistoryById = async (req, res) => {
     });
     res.status(200).json(allDocs);
 } catch (err) {
-    logger.error(`getCounterHistoryById failed: ${err.message}`);
+    logger.error(`getCounterById failed: ${err.message}`);
     res.status(400).json({ code: err.code, message: err.message });
     }
     
@@ -89,7 +89,7 @@ const getCounterDateRange = async (req, res) => {
 }
 };
 
-router.get('/history/:id/:startDate/:endDate', auth, getCounterHistoryById);
+router.get('/data/:id/:startDate/:endDate', auth, getCounterById);
 router.get('/get/devices', auth, getCounterDevicesById);
 router.get('/daterange/:id', auth, getCounterDateRange);
 
