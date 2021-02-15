@@ -11,6 +11,7 @@ import PrivateRoute from './privateRoute';
 import chillerHistory from '../Pages/ChillerHistory';
 import { MenuAppBar } from "../Components/MenuAppBar/MenuAppBar";
 import LocationManagement from '../Pages/LocationManagement/LocationManagement';
+import CounterDetails from '../Pages/CounterDetails/CounterDetails';
 
 const Routes = () => {
   const { userData } = useSelector((state) => state.user);
@@ -72,6 +73,13 @@ const Routes = () => {
         isAuthorized={!!userData}
         component={chillerHistory}
       />
+      <PrivateRoute
+        path='/CounterDetails'
+        exact
+        isAuthorized={!!userData}
+        component={CounterDetails}
+      />
+      
     </div>
   );
 };

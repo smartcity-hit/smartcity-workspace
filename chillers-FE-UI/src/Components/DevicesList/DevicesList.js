@@ -8,7 +8,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import { object } from 'prop-types';
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const columns = [
   { id: 'name', label: 'Name', minWidth: 100 },
@@ -22,10 +23,24 @@ const columns = [
  
 ];
 
-function createData(name, ip, createdDate) {
+
+
+ function createData(name, ip, createdDate) {
   return { name, ip, createdDate };
 }
 
+const ROW_DATA = [
+    createData(
+        'counter1',
+        '172.16.11.203',
+        '12/01/2021'
+    ),
+    createData(
+        'counter2',
+        '172.16.11.204',
+        '12/01/2021'
+    ),
+];
 
 const useStyles = makeStyles({
   root: {
@@ -41,22 +56,28 @@ const useStyles = makeStyles({
   },
 });
 
- const DevicesList = ({rows}) => {
+ const DevicesList = ({rows,cols}) => {
+    const { pathname } = useLocation();
+    const [activeTab, setActiveTab] = React.useState(0);
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  
-	var newRows = [];
-	Object.keys(rows).forEach((key) => {
+  const columns = cols;
+
+
+	var newRows = [ROW_DATA];
+	rows.forEach((row) => {
 		newRows.push(
 			createData(
-				rows[key].name,
-				rows[key].ip,
-				rows[key].createdDate
+				row.name,
+				row.ip,
+				row.createdDate
 			)
 		);
     });
+
+  
     
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -65,6 +86,10 @@ const useStyles = makeStyles({
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
+  };
+
+  const onClickTab = (tabClicked) => {
+    setActiveTab(tabClicked);
   };
 
   return (
@@ -85,18 +110,29 @@ const useStyles = makeStyles({
             </TableRow>
           </TableHead>
           <TableBody>
-            {Object.keys(rows).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row,index) => {
               return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                  {columns.map((column) => {
+              
+                <TableRow hover role="checkbox" tabIndex={-1} key={index}
+                >
+                  {columns.map((column,index) => {
                     const value = row[column.id];
                     return (
-                      <TableCell key={column.id} align={column.align}>
-                        {column.format && typeof value === 'number' ? column.format(value) : value}
+                     
+                      <TableCell key={column.id} 
+                      align={column.align} 
+                      style={{ textAlign: index !== 0 ? 'center' : 'left' }} 
+                       >
+                        <Link to="/CounterDetails">
+                        {column.format && typeof value === 'number' ? column.format(value) : value} 
+                         </Link>
                       </TableCell>
+                    
+                       
                     );
                   })}
                 </TableRow>
+          
               );
             })}
           </TableBody>
