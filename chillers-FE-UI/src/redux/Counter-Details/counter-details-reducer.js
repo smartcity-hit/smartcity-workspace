@@ -1,3 +1,5 @@
+import * as actionTypes from './counter-details-types';
+
 const initialState = {
     counterName: '',
     i1: 0,
@@ -16,16 +18,16 @@ const initialState = {
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case 'counter/initCounter':
+        case actionTypes.INIT_COUNTER:
             return {
                 ...state
             };
-        case 'counter/setIsLoading':
+        case actionTypes.GET_COUNTER_DETAILS_REQUEST:
             return {
                 ...state,
                 isLoading: true,
             };
-        case 'counter/getCounterFetched':
+        case actionTypes.GET_COUNTER_DETAILS_SUCCESS:
             return {
                 ...state,
                 isLoading: false,
@@ -42,7 +44,7 @@ export default (state = initialState, action) => {
                 cos: action.payload.cos,
                 createdDate: action.payload.createdDate
             };
-        case 'counters/getCountersError':
+        case actionTypes.GET_COUNTER_DETAILS_FAIL:
             return {
                 ...state,
                 isLoading: false,
