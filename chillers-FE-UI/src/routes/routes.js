@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
-import Alerts from '../Pages/Alerts';
-import Counterdevices from '../Pages/CounterDevices';
+import Alert from '../Pages/Alerts';
+import CounterDevices from "../Pages/CounterDevices/CounterDevices";
 import CoolingCircuit from '../Pages/CoolingCircuit';
 import WaterCircuit from '../Pages/WaterCircuit';
 import LoginPage from '../Pages/LoginPage';
@@ -11,7 +11,7 @@ import PrivateRoute from './privateRoute';
 import chillerHistory from '../Pages/ChillerHistory';
 import { MenuAppBar } from "../Components/MenuAppBar/MenuAppBar";
 import LocationManagement from '../Pages/LocationManagement/LocationManagement';
-
+import CounterDetails from '../Pages/CounterDetails/CounterDetails';
 
 const Routes = () => {
   const { userData } = useSelector((state) => state.user);
@@ -33,9 +33,10 @@ const Routes = () => {
         path="/counters/alerts"
         exact
         isAuthorized={!!userData}
-        component={Alerts}
+        component={Alert}
       />
-      <PrivateRoute
+
+     <PrivateRoute
         path="/location-management"
         exact
         isAuthorized={!!userData}
@@ -45,7 +46,7 @@ const Routes = () => {
         path="/counters/devices"
         exact
         isAuthorized={!!userData}
-        component={Counterdevices}
+        component={CounterDevices}
       />
       <PrivateRoute
         main
@@ -72,6 +73,13 @@ const Routes = () => {
         isAuthorized={!!userData}
         component={chillerHistory}
       />
+      <PrivateRoute
+        path='/CounterDetails'
+        exact
+        isAuthorized={!!userData}
+        component={CounterDetails}
+      />
+      
     </div>
   );
 };
