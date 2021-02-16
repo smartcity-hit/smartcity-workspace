@@ -60,9 +60,7 @@ const CountersMenuItem = () => {
         <Collapse in={open} timeout="auto" unmountOnExit>
 
           <List className="menu-app-bar" component="div" disablePadding>
-            <ListItem button className={`nav-link ${pathname.includes('CountersDevices') && activeTab === 1 ? 'active' : ''}`} onClick={() => {
-              onClickTab(1)
-            }}>
+            <ListItem button className={`nav-link ${pathname.includes('CountersDevices') && activeTab === 1 ? 'active' : ''}`} onClick={() => { onClickTab(1) }}>
               <ListItemIcon>
                 <StarBorder />
               </ListItemIcon>
