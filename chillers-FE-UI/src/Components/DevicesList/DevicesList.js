@@ -113,8 +113,7 @@ const useStyles = makeStyles({
             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row,index) => {
               return (
               
-                <TableRow hover role="checkbox" tabIndex={-1} key={index}
-                >
+                <TableRow hover role="checkbox" tabIndex={-1} key={index}>
                   {columns.map((column,index) => {
                     const value = row[column.id];
                     return (

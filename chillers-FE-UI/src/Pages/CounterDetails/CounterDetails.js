@@ -1,11 +1,20 @@
 import React from 'react';
+import DetailsCard from '../../Components/DetailsCard/DetailsCard'
 
+const CounterDetails = () => {
+  function createData(state, location, createdDate) {
+    return { state, location, createdDate };
+  }
 
-const CounterDetails = () => (
+  const createCol=[
+    createData('on','bulding 1','16/02/2021'),
+  ];
+return(
   <div>
-    This is counter details page Hello!
+    <DetailsCard cols={createCol}/>
   </div>
 );
+};
 
 export default CounterDetails;
 
