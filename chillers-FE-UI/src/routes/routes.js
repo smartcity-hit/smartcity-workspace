@@ -36,7 +36,7 @@ const Routes = () => {
         component={Alert}
       />
 
-     <PrivateRoute
+      <PrivateRoute
         path="/locationManagement"
         exact
         isAuthorized={!!userData}
@@ -79,7 +79,7 @@ const Routes = () => {
         isAuthorized={!!userData}
         component={CounterDetails}
       />
-      
+
     </div>
   );
 };
