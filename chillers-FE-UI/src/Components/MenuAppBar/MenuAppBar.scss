@@ -1,6 +1,8 @@
 .menu-app-bar {
     .nav-link {
-      
+    position: sticky;
+      top: 0;
+      left: 0;
       cursor: pointer;
       transition: all 0.3s linear;
       &.active {
