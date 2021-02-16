@@ -148,8 +148,8 @@ const MenuAppBar = () => {
               <li><a href="/home">H.I.T Smart City</a></li>
             </ul>
           </nav>
-          <IconButton color="inherit" className={classes.menuButton}>
-            <ExitToAppOutlinedIcon onClick={onClickSignOut} />
+          <IconButton onClick={onClickSignOut} color="inherit" className={classes.menuButton}>
+            <ExitToAppOutlinedIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
