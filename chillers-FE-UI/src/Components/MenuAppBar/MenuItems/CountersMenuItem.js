@@ -56,7 +56,7 @@ export default function CountersMenuItem(props) {
         </Collapse>
       </Link>
 
-      <Link to="/counters/devices">
+     <Link to="/counters/devices">
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List className="menu-app-bar" component="div" disablePadding>
             <ListItem button className={`nav-link ${pathname.includes('/counters/devices') && activeTab === 1 ? 'active' : ''}`} onClick={() => { onClickTab(1) }}>

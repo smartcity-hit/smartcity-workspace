@@ -79,7 +79,7 @@ const Routes = () => {
         isAuthorized={!!userData}
         component={CounterDetails}
       />
-
+      
     </div>
   );
 };
