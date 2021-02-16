@@ -4,7 +4,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const auth = require('../../middleware/auth');
 const { getChillersNames, dropCollection, createChillerModelAndCollection, getChillersSettings } = require('../../utils/chillersService');
-const { Devices } = require('../../models/chillers');
+const { Devices , Chillers} = require('../../models/chillers');
 const logger = require('../../utils/logger');
 
 const getAllChillers = async (req, res) => {
@@ -20,11 +20,14 @@ const getAllChillers = async (req, res) => {
         }
         const chillers = [];
         const chillersNames = await getChillersNames();
-        const Chillers = mongoose.models['chillers']; // get the model of all chillers
+        const ChillersData = mongoose.models['Chillers']; // get the model of all chillers
+        if (!ChillersData) {
+            throw new Error('Couldn\'t find chiller by Id - chillers model dosent exist!')
+        }
         for (let index = 0; index < chillersNames.length; index++) {
             // foreach chillerName -> get latest data -> push to chillers array
             const chillerName = chillersNames[index];
-            let chillerInfo = await Chillers.find( { chillerName: `${chillerName}` }).limit(1).sort({ _id: -1 });
+            let chillerInfo = await ChillersData.find( { chillerName: `${chillerName}` }).limit(1).sort({ _id: -1 });
             chillerInfo = chillerInfo[0].convertData();
             chillers.push(chillerInfo);
         }
@@ -160,10 +163,10 @@ const getHistoryById = async (req, res) => {
         }
         const id = parseInt(req.params.id);
         const startDate = new Date(req.params.startDate);
-        const endDate = new Date(req.params.endDate).setHours(23,59,59,999); // Setting to end of day
-        const Chillers = mongoose.models[`chillers`];// getting chillers model
+        const endDate = new Date(req.params.endDate).setHours(23, 59, 59, 999); // Setting to end of day
+        const Chillers = mongoose.models['Chillers'];// getting chillers model
         if (!Chillers) {
-            throw new Error('Couldn\'t find chiller by Id - chiller Model was not found!')
+            throw new Error('Couldn\'t find chiller by Id - chillers Model was not found!')
         }
         if (startDate > endDate) { // In case dates are not ordered asc
             throw new Error('Start date cannot be bigger than end date.');
