@@ -12,7 +12,7 @@ export const getCounters = () => async (dispatch) => {
     try {
         dispatch({ type: actionTypes.GET_COUNTERS_REQUEST });
         const res = await fetch(
-            appApiBaseUrl + `/api/1/counters/get`,
+            appApiBaseUrl + `/api/1/counters/get/devices`,
             getRequestOptions('GET')
         );
         const data = await res.json();

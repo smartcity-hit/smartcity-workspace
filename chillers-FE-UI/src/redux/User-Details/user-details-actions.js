@@ -48,7 +48,6 @@ export const initEnvironment = () => async (dispatch) => {
 
 export const signInUser = ({ userId, password }) => async (dispatch) => {
     try {
-        debugger;
         dispatch({ type: actionTypes.SET_LOADING });
         const res = await fetch(appApiBaseUrl + '/api/1/users/login', {
             method: 'POST',
