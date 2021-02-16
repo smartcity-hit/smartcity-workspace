@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { deleteUserById, editUser } from '../../../actions/user';
+import { deleteUserById, editUser } from '../../../redux/User-Details/user-details-actions';
 import GeneralModal from '../../../Components/GeneralModal/GeneralModal';
 import './index.scss';
 
@@ -83,9 +83,8 @@ const ViewUsers = () => {
 						{
 							<div className="td-icons">
 								<i
-									className={`fas fa-pencil-alt icon ${
-										userToEditId === user.id && isEditConfirmEnabled ? 'edit-active' : ''
-									}`}
+									className={`fas fa-pencil-alt icon ${userToEditId === user.id && isEditConfirmEnabled ? 'edit-active' : ''
+										}`}
 									onClick={() => {
 										onClickEditIcon(user);
 									}}

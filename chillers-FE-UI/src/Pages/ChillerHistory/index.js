@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import ApiService from '../../services/ApiService';
+import chillersService from '../../services/chillersService';
 import Table from '../../Components/Table';
 
 import './index.scss';
@@ -76,7 +76,7 @@ const ChillerHistory = () => {
 
 	const handleChangeChillerId = async (id) => {
 		try {
-			const res = await ApiService.getChillerDateRange(id);
+			const res = await chillersService.getChillerDateRange(id);
 			if (res && res.initial_date) {
 				setChillerId(id);
 				setMinRange(res.initial_date);
@@ -124,7 +124,7 @@ const ChillerHistory = () => {
 			setError('Start date cannot be bigger than end date');
 		} else {
 			try {
-				const chillerHistory = await ApiService.getChillerHistory(chillerId, startDate, endDate);
+				const chillerHistory = await chillersService.getChillerHistory(chillerId, startDate, endDate);
 				if (chillerHistory) {
 					setError('');
 					setCurrentChillerHistory(chillerHistory);
