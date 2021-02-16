@@ -152,7 +152,6 @@ const ChillerHistory = () => {
 							handleChangeChillerId(e.target.value);
 						}}
 					>
-						<option className="field-option" value=""></option>
 						{renderOptions(allChillers)}
 					</select>
 				</div>
