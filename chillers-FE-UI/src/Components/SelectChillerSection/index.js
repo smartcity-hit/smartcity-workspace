@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getAllChillersData, setActiveChiller } from '../../actions/chiller';
+import { getAllChillersData, setActiveChiller } from '../../redux/Chiller-Details/chiller-details-actions';
 
 import './index.scss';
 
@@ -23,9 +23,8 @@ const SelectChillerSection = () => {
 		<div className="select-chillers-section-wrapper">
 			<select className="chillers-select" value={activeChillerIndex} onChange={onChangeChiller}>
 				{allChillers.map((chiller, index) => (
-					<option key={index} className="chiller-option" value={index}>{`Chiller ${
-						index + 1
-					}`}</option>
+					<option key={index} className="chiller-option" value={index}>{`Chiller ${index + 1
+						}`}</option>
 				))}
 			</select>
 			<button onClick={onClickRefreshBtn} className="refresh-btn">
@@ -33,8 +32,8 @@ const SelectChillerSection = () => {
 			</button>
 		</div>
 	) : (
-		''
-	);
+			''
+		);
 };
 
 export default SelectChillerSection;

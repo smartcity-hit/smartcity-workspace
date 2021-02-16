@@ -9,6 +9,7 @@ export default {
       phone: oldUserObj.phone,
       email: oldUserObj.email
     }
+
     return newUserObj;
   }
 }

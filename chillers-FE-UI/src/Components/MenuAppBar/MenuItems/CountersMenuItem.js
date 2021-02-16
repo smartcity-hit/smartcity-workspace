@@ -12,7 +12,8 @@ import List from "@material-ui/core/List";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-
+import { connect } from 'react-redux';
+import { getCounters } from '../../../redux/Counters-List/counters-list-actions';
 
 const useStyles = makeStyles((theme) => ({
   nested: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CountersMenuItem(props) {
+const CountersMenuItem = () => {
   const { pathname } = useLocation();
   const [activeTab, setActiveTab] = useState(0);
   const classes = useStyles();
@@ -72,4 +73,4 @@ export default function CountersMenuItem(props) {
   )
 };
 
-export { CountersMenuItem };
+export default (CountersMenuItem);

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { signUpUser } from '../../../actions/user';
+import { signUpUser } from '../../../redux/User-Details/user-details-actions';
 import verifiers from '../../../utils/verifiers';
 
 import './index.scss';
@@ -189,27 +189,27 @@ const AddUser = () => {
                 onBlur={field.checkFunc}
               ></input>
             ) : (
-              <select
-                name={field.prop}
-                id={field.prop}
-                className="field-select"
-                value={field.value}
-                onChange={(e) => {
-                  console.log(field.value);
-                  field.setFunc(e.target.value);
-                }}
-              >
-                {field.options.map((option, index) => (
-                  <option
-                    value={option.value}
-                    key={index}
-                    className="field-option"
-                  >
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            )}
+                <select
+                  name={field.prop}
+                  id={field.prop}
+                  className="field-select"
+                  value={field.value}
+                  onChange={(e) => {
+                    console.log(field.value);
+                    field.setFunc(e.target.value);
+                  }}
+                >
+                  {field.options.map((option, index) => (
+                    <option
+                      value={option.value}
+                      key={index}
+                      className="field-option"
+                    >
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              )}
           </div>
           <div className="field-error">{field.err}</div>
         </div>
