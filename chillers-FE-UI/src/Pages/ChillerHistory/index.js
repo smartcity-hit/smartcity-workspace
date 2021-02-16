@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import ApiService from '../../services/ApiService';
+import chillersService from '../../services/chillersService';
 import Table from '../../Components/Table';
 
 import './index.scss';
 
 const ChillerHistory = () => {
-	const [chillerId, setChillerId] = useState('1');
+	const [chillerId, setChillerId] = useState('');
 	const [startDate, setStartDate] = useState('');
 	const [endDate, setEndDate] = useState('');
 	const [minRange, setMinRange] = useState(null);
@@ -76,7 +76,7 @@ const ChillerHistory = () => {
 
 	const handleChangeChillerId = async (id) => {
 		try {
-			const res = await ApiService.getChillerDateRange(id);
+			const res = await chillersService.getChillerDateRange(id);
 			if (res && res.initial_date) {
 				setChillerId(id);
 				setMinRange(res.initial_date);
@@ -124,7 +124,7 @@ const ChillerHistory = () => {
 			setError('Start date cannot be bigger than end date');
 		} else {
 			try {
-				const chillerHistory = await ApiService.getChillerHistory(chillerId, startDate, endDate);
+				const chillerHistory = await chillersService.getChillerHistory(chillerId, startDate, endDate);
 				if (chillerHistory) {
 					setError('');
 					setCurrentChillerHistory(chillerHistory);
@@ -152,7 +152,7 @@ const ChillerHistory = () => {
 							handleChangeChillerId(e.target.value);
 						}}
 					>
-
+						<option className="field-option" value=""></option>
 						{renderOptions(allChillers)}
 					</select>
 				</div>

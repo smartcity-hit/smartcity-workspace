@@ -20,9 +20,10 @@ import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
 import PeopleOutlinedIcon from '@material-ui/icons/PeopleOutlined';
 import ChillersMenuItem from "../MenuAppBar/MenuItems/ChillersMenuItem";
 import CountersMenuItem from "../MenuAppBar/MenuItems/CountersMenuItem";
-import { BroserRouter, Link, Switch, Route } from 'react-router-dom';
-import { useHistory, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useDispatch } from "react-redux";
+import { signOutUser } from '../../redux/User-Details/user-details-actions';
 
 
 const drawerWidth = 240;
@@ -141,14 +142,14 @@ const MenuAppBar = () => {
             className={clsx(classes.menuButton, openMenuAppBar && classes.hide)}
           >
             <MenuIcon />
-          </IconButton >
+          </IconButton>
           <nav>
             <ul>
               <li><a href="/home">H.I.T Smart City</a></li>
             </ul>
           </nav>
-          <IconButton onClick={onClickSignOut} color="inherit" className={classes.menuButton}>
-            <ExitToAppOutlinedIcon />
+          <IconButton color="inherit" className={classes.menuButton}>
+            <ExitToAppOutlinedIcon onClick={onClickSignOut} />
           </IconButton>
         </Toolbar>
       </AppBar>
@@ -179,10 +180,10 @@ const MenuAppBar = () => {
         </List>
         <Divider />
 
-        <Link to="/admin-panel">
+        <Link to="/AdminPanel">
           <List className="menu-app-bar">
 
-            <ListItem button className={`nav-link ${pathname.includes('admin-panel') && activeTab === 0 ? 'active' : ''}`} onClick={() => { onClickTab(0) }}>
+            <ListItem button className={`nav-link ${pathname.includes('AdminPanel') && activeTab === 0 ? 'active' : ''}`} onClick={() => { onClickTab(0) }}>
               <ListItemIcon>
                 <PeopleOutlinedIcon />
               </ListItemIcon>
@@ -191,9 +192,9 @@ const MenuAppBar = () => {
           </List>
         </Link>
 
-        <Link to="/location-management">
+        <Link to="/locationManagement">
           <List className="menu-app-bar">
-            <ListItem button className={`nav-link ${pathname.includes('location-management') && activeTab === 1 ? 'active' : ''}`} onClick={() => { onClickTab(1) }}>
+            <ListItem button className={`nav-link ${pathname.includes('locationManagement') && activeTab === 1 ? 'active' : ''}`} onClick={() => { onClickTab(1) }}>
               <ListItemIcon>
                 <LocationOnOutlinedIcon />
               </ListItemIcon>

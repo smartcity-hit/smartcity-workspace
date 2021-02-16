@@ -1,45 +1,42 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { useEffect } from 'react';
 import DevicesList from '../../Components/DevicesList/DevicesList';
-import useState from 'react';
-import createData from '../../Components/DevicesList/DevicesList'
+import { useDispatch, useSelector } from 'react-redux';
+import { getCounters } from '../../redux/Counters-List/counters-list-actions';
 
-const CounterDevices=()=>{
-  
-    function createData(name, ip, createdDate) {
-        return { name, ip, createdDate };
-      }
-      
-      const ROW_DATA = [
-          createData(
-              'counter1',
-              '172.16.11.203',
-              '12/01/2021'
-          ),
-          createData(
-              'counter2',
-              '172.16.11.204',
-              '12/01/2021'
-          ),
-      ];
+const CounterDevices = () => {
+  const counters = useSelector((state) => state.countersList.counters);
+  const dispatch = useDispatch();
 
-      const columns = [
-        { id: 'name', label: 'Name', minWidth: 100 },
-        { id: 'ip', label: 'Ip', minWidth: 100 },
-        {
-          id: 'createdDate',
-          label: 'Created Date',
-          minWidth: 100,
-          align: 'right',
-        },
-       
-      ];
-    
-    return(
+  useEffect(() => {
+    dispatch(getCounters());
+  }, [dispatch]);
+
+  const columns = [
+    {
+      id: 'name',
+      label: 'Name',
+      minWidth: 100,
+      align: 'center',
+    },
+    {
+      id: 'ip',
+      label: 'Ip',
+      minWidth: 100,
+      align: 'center',
+    },
+    {
+      id: 'createdDate',
+      label: 'Created Date',
+      minWidth: 100,
+      align: 'center',
+    },
+  ];
+
+  return (
     <div>
-    <DevicesList rows={ROW_DATA} cols={columns} />
+      <DevicesList rows={counters} cols={columns} />
     </div>
-    );
+  );
 };
 
 export default CounterDevices;

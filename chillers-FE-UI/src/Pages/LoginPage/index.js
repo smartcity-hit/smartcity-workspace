@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import MenuAppBar from "../../Components/MenuAppBar/MenuAppBar"
-import { signInUser } from '../../actions/user';
+import { signInUser } from '../../redux/User-Details/user-details-actions';
 
 import './index.scss';
 
@@ -86,8 +85,8 @@ const LoginPage = () => {
 			</div>
 		</div>
 	) : (
-		''
-	);
+			''
+		);
 };
 
 export default LoginPage;
