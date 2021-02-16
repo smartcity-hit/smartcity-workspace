@@ -71,10 +71,10 @@ const ChillersMenuItem = () => {
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
 
-      <Link to="/chillers/water-circuit">
+      <Link to="/waterCircuit">
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List className="menu-app-bar" component="div" disablePadding>
-            <ListItem button className={`nav-link ${pathname.includes('/chillers/water-circuit') && activeTab === 0 ? 'active' : ''}`} onClick={() => { onClickTab(0) }}>
+            <ListItem button className={`nav-link ${pathname.includes('waterCircuit') && activeTab === 0 ? 'active' : ''}`} onClick={() => { onClickTab(0) }}>
               <ListItemIcon onClick={handleDocumentClick}>
                 <StarBorder />
               </ListItemIcon>
@@ -85,10 +85,10 @@ const ChillersMenuItem = () => {
       </Link>
 
 
-      <Link to="/chillers/cooling-circuit">
+      <Link to="/coolingCircuit">
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List className="menu-app-bar" component="div" disablePadding>
-            <ListItem button className={`nav-link ${pathname.includes('/chillers/cooling-circuit') && activeTab === 1 ? 'active' : ''}`} onClick={() => { onClickTab(1) }}>
+            <ListItem button className={`nav-link ${pathname.includes('coolingCircuit') && activeTab === 1 ? 'active' : ''}`} onClick={() => { onClickTab(1) }}>
               <ListItemIcon onClick={handelClose}>
                 <StarBorder />
               </ListItemIcon>
@@ -99,10 +99,10 @@ const ChillersMenuItem = () => {
       </Link>
 
 
-      <Link to="/chillers/chiller-history">
+      <Link to="/chillerHistory">
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List className="menu-app-bar" component="div" disablePadding>
-            <ListItem button className={`nav-link ${pathname.includes('/chillers/chiller-history') && activeTab === 2 ? 'active' : ''}`} onClick={() => { onClickTab(2) }}>
+            <ListItem button className={`nav-link ${pathname.includes('chillerHistory') && activeTab === 2 ? 'active' : ''}`} onClick={() => { onClickTab(2) }}>
               <ListItemIcon onClick={handelClose}>
                 <StarBorder />
               </ListItemIcon>

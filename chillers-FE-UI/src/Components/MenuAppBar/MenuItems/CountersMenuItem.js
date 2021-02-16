@@ -43,10 +43,10 @@ export default function CountersMenuItem(props) {
       </ListItem>
 
 
-      <Link to="/counters/alerts">
+      <Link to="/CountersAlerts">
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List className="menu-app-bar" component="div" disablePadding>
-            <ListItem button className={`nav-link ${pathname.includes('/counters/alerts') && activeTab === 0 ? 'active' : ''}`} onClick={() => { onClickTab(0) }}>
+            <ListItem button className={`nav-link ${pathname.includes('CountersAlerts') && activeTab === 0 ? 'active' : ''}`} onClick={() => { onClickTab(0) }}>
               <ListItemIcon>
                 <StarBorder />
               </ListItemIcon>
@@ -55,11 +55,11 @@ export default function CountersMenuItem(props) {
           </List>
         </Collapse>
       </Link>
-      <Link to="/counters/devices">
+      <Link to="/CounterDevices">
         <Collapse in={open} timeout="auto" unmountOnExit>
 
           <List className="menu-app-bar" component="div" disablePadding>
-            <ListItem button className={`nav-link ${pathname.includes('/counters/devices') && activeTab === 1 ? 'active' : ''}`} onClick={() => { onClickTab(1) }}>
+            <ListItem button className={`nav-link ${pathname.includes('CountersDevices') && activeTab === 1 ? 'active' : ''}`} onClick={() => { onClickTab(1) }}>
               <ListItemIcon>
                 <StarBorder />
               </ListItemIcon>
