@@ -9,6 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import { Link } from 'react-router-dom';
+import {useLocation} from  'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -22,6 +23,7 @@ const useStyles = makeStyles({
 
 const DevicesList = ({ rows, cols }) => {
   const classes = useStyles();
+  const { pathname } = useLocation();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -55,9 +57,11 @@ const DevicesList = ({ rows, cols }) => {
             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
               return (
                 <TableRow align="center" key={row.name}>
-                  <TableCell align="center" component="th" scope="row">
+                  <Link to="/counter/details">
+                  <TableCell align="center" component="th" scope="row" button className={`nav-link ${pathname.includes('/counter/details') && activeTab === 0 ? 'active' : ''}`}>
                     {row.name}
                   </TableCell>
+                  </Link>
                   <TableCell align="center">{row.host}</TableCell>
                   <TableCell align="center">{row.createdAt}</TableCell>
                 </TableRow>
