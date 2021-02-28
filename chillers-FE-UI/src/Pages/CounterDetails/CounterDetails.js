@@ -1,15 +1,24 @@
 import React from 'react';
 import HistoryCard from '../../Components/HistoryCard/HistoryCard'
+import DetailsCard from '../../Components/DetailsCard/DetailsCard'
 
 const CounterDetails = () => {
 
-  function createData(name, date, i1,i2,i3,nv1,nv2,nv3,v1v2,v1v3,v2v3,cos) {
+  function createDataHis(name, date, i1,i2,i3,nv1,nv2,nv3,v1v2,v1v3,v2v3,cos) {
 
     return { name, date, i1, i2,i3,nv1,nv2,nv3,v1v2,v1v3,v2v3,cos };
   }
 
+  function createData(state, location, createdDate) {
+    return { state, location, createdDate };
+  }
+
+  const createCol = [
+    createData('on', 'bulding 1', '16/02/2021'),
+  ];
+
   const rows_data = [
-    createData('counter1', '16/02/2021','110', '100','100','100','100','100','100','100','100','100'),
+    createDataHis('counter1', '16/02/2021','110', '100','100','100','100','100','100','100','100','100'),
   ];
 
   const columns = [
@@ -30,11 +39,11 @@ const CounterDetails = () => {
   return(
     
   <div>
+    <DetailsCard cols={createCol} />
     <h3 textAlign='left'>Counter History</h3>
     <HistoryCard rows={rows_data} cols={columns}/>
   </div>
   );
-  };
+  }
 
 export default CounterDetails;
-

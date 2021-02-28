@@ -21,8 +21,8 @@ export default (state = initialState, action) => {
         case actionTypes.GET_COUNTERS_SUCCESS:
             return {
                 ...state,
-                counters: action.payload,
-                numOfCounters: action.payload && action.payload.length,
+                counters: action.payload.counters,
+                numOfCounters: action.payload && action.payload.counters.length,
                 isLoading: false
             };
         case actionTypes.GET_COUNTERS_FAIL:

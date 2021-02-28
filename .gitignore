@@ -1,3 +1,7 @@
 node_modules/*
 chillers-FE-UI/debug.log
 chillers-BE-API/.vscode/launch.json
+chillers-BE-API/package-lock.json
+chillers-BE-API/package.json
+*.json
+chillers-BE-API/package-lock.json

@@ -2,10 +2,14 @@ import React, { useEffect } from 'react';
 import DevicesList from '../../Components/DevicesList/DevicesList';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCounters } from '../../redux/Counters-List/counters-list-actions';
+import { colors, makeStyles } from '@material-ui/core';
+
+
 
 const CounterDevices = () => {
   const counters = useSelector((state) => state.countersList.counters);
   const dispatch = useDispatch();
+
 
   useEffect(() => {
     dispatch(getCounters());
@@ -34,6 +38,7 @@ const CounterDevices = () => {
 
   return (
     <div>
+      <h1>COUNTESRS</h1>
       <DevicesList rows={counters} cols={columns} />
     </div>
   );

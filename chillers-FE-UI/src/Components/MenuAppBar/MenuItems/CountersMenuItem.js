@@ -44,10 +44,10 @@ const CountersMenuItem = () => {
       </ListItem>
 
 
-      <Link to="/CountersAlerts">
+      <Link to="/counters/alerts">
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List className="menu-app-bar" component="div" disablePadding>
-            <ListItem button className={`nav-link ${pathname.includes('CountersAlerts') && activeTab === 0 ? 'active' : ''}`} onClick={() => { onClickTab(0) }}>
+            <ListItem button className={`nav-link ${pathname.includes('/counters/alerts') && activeTab === 0 ? 'active' : ''}`} onClick={() => { onClickTab(0) }}>
               <ListItemIcon>
                 <StarBorder />
               </ListItemIcon>
@@ -56,18 +56,18 @@ const CountersMenuItem = () => {
           </List>
         </Collapse>
       </Link>
-      <Link to="/CounterDevices">
-      <Collapse in={open} timeout="auto" unmountOnExit>
 
-        <List className="menu-app-bar" component="div" disablePadding>
-          <ListItem button className={`nav-link ${pathname.includes('CountersDevices') && activeTab === 1 ? 'active' : ''}`} onClick={() => { onClickTab(1) }}>
-            <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="Devices" />
-          </ListItem>
-        </List>
-      </Collapse>
+     <Link to="/counters/devices">
+        <Collapse in={open} timeout="auto" unmountOnExit>
+          <List className="menu-app-bar" component="div" disablePadding>
+            <ListItem button className={`nav-link ${pathname.includes('/counters/devices') && activeTab === 1 ? 'active' : ''}`} onClick={() => { onClickTab(1) }}>
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary="Devices" />
+            </ListItem>
+          </List>
+        </Collapse>
       </Link>
     </div>
   )
