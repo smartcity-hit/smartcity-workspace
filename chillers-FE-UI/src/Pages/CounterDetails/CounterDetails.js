@@ -1,49 +1,34 @@
-import React from 'react';
-import HistoryCard from '../../Components/HistoryCard/HistoryCard'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCounterBasicDetails, getCounterSamples } from '../../redux/Counter-Details/counter-details-actions';
 import DetailsCard from '../../Components/DetailsCard/DetailsCard'
 
-const CounterDetails = () => {
-
-  function createDataHis(name, date, i1,i2,i3,nv1,nv2,nv3,v1v2,v1v3,v2v3,cos) {
-
-    return { name, date, i1, i2,i3,nv1,nv2,nv3,v1v2,v1v3,v2v3,cos };
-  }
-
-  function createData(state, location, createdDate) {
-    return { state, location, createdDate };
-  }
+const CounterDetails = (props) => {
+  const samples = useSelector((state) => state.counterDetails.counterSamples);
+  const location = useSelector((state) => state.counterDetails.counterLocation);
+  const name = useSelector((state) => state.counterDetails.counterName);
+  const createdDate = useSelector((state) => state.counterDetails.createdDate);
+  const ip = useSelector((state) => state.counterDetails.counterIP);
+  console.log(props.location.counterName)
+  const dispatch = useDispatch();
 
   const createCol = [
-    createData('on', 'bulding 1', '16/02/2021'),
+    { counterName: name, counterIP: ip, counterLocation: location, createdDate: createdDate }
   ];
 
-  const rows_data = [
-    createDataHis('counter1', '16/02/2021','110', '100','100','100','100','100','100','100','100','100'),
-  ];
+  useEffect(() => {
+    dispatch(getCounterSamples(props.location.counterName)),
+      dispatch(getCounterBasicDetails(props.location.counterName));
+  }, [dispatch]);
 
-  const columns = [
-    { id: 'name', label: 'Name', minWidth: 100 },
-    { id: 'date', label: 'Sample Date', minWidth: 100 },
-    { id: 'I1', label: 'I1', minWidth: 50, textAlign:'center'},
-    { id: 'I2',label: 'I2',minWidth: 50,},
-    { id: 'I3',label: 'I3',minWidth: 50,},
-    { id: 'NV1',label: 'N/V1',minWidth: 50,},
-    { id: 'NV2',label: 'N/V2',minWidth: 50,},
-    { id: 'NV3',label: 'N/V3',minWidth: 50,},
-    { id: 'V1V2',label: 'V1/V2',minWidth: 50,},
-    { id: 'V1V3',label: 'V1/V3',minWidth: 50,},
-    { id: 'V2V3',label: 'V2/V3',minWidth: 50,},
-    { id: 'cos',label: 'cosΦ',minWidth: 50,},
-  ];
-
-  return(
-    
-  <div>
-    <DetailsCard cols={createCol} />
-    <h3 textAlign='left'>Counter History</h3>
-    <HistoryCard rows={rows_data} cols={columns}/>
-  </div>
+  return (
+    <div>
+      <DetailsCard cols={createCol} />
+      {samples.map((sample) => {
+        return <label>{JSON.stringify(sample)}</label>
+      })}
+    </div>
   );
-  }
+}
 
 export default CounterDetails;

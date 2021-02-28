@@ -73,7 +73,7 @@ const DevicesList = ({ rows, cols }) => {
               return (
 
                 <TableRow align="center" hover role="checkbox" tabIndex={-1} key={row.name} className={classes.row} >
-                  <Link to="/counter/details">
+                  <Link to={{ pathname: '/counter/details', counterName: row.name }}>
                     <TableCell align="center" component="th" scope="row" className={`nav-link ${pathname.includes('/counter/details') && activeTab === 0 ? 'active' : ''}`, classes.cell} >
                       {row.name}
                     </TableCell>

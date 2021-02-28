@@ -1,24 +1,16 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { Divider, TableRow } from '@material-ui/core';
+import { TableRow } from '@material-ui/core';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableFooter from '@material-ui/core/TableFooter';
 import Paper from '@material-ui/core/Paper';
-import TablePagination from '@material-ui/core/TablePagination';
 
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '50%',
-    textAlign:'left'
+    textAlign: 'left'
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -32,90 +24,89 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-  const useStyles1 = makeStyles({
-    root: {
-        width: '30%',
-        align:"center",
-    
-      },
-      table: {
-        minWidth: 300,
-      },
-    cell:{
-        width:'50%',
-        textAlign:'start'
-    },
- 
-  });
+const useStyles1 = makeStyles({
+  root: {
+    width: '30%',
+    align: "center",
 
-function createData(state, location, createdDate) {
-    return { state, location, createdDate };
-  }
+  },
+  table: {
+    minWidth: 300,
+  },
+  cell: {
+    width: '50%',
+    textAlign: 'start'
+  },
 
-  
+});
 
-  const rows=[
-    { id: 'state', label: 'State:', minWidth: 100 },
-    { id: 'location', label: 'Location:', minWidth: 100 },
-    { id: 'createdDate', label: 'Created Date:', minWidth: 300 },
-  ];
+function createData(counterName, counterIP, counterLocation, createdDate) {
+  return { counterName, counterIP, counterLocation, createdDate };
+}
 
-const DetailsCard=({cols})=> {
+const rows = [
+  { id: 'counterName', label: 'Counter Name:', minWidth: 300 },
+  { id: 'counterIP', label: 'IP:', minWidth: 300 },
+  { id: 'counterlocation', label: 'Location:', minWidth: 100 },
+  { id: 'createdDate', label: 'Created Date:', minWidth: 300 }
+];
+
+const DetailsCard = ({ cols }) => {
   const classes = useStyles1();
-  const [page, setPage] = React.useState(0);
 
   var newCols = [];
   cols.forEach((col) => {
     newCols.push(
-          createData(
-              col.state,
-              col.location,
-              col.createdDate
-          )
-      );
+      createData(
+        col.counterName,
+        col.counterIP,
+        col.counterLocation,
+        col.createdDate
+      )
+    );
   });
 
   return (
     <Paper className={classes.root}>
- 
+
       <Table className={classes.table} aria-label="custom pagination table">
         <TableBody >
-          <TableCell className={classes.cell}  width='100%' >
-          { rows.map((row) => (
-          
-                <TableRow key={row.id} className={classes.cell} component="th" scope="row"   >
+          <TableCell className={classes.cell} width='100%' >
+            {rows.map((row) => (
+
+              <TableRow key={row.id} className={classes.cell} component="th" scope="row"   >
                 {row.label}
               </TableRow>
-         
-              ))}
-        </TableCell>
-        <TableCell align='rigth' className={classes.cell}>
-              {cols.map((col) => {
-                  return(
-                
-                   <TableCell align="right">
-                    {rows.map((row,index) => {
-                        const value= col[row.id];
-                        return(
-                            <TableRow key={row.id} 
-                            align={row.align} 
-                            style={{textAlign:'start' }} 
-                             >
-                              {row.format && typeof value === 'number' ? row.format(value) : value} 
-                             
-                            </TableRow>
-                           
-                          );
-                        })}
-                       
-                       </TableCell>
-                  );
-                })}
+
+            ))}
+          </TableCell>
+          <TableCell align='right' className={classes.cell}>
+            {cols.map((col) => {
+              return (
+
+                <TableCell align="right">
+                  {rows.map((row, index) => {
+                    const value = col[row.id];
+                    return (
+                      <TableRow key={row.id}
+                        align={row.align}
+                        style={{ textAlign: 'start' }}
+                      >
+                        {row.format && typeof value === 'number' ? row.format(value) : value}
+
+                      </TableRow>
+
+                    );
+                  })}
+
+                </TableCell>
+              );
+            })}
           </TableCell>
 
-    </TableBody>
-    
-        </Table>
+        </TableBody>
+
+      </Table>
 
     </Paper>
   );
