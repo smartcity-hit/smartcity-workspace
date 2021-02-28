@@ -71,16 +71,19 @@ const DevicesList = ({ rows, cols }) => {
           <TableBody>
             {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
               return (
-
+              
                 <TableRow align="center" hover role="checkbox" tabIndex={-1} key={row.name} className={classes.row} >
-                  <Link to="/counter/details">
+                  
                     <TableCell align="center" component="th" scope="row" className={`nav-link ${pathname.includes('/counter/details') && activeTab === 0 ? 'active' : ''}`, classes.cell} >
+                    <Link to="/counter/details">
                       {row.name}
+                      </Link>
                     </TableCell>
-                  </Link>
+                  
                   <TableCell align="center">{row.host}</TableCell>
                   <TableCell align="center">{row.createdAt}</TableCell>
                 </TableRow>
+              
               );
             })}
           </TableBody>

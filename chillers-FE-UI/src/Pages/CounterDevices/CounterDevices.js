@@ -38,8 +38,10 @@ const CounterDevices = () => {
 
   return (
     <div>
+      
       <h1>COUNTESRS</h1>
       <DevicesList rows={counters} cols={columns} />
+   
     </div>
   );
 };
