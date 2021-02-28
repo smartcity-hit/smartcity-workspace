@@ -13,7 +13,7 @@ const CounterDetails = (props) => {
   const dispatch = useDispatch();
 
   const createCol = [
-    { counterName: name, location: location, createdDate: createdDate, counterIP: ip }
+    { counterName: name, counterIP: ip, counterLocation: location, createdDate: createdDate }
   ];
 
   useEffect(() => {
@@ -32,4 +32,3 @@ const CounterDetails = (props) => {
 }
 
 export default CounterDetails;
-
