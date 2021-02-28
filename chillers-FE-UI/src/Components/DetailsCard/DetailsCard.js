@@ -1,18 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { Divider, TableRow } from '@material-ui/core';
+import { TableRow } from '@material-ui/core';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableFooter from '@material-ui/core/TableFooter';
 import Paper from '@material-ui/core/Paper';
-import TablePagination from '@material-ui/core/TablePagination';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -48,13 +40,14 @@ const useStyles1 = makeStyles({
 
 });
 
-function createData(state, location, counterName) {
-  return { state, location, counterName };
+function createData(counterName, counterIP, counterLocation, createdDate) {
+  return { counterName, counterIP, counterLocation, createdDate };
 }
 
 const rows = [
   { id: 'counterName', label: 'Counter Name:', minWidth: 300 },
-  { id: 'location', label: 'Location:', minWidth: 100 },
+  { id: 'counterIP', label: 'IP:', minWidth: 300 },
+  { id: 'counterlocation', label: 'Location:', minWidth: 100 },
   { id: 'createdDate', label: 'Created Date:', minWidth: 300 }
 ];
 
@@ -65,8 +58,9 @@ const DetailsCard = ({ cols }) => {
   cols.forEach((col) => {
     newCols.push(
       createData(
-        col.location,
         col.counterName,
+        col.counterIP,
+        col.location,
         col.createdDate
       )
     );
@@ -86,7 +80,7 @@ const DetailsCard = ({ cols }) => {
 
             ))}
           </TableCell>
-          <TableCell align='rigth' className={classes.cell}>
+          <TableCell align='right' className={classes.cell}>
             {cols.map((col) => {
               return (
 

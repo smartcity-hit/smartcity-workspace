@@ -4,6 +4,7 @@ const initialState = {
     isLoading: false,
     counterName: '',
     counterLocation: '',
+    counterIP: '',
     createdDate: null,
     counterSamples: []
 }
@@ -20,12 +21,12 @@ export default (state = initialState, action) => {
                 isLoading: true,
             };
         case actionTypes.GET_COUNTER_BASIC_DETAILS_SUCCESS:
-            debugger
             return {
                 ...state,
                 isLoading: false,
                 counterName: action.payload.name,
                 counterLocation: action.payload.location ? action.payload.location : 'No location is set',
+                counterIP: action.payload.host,
                 createdDate: action.payload.createdAt
             };
         case actionTypes.GET_COUNTER_BASIC_DETAILS_FAIL:

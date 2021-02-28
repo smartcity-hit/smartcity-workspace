@@ -10,7 +10,6 @@ export const initCounters = () => async (dispatch) => {
 
 export const getCounterBasicDetails = (id) => async (dispatch) => {
     try {
-        debugger
         dispatch({ type: actionTypes.GET_COUNTER_BASIC_DETAILS_REQUEST });
         const res = await fetch(
             appApiBaseUrl + `/api/1/counters/get/basicDetails/${id}`,
@@ -32,14 +31,12 @@ export const getCounterBasicDetails = (id) => async (dispatch) => {
 };
 
 export const getCounterSamples = (id) => async (dispatch) => {
-    debugger
     try {
         dispatch({ type: actionTypes.GET_COUNTER_SAMPLES_REQUEST });
         const res = await fetch(
             appApiBaseUrl + `/api/1/counters/get/samples/${id}`,
             getRequestOptions('GET')
         );
-        debugger
         const data = await res.json();
         if (res && res.status === 200) {
             dispatch({

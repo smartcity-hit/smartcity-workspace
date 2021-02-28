@@ -8,11 +8,12 @@ const CounterDetails = (props) => {
   const location = useSelector((state) => state.counterDetails.counterLocation);
   const name = useSelector((state) => state.counterDetails.counterName);
   const createdDate = useSelector((state) => state.counterDetails.createdDate);
+  const ip = useSelector((state) => state.counterDetails.counterIP);
   console.log(props.location.counterName)
   const dispatch = useDispatch();
 
   const createCol = [
-    { counterName: name, location: location, createdDate: createdDate }
+    { counterName: name, location: location, createdDate: createdDate, counterIP: ip }
   ];
 
   useEffect(() => {
