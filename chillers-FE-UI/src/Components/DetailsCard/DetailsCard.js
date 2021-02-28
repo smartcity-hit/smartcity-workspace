@@ -60,7 +60,7 @@ const DetailsCard = ({ cols }) => {
       createData(
         col.counterName,
         col.counterIP,
-        col.location,
+        col.counterLocation,
         col.createdDate
       )
     );
