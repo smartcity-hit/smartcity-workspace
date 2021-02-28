@@ -74,7 +74,7 @@ const Routes = () => {
         component={chillerHistory}
       />
       <PrivateRoute
-        path='/CounterDetails'
+        path='/counter/details'
         exact
         isAuthorized={!!userData}
         component={CounterDetails}
