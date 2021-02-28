@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 const useStyles1 = makeStyles({
   root: {
-    width: '30%',
+    width: '40%',
     align: "center",
 
   },
