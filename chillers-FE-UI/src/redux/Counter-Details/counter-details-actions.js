@@ -8,11 +8,12 @@ export const initCounters = () => async (dispatch) => {
     });
 };
 
-export const getCounterDetails = () => async (dispatch) => {
+export const getCounterDetails = (id) => async (dispatch) => {
     try {
+        debugger
         dispatch({ type: actionTypes.GET_COUNTER_DETAILS_REQUEST });
         const res = await fetch(
-            appApiBaseUrl + `/api/1/counters/get`,
+            appApiBaseUrl + `/api/1/counters/get/${id}`,
             getRequestOptions('GET')
         );
         const data = await res.json();

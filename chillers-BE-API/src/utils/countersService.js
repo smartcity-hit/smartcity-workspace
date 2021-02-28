@@ -12,7 +12,7 @@ const getCounterById= async () => {
    */
     const ChillersDeviceSettings = mongoose.model('Devices', devicesSchema, 'devices');
     const collections = await ChillersDeviceSettings.find( { deviceType: "2" } );
-  const names = [];
+    const names = [];
   
     return collections;
 }
