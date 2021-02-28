@@ -86,11 +86,43 @@ const getCounterDateRange = async (req, res) => {
 } catch (err) {
     logger.error(`getCounterDateRange failed: ${err.message}`);
     res.status(400).json({ code: err.code, message: err.message });
-}
+    }
+    
 };
+
+const getCounterByCounterName = async (req, res) => {
+       /**
+   * * Route: GET /data/:id/:startDate/:endDate'
+   * * Response: counter: Array
+   * * Description: getting counter's data between given dates
+   * * 
+   */
+  try {
+    const loggedInUser = req.user;
+    if (loggedInUser.userType !== '1') {
+        throw new Error('User is not an Admin.');
+      }
+    const counterName = req.params.counterName;
+    const CountersData = mongoose.models['Counters'];// getting counters model
+        if (!CountersData) {
+        throw new Error('Couldn\'t find counter by Id - counters Model was not found!')
+    }
+
+    // get all the documents from the model collection
+    let allDocs = await CountersData.find({ "counterName": `${counterName}`
+    });
+    res.status(200).json(allDocs);
+} catch (err) {
+    logger.error(`getCounterByCounterName failed: ${err.message}`);
+    res.status(400).json({ code: err.code, message: err.message });
+    }
+    
+};
+
 
 router.get('/data/:id/:startDate/:endDate', auth, getCounterById);
 router.get('/get/devices', auth, getCounterDevicesById);
 router.get('/daterange/:id', auth, getCounterDateRange);
+router.get('/:countername', auth, getCounterByCounterName);
 
 module.exports = router;
