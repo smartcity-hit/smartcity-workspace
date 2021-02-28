@@ -8,39 +8,50 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+
+
+
+function createData(name, date, i1,i2,i3,nv1,nv2,nv3,v1v2,v1v3,v2v3,cos) {
+
+  return { name, date, i1, i2,i3,nv1,nv2,nv3,v1v2,v1v3,v2v3,cos };
+}
+
+
 
 const useStyles = makeStyles({
   root: {
     width: '100%',
-    height: '400%',
-    align: "center",
-
   },
-  Pagination: {
-    display: 'flex',
-    justifyContent: 'center',
-    width: "100%",
-    alignItems: 'left',
-    padding: '0px',
+  container: {
+    maxHeight: 440,
   },
-  row: {
-    height: 100,
-    textAlign: 'inherit',
-  },
-  cell: {
-    height: 100,
-    padding: '50px',
-  },
-
 });
 
-const DevicesList = ({ rows, cols }) => {
+const HistoryCard=({rows,cols})=> {
   const classes = useStyles();
-  const { pathname } = useLocation();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+  const columns=cols;
+  var newRows = [];
+	rows.forEach((row) => {
+		newRows.push(
+			createData( 
+				row.name,
+				row.date,
+				row.i1,
+				row.i2,
+				row.i3,
+				row.nv1,
+				row.nv2,
+				row.nv3,
+				row.v1v2,
+                row.v1v3,
+                row.v2v3,
+                row.cos
+			)
+		);
+	});
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -53,11 +64,11 @@ const DevicesList = ({ rows, cols }) => {
 
   return (
     <Paper className={classes.root}>
-      <TableContainer>
+      <TableContainer className={classes.container}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {cols.map((column) => (
+              {columns.map((column) => (
                 <TableCell
                   key={column.id}
                   align={column.align}
@@ -69,17 +80,17 @@ const DevicesList = ({ rows, cols }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => {
+            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
               return (
-
-                <TableRow align="center" hover role="checkbox" tabIndex={-1} key={row.name} className={classes.row} >
-                  <Link to={{ pathname: '/counter/details', counterName: row.name }}>
-                    <TableCell align="center" component="th" scope="row" className={`nav-link ${pathname.includes('/counter/details') && activeTab === 0 ? 'active' : ''}`, classes.cell} >
-                      {row.name}
-                    </TableCell>
-                  </Link>
-                  <TableCell align="center">{row.host}</TableCell>
-                  <TableCell align="center">{row.createdAt}</TableCell>
+                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                  {columns.map((column) => {
+                    const value = row[column.id];
+                    return (
+                      <TableCell key={column.id} align={column.align}>
+                        {column.format && typeof value === 'number' ? column.format(value) : value}
+                      </TableCell>
+                    );
+                  })}
                 </TableRow>
               );
             })}
@@ -87,7 +98,6 @@ const DevicesList = ({ rows, cols }) => {
         </Table>
       </TableContainer>
       <TablePagination
-        className={classes.Pagination}
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
         count={rows.length}
@@ -100,4 +110,4 @@ const DevicesList = ({ rows, cols }) => {
   );
 }
 
-export default DevicesList;
+export default HistoryCard;

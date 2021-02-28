@@ -12,8 +12,6 @@ import List from "@material-ui/core/List";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { getCounters } from '../../../redux/Counters-List/counters-list-actions';
 
 const useStyles = makeStyles((theme) => ({
   nested: {
@@ -57,7 +55,7 @@ const CountersMenuItem = () => {
         </Collapse>
       </Link>
 
-     <Link to="/counters/devices">
+      <Link to="/counters/devices">
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List className="menu-app-bar" component="div" disablePadding>
             <ListItem button className={`nav-link ${pathname.includes('/counters/devices') && activeTab === 1 ? 'active' : ''}`} onClick={() => { onClickTab(1) }}>

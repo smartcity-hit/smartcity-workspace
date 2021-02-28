@@ -7,6 +7,7 @@ const CounterDevices = () => {
   const counters = useSelector((state) => state.countersList.counters);
   const dispatch = useDispatch();
 
+
   useEffect(() => {
     dispatch(getCounters());
   }, [dispatch]);
@@ -34,6 +35,7 @@ const CounterDevices = () => {
 
   return (
     <div>
+      <h1>COUNTERS</h1>
       <DevicesList rows={counters} cols={columns} />
     </div>
   );

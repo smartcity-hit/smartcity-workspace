@@ -29,58 +29,50 @@ const Routes = () => {
 
         <Route path="/signin" exact component={LoginPage} />
 
-
-        <PrivateRoute
-          path="/counters/alerts"
-          exact
-          isAuthorized={!!userData}
-          component={Alert}
-        />
-
-        <PrivateRoute
-          path="/location-management"
-          exact
-          isAuthorized={!!userData}
-          component={LocationManagement}
-        />
-        <PrivateRoute
-          path="/counters/devices"
-          exact
-          isAuthorized={!!userData}
-          component={CounterDevices}
-        />
-        <PrivateRoute
-          main
-          path="/chillers/water-circuit"
-          exact
-          isAuthorized={!!userData}
-          component={WaterCircuit}
-        />
-        <PrivateRoute
-          path="/chillers/cooling-circuit"
-          exact
-          isAuthorized={!!userData}
-          component={CoolingCircuit}
-        />
-        <PrivateRoute
-          path="/admin-panel"
-          exact
-          isAuthorized={!!userData && userData.userType === 1}
-          component={AdminPanel}
-        />
-        <PrivateRoute
-          path='/chillers/chiller-history'
-          exact
-          isAuthorized={!!userData}
-          component={chillerHistory}
-        />
-        <PrivateRoute
-          path='/CounterDetails'
-          exact
-          isAuthorized={!!userData}
-          component={CounterDetails}
-        />
-      </Switch>
+      <PrivateRoute
+        path="/location-management"
+        exact
+        isAuthorized={!!userData}
+        component={LocationManagement}
+      />
+      <PrivateRoute
+        path="/counters/devices"
+        exact
+        isAuthorized={!!userData}
+        component={CounterDevices}
+      />
+      <PrivateRoute
+        main
+        path="/chillers/water-circuit"
+        exact
+        isAuthorized={!!userData}
+        component={WaterCircuit}
+      />
+      <PrivateRoute
+        path="/chillers/cooling-circuit"
+        exact
+        isAuthorized={!!userData}
+        component={CoolingCircuit}
+      />
+      <PrivateRoute
+        path="/admin-panel"
+        exact
+        isAuthorized={!!userData && userData.userType === 1}
+        component={AdminPanel}
+      />
+      <PrivateRoute
+        path='/chillers/chiller-history'
+        exact
+        isAuthorized={!!userData}
+        component={chillerHistory}
+      />
+      <PrivateRoute
+        path='/counter/details'
+        exact
+        isAuthorized={!!userData}
+        component={CounterDetails}
+      />
+      
     </div>
   );
 };
