@@ -6,14 +6,14 @@ const CounterDetails = () => {
     return { state, location, createdDate };
   }
 
-  const createCol=[
-    createData('on','bulding 1','16/02/2021'),
+  const createCol = [
+    createData('on', 'bulding 1', '16/02/2021'),
   ];
-return(
-  <div>
-    <DetailsCard cols={createCol}/>
-  </div>
-);
+  return (
+    <div>
+      <DetailsCard cols={createCol} />
+    </div>
+  );
 };
 
 export default CounterDetails;

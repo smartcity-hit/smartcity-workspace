@@ -7,7 +7,7 @@ import Table from '../../Components/Table';
 import './index.scss';
 
 const ChillerHistory = () => {
-	const [chillerId, setChillerId] = useState('');
+	const [chillerId, setChillerId] = useState('1');
 	const [startDate, setStartDate] = useState('');
 	const [endDate, setEndDate] = useState('');
 	const [minRange, setMinRange] = useState(null);
@@ -152,7 +152,6 @@ const ChillerHistory = () => {
 							handleChangeChillerId(e.target.value);
 						}}
 					>
-						<option className="field-option" value=""></option>
 						{renderOptions(allChillers)}
 					</select>
 				</div>
