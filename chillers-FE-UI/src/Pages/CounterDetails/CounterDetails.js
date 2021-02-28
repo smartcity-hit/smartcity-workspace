@@ -6,12 +6,21 @@ const CounterDetails = (props) => {
   const counterDetails = useSelector((state) => state.counterDetails);
   const dispatch = useDispatch();
 
+  function createData(state, location, createdDate) {
+    return { state, location, createdDate };
+  }
+
+  const createCol = [
+    createData('on', 'bulding 1', '16/02/2021'),
+  ];
+
   useEffect(() => {
     dispatch(getCounterDetails(1));
   }, [dispatch]);
 
   return (
     <div>
+      <DetailsCard cols={createCol} />
       {console.log(counterDetails)}
     </div>
   );
