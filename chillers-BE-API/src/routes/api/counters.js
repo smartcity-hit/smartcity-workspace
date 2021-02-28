@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const auth = require('../../middleware/auth');
 const logger = require('../../utils/logger');
 const { Devices, Counters } = require('../../models/counters');
-const { getCountersSettings, getCounterSamples } = require('../../utils/countersService');
+const { getCountersSettings, getCounterSamplesByName, getCounterBasicDetailsByName } = require('../../utils/countersService');
 
 
 const getCounterDevicesById = async (req, res) => {
@@ -87,22 +87,40 @@ const getCounterDateRange = async (req, res) => {
 }
 };
 
-const getCounterByIdTemp = async (req, res) => {
+const getCounterSamples = async (req, res) => {
     try {
         const loggedInUser = req.user;
         if (loggedInUser.userType !== '1') {
             throw new Error('User is not an Admin.');
         }
-        const counters = await getCounterSamples(req.params.counterName);
-        logger.info('getAllCounters:', counters);
-        res.status(200).json({ counters });
+        const counterSamples = await getCounterSamplesByName(req.params.counterName);
+        logger.info('getCounterSamples:', counterSamples);
+        res.status(200).json({ counterSamples });
+
     } catch (err) {
-        logger.error(`getAllCountersSettings failed: ${err.message}`);
+        logger.error(`getCounterSamples failed: ${err.message}`);
         res.status(400).json({ code: err.code, message: err.message });
     }
 }
 
-router.get('/get/samples/:counterName', auth, getCounterByIdTemp);
+const getCounterBasicDetails = async (req, res) => {
+    try {
+        const loggedInUser = req.user;
+        if (loggedInUser.userType !== '1') {
+            throw new Error('User is not an Admin.');
+        }
+        const counter = await getCounterBasicDetailsByName(req.params.counterName);
+        logger.info('getCounterBasicDetails:', counter);
+        res.status(200).json(counter);
+
+    } catch (err) {
+        logger.error(`getCounterBasicDetails failed: ${err.message}`);
+        res.status(400).json({ code: err.code, message: err.message });
+    }
+}
+
+router.get('/get/basicDetails/:counterName', auth, getCounterBasicDetails)
+router.get('/get/samples/:counterName', auth, getCounterSamples);
 router.get('/data/:id/:startDate/:endDate', auth, getCounterById);
 router.get('/get/devices', auth, getCounterDevicesById);
 router.get('/daterange/:id', auth, getCounterDateRange);

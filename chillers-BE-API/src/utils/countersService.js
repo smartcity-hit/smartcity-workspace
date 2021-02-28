@@ -13,14 +13,22 @@ const getCountersSettings = async () => {
     return collections;
 }
 
-const getCounterSamples = async (counterName) => {
-    const CounterSamples = mongoose.model('Counters', countersSchema, 'counters');
-    const collections = await CounterSamples.find( { counterName: counterName } );
+const getCounterSamplesByName = async (counterName) => {
+    const Counter = mongoose.model('Counters', countersSchema, 'counters');
+    const counters = await Counter.find( { counterName: counterName } );
   
-    return collections;
+    return counters;
+}
+
+const getCounterBasicDetailsByName = async (counterName) => {
+  const CountersDevices = mongoose.model('Devices', devicesSchema, 'devices');
+  const counters = await CountersDevices.find( { deviceType: '2' , name: counterName } );
+
+  return counters[0];
 }
 
 module.exports = {
   getCountersSettings,
-  getCounterSamples
+  getCounterSamplesByName,
+  getCounterBasicDetailsByName
 };

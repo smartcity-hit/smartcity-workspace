@@ -18,7 +18,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '50%',
-    textAlign:'left'
+    textAlign: 'left'
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -32,90 +32,87 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-  const useStyles1 = makeStyles({
-    root: {
-        width: '30%',
-        align:"center",
-    
-      },
-      table: {
-        minWidth: 300,
-      },
-    cell:{
-        width:'50%',
-        textAlign:'start'
-    },
- 
-  });
+const useStyles1 = makeStyles({
+  root: {
+    width: '30%',
+    align: "center",
 
-function createData(state, location, createdDate) {
-    return { state, location, createdDate };
-  }
+  },
+  table: {
+    minWidth: 300,
+  },
+  cell: {
+    width: '50%',
+    textAlign: 'start'
+  },
 
-  
+});
 
-  const rows=[
-    { id: 'state', label: 'State:', minWidth: 100 },
-    { id: 'location', label: 'Location:', minWidth: 100 },
-    { id: 'createdDate', label: 'Created Date:', minWidth: 300 },
-  ];
+function createData(state, location, counterName) {
+  return { state, location, counterName };
+}
 
-const DetailsCard=({cols})=> {
+const rows = [
+  { id: 'counterName', label: 'Counter Name:', minWidth: 300 },
+  { id: 'location', label: 'Location:', minWidth: 100 },
+  { id: 'createdDate', label: 'Created Date:', minWidth: 300 }
+];
+
+const DetailsCard = ({ cols }) => {
   const classes = useStyles1();
-  const [page, setPage] = React.useState(0);
 
   var newCols = [];
   cols.forEach((col) => {
     newCols.push(
-          createData(
-              col.state,
-              col.location,
-              col.createdDate
-          )
-      );
+      createData(
+        col.location,
+        col.counterName,
+        col.createdDate
+      )
+    );
   });
 
   return (
     <Paper className={classes.root}>
- 
+
       <Table className={classes.table} aria-label="custom pagination table">
         <TableBody >
-          <TableCell className={classes.cell}  width='100%' >
-          { rows.map((row) => (
-          
-                <TableRow key={row.id} className={classes.cell} component="th" scope="row"   >
+          <TableCell className={classes.cell} width='100%' >
+            {rows.map((row) => (
+
+              <TableRow key={row.id} className={classes.cell} component="th" scope="row"   >
                 {row.label}
               </TableRow>
-         
-              ))}
-        </TableCell>
-        <TableCell align='rigth' className={classes.cell}>
-              {cols.map((col) => {
-                  return(
-                
-                   <TableCell align="right">
-                    {rows.map((row,index) => {
-                        const value= col[row.id];
-                        return(
-                            <TableRow key={row.id} 
-                            align={row.align} 
-                            style={{textAlign:'start' }} 
-                             >
-                              {row.format && typeof value === 'number' ? row.format(value) : value} 
-                             
-                            </TableRow>
-                           
-                          );
-                        })}
-                       
-                       </TableCell>
-                  );
-                })}
+
+            ))}
+          </TableCell>
+          <TableCell align='rigth' className={classes.cell}>
+            {cols.map((col) => {
+              return (
+
+                <TableCell align="right">
+                  {rows.map((row, index) => {
+                    const value = col[row.id];
+                    return (
+                      <TableRow key={row.id}
+                        align={row.align}
+                        style={{ textAlign: 'start' }}
+                      >
+                        {row.format && typeof value === 'number' ? row.format(value) : value}
+
+                      </TableRow>
+
+                    );
+                  })}
+
+                </TableCell>
+              );
+            })}
           </TableCell>
 
-    </TableBody>
-    
-        </Table>
+        </TableBody>
+
+      </Table>
 
     </Paper>
   );

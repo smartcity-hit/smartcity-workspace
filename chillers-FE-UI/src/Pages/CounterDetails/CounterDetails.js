@@ -1,24 +1,31 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCounterDetails, getCounterSamples } from '../../redux/Counter-Details/counter-details-actions';
+import { getCounterBasicDetails, getCounterSamples } from '../../redux/Counter-Details/counter-details-actions';
 import DetailsCard from '../../Components/DetailsCard/DetailsCard'
 
 const CounterDetails = (props) => {
-  const counterSamples = useSelector((state) => state.samples);
+  const samples = useSelector((state) => state.counterDetails.counterSamples);
+  const location = useSelector((state) => state.counterDetails.counterLocation);
+  const name = useSelector((state) => state.counterDetails.counterName);
+  const createdDate = useSelector((state) => state.counterDetails.createdDate);
+  console.log(props.location.counterName)
   const dispatch = useDispatch();
 
   const createCol = [
-    { state: 'on', location: 'bulding 1', createdDate: '16/02/2021' }
+    { counterName: name, location: location, createdDate: createdDate }
   ];
 
   useEffect(() => {
-    dispatch(getCounterSamples('counter1'));
+    dispatch(getCounterSamples(props.location.counterName)),
+      dispatch(getCounterBasicDetails(props.location.counterName));
   }, [dispatch]);
 
   return (
     <div>
       <DetailsCard cols={createCol} />
-      {console.log(counterSamples)}
+      {samples.map((sample) => {
+        return <label>{JSON.stringify(sample)}</label>
+      })}
     </div>
   );
 }
