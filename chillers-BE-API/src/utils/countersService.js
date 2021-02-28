@@ -6,19 +6,21 @@ const { devicesSchema, countersSchema } = require('./schemas');
  * * All the exported functions, All  of the methods & statics related to schemas
  */
 
-const getCounterById= async () => {
-  /**
-   * * This function will get all counters settings from db and return them in array
-   */
-    const ChillersDeviceSettings = mongoose.model('Devices', devicesSchema, 'devices');
-    const collections = await ChillersDeviceSettings.find( { deviceType: "2" } );
-    const names = [];
+const getCountersSettings = async () => {
+    const CountersDevices = mongoose.model('Devices', devicesSchema, 'devices');
+    const collections = await CountersDevices.find( { deviceType: '2' } );
   
     return collections;
 }
+
+const getCounterSamples = async (counterName) => {
+    const CounterSamples = mongoose.model('Counters', countersSchema, 'counters');
+    const collections = await CounterSamples.find( { counterName: counterName } );
   
+    return collections;
+}
 
 module.exports = {
-  getCountersSettings: getCounterById
-
+  getCountersSettings,
+  getCounterSamples
 };

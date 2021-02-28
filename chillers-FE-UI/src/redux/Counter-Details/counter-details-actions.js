@@ -30,3 +30,27 @@ export const getCounterDetails = (id) => async (dispatch) => {
         });
     }
 };
+
+export const getCounterSamples = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: actionTypes.GET_COUNTER_SAMPLES_REQUEST });
+        const res = await fetch(
+            appApiBaseUrl + `/api/1/counters/get/samples/${id}`,
+            getRequestOptions('GET')
+        );
+        const data = await res.json();
+        if (res && res.status === 200) {
+            console.log(data);
+            dispatch({
+                type: actionTypes.GET_COUNTER_SAMPLES_SUCCESS,
+                payload: data
+            });
+        }
+    } catch (err) {
+        console.log(err)
+        return dispatch({
+            type: actionTypes.GET_COUNTER_SAMPLES_FAIL,
+            payload: err
+        });
+    }
+};
