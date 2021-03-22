@@ -1,0 +1,19 @@
+div.counter-wrapper{
+
+    background-color: linear-gradient(to top, #323c97, #b4ddec, white);
+    position:absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    height: 1450px;
+    width:100%;
+    padding: 10px 60px;
+		.MuiTablePagination-root {
+			padding: 8px 10px;
+			.MuiButtonBase-root {
+				margin-left: 10px;
+			}
+		}
+}
+
