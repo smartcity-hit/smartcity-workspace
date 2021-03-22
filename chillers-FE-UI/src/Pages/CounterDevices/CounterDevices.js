@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import DevicesList from '../../Components/DevicesList/DevicesList';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCounters } from '../../redux/Counters-List/counters-list-actions';
-import './CounterDevices.scss'; 
+import "./CounterDevices.scss"; 
 
 const CounterDevices = () => {
   const counters = useSelector((state) => state.countersList.counters);
@@ -35,11 +35,11 @@ const CounterDevices = () => {
   ];
 
   return (
-    <div className="counter-wrapper">
+    <div className="body">
       
       <h1>COUNTERS</h1>
       <DevicesList rows={counters} cols={columns} />
-      
+    
     </div>
   );
 };
