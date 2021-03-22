@@ -17,6 +17,9 @@ const useStyles = makeStyles({
   container: {
     maxHeight: 440,
   },
+  tabel:{
+    width: 80,
+  },
 });
 
 const HistoryCard=({rows,cols})=> {
@@ -37,7 +40,7 @@ const HistoryCard=({rows,cols})=> {
   return (
     <Paper className={classes.root}>
       <TableContainer className={classes.container}>
-        <Table stickyHeader aria-label="sticky table">
+        <Table className={classes.tabel} stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
               {cols.map((column) => (

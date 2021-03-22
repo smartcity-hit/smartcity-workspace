@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCounterBasicDetails, getCounterSamples } from '../../redux/Counter-Details/counter-details-actions';
 import DetailsCard from '../../Components/DetailsCard/DetailsCard'
 import HistoryCard from '../../Components/HistoryCard/HistoryCard'
+import './CounterDetails.scss';
 
 const CounterDetails = (props) => {
   const samples = useSelector((state) => state.counterDetails.counterSamples);
@@ -101,9 +102,14 @@ const CounterDetails = (props) => {
 
 
   return (
-    <div>
+    <div className="counter-wrapper">
+      <div>
       <DetailsCard cols={createCol} />
+      </div>
+      <p></p>
+      <div>
       <HistoryCard rows={samples} cols={columns} />
+      </div>
     </div>
   );
 }
