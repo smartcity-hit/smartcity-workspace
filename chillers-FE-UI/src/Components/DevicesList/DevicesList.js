@@ -26,12 +26,12 @@ const useStyles = makeStyles({
     padding: '0px',
   },
   row: {
-    height: 100,
+    height: 50,
     textAlign: 'inherit',
   },
   cell: {
-    height: 100,
-    padding: '50px',
+    height: 50,
+    padding: '25px',
   },
 
 });
