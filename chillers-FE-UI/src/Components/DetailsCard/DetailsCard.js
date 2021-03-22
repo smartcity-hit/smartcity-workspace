@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 const useStyles1 = makeStyles({
   root: {
-    width: '30%',
+    width: '40%',
     align: "center",
 
   },
@@ -47,13 +47,13 @@ function createData(counterName, counterIP, counterLocation, createdDate) {
 const rows = [
   { id: 'counterName', label: 'Counter Name:', minWidth: 300 },
   { id: 'counterIP', label: 'IP:', minWidth: 300 },
-  { id: 'counterlocation', label: 'Location:', minWidth: 100 },
+  { id: 'counterLocation', label: 'Location:', minWidth: 100 },
   { id: 'createdDate', label: 'Created Date:', minWidth: 300 }
 ];
 
 const DetailsCard = ({ cols }) => {
   const classes = useStyles1();
-
+  console.log(cols)
   var newCols = [];
   cols.forEach((col) => {
     newCols.push(

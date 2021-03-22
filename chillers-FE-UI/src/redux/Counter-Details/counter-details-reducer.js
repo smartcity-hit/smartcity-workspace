@@ -25,7 +25,7 @@ export default (state = initialState, action) => {
                 ...state,
                 isLoading: false,
                 counterName: action.payload.name,
-                counterLocation: action.payload.location ? action.payload.location : 'No location is set',
+                counterLocation: action.payload.location ? action.payload.location : 'No location set',
                 counterIP: action.payload.host,
                 createdDate: action.payload.createdAt
             };
