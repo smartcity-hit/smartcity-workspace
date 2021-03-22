@@ -10,14 +10,6 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 
 
-
-function createData(name, date, i1,i2,i3,nv1,nv2,nv3,v1v2,v1v3,v2v3,cos) {
-
-  return { name, date, i1, i2,i3,nv1,nv2,nv3,v1v2,v1v3,v2v3,cos };
-}
-
-
-
 const useStyles = makeStyles({
   root: {
     width: '100%',
@@ -32,26 +24,6 @@ const HistoryCard=({rows,cols})=> {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const columns=cols;
-  var newRows = [];
-	rows.forEach((row) => {
-		newRows.push(
-			createData( 
-				row.name,
-				row.date,
-				row.i1,
-				row.i2,
-				row.i3,
-				row.nv1,
-				row.nv2,
-				row.nv3,
-				row.v1v2,
-                row.v1v3,
-                row.v2v3,
-                row.cos
-			)
-		);
-	});
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -68,7 +40,7 @@ const HistoryCard=({rows,cols})=> {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {columns.map((column) => (
+              {cols.map((column) => (
                 <TableCell
                   key={column.id}
                   align={column.align}
@@ -80,20 +52,24 @@ const HistoryCard=({rows,cols})=> {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row,index) => {
               return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                  {columns.map((column) => {
-                    const value = row[column.id];
-                    return (
-                      <TableCell key={column.id} align={column.align}>
-                        {column.format && typeof value === 'number' ? column.format(value) : value}
-                      </TableCell>
+                <TableRow hover role="checkbox" tabIndex={-1} key={row.name}>
+                        <TableCell align="center">{row.counterName}</TableCell>
+                        <TableCell align="center">{row.i1}</TableCell>
+                        <TableCell align="center">{row.i2}</TableCell>
+                        <TableCell align="center">{row.i3}</TableCell>
+                        <TableCell align="center">{row.n_v1}</TableCell>
+                        <TableCell align="center">{row.n_v2}</TableCell>
+                        <TableCell align="center">{row.n_v3}</TableCell>
+                        <TableCell align="center">{row.v1_v2}</TableCell>
+                        <TableCell align="center">{row.v1_v3}</TableCell>
+                        <TableCell align="center">{row.v2_v3}</TableCell>
+                        <TableCell align="center">{row.cos}</TableCell>
+                        <TableCell align="center">{row.updatedAt}</TableCell>
+                    </TableRow>
                     );
                   })}
-                </TableRow>
-              );
-            })}
           </TableBody>
         </Table>
       </TableContainer>
