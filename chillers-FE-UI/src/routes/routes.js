@@ -76,7 +76,7 @@ const Routes = () => {
       />
 
     <PrivateRoute
-        path='/user/management'
+        path='/user-management'
         exact
         isAuthorized={!!userData}
         component={AdminPanel}
