@@ -1,14 +1,16 @@
 .admin-panel-wrapper {
   width: 100%;
+  height: inherit;
   display: flex;
   flex-direction: column;
+  background: linear-gradient(to top, #323c97, #b4ddec, white);
   .admin-panel-container {
     width: 90%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background: linear-gradient(135deg, #17ead9 0%, #6078ea 100%);
+    //background: linear-gradient(135deg, #17ead9 0%, #6078ea 100%);
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
     padding: 20px;
     margin: 20px auto;
@@ -20,7 +22,7 @@
     .admin-panel-title {
       margin: 0;
       padding: 0;
-      color: white;
+      color: rgba(76, 132, 177, 0.726);
     }
     .tabs {
       display: flex;
@@ -38,7 +40,7 @@
         cursor: pointer;
         transition: all 0.3s linear;
         &.active {
-          background-color: #5fb2ce;
+          background-color:rgba(76, 132, 177, 0.726);
           .tab-name {
             color: white;
           }
@@ -58,7 +60,7 @@
           cursor: pointer;
           font-weight: bold;
           font-size: 20px;
-          color: white;
+          color: rgba(76, 132, 177, 0.726);
         }
       }
     }
