@@ -37,7 +37,7 @@ const CounterDevices = () => {
   return (
     <div className="body">
       
-      <h1>COUNTERS</h1>
+      <h1 className="counter-title">COUNTERS</h1>
       <DevicesList rows={counters} cols={columns} />
     
     </div>

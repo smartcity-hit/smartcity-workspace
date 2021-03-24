@@ -1,7 +1,7 @@
 .user-list-wrapper {
 	width: 90%;
 	margin: auto;
-	background: linear-gradient(135deg, #17ead9 0%, #6078ea 100%);
+	//background: linear-gradient(135deg, #17ead9 0%, #6078ea 100%);
 	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
 	border-radius: 20px;
 	padding: 15px;
@@ -34,7 +34,7 @@
 				height: 50px;
 				border-bottom: 1px solid white;
 				&:hover {
-					background: linear-gradient(135deg, #2ee4d5 0%, #6982ff 100%);
+					background: linear-gradient( #6982ff 100%);
 				}
 				.td-wrapper {
 					input.user-field-input {
