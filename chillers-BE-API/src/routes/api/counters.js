@@ -119,6 +119,8 @@ const getCounterBasicDetails = async (req, res) => {
     }
 }
 
+
+
 router.get('/get/basicDetails/:counterName', auth, getCounterBasicDetails)
 router.get('/get/samples/:counterName', auth, getCounterSamples);
 router.get('/data/:id/:startDate/:endDate', auth, getCounterById);

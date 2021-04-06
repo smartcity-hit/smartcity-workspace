@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const fahrenheitToCelcius = require('./data');
 const { chillersNamesSchema, devicesSchema, chillersSchema } = require('../utils/schemas');
+const logger = require('../utils/logger');
+const { Devices } = require('../models/counters');
 
 
 /**
@@ -125,6 +127,34 @@ const createChillersModel = async () => {
   return Chillers;
 }
 
+
+const createChiller = async (req, res) => {
+  /*
+ * * Route: POST '/api/1/chillers/create'
+ * * Response: chiller name-Object
+ * * Description: add new chiller document to the chillers-names collection and create collection from db
+ */
+  try {
+      const chillersNames = await getChillersNames();
+      let id;
+      if (chillersNames.length === 0) { // no chillers in db
+          id = 1;
+      } else {
+          id = Number(chillersNames[chillersNames.length - 1].split('r')[1]) + 1;
+      }
+      const name = `chiller${id}`;
+      const { host, port, unitId, deviceType } = req.body;
+      const chillerDeviceSettings = new Devices({ name, host, port, unitId, deviceType });
+      await chillerDeviceSettings.save();
+      await createChillersModelAndCollection(id, name);
+      logger.info('createChiller:', chillerDeviceSettings);
+      res.status(200).json({ chillerDeviceSettings });
+  } catch(err) {
+      logger.error(`createChiller failed: ${err.message}`);
+      res.status(400).json({ code: err.code, message: err.message });
+  }
+}
+
 module.exports = {
   changeCollectionName,
   getChillersNames,
@@ -135,5 +165,6 @@ module.exports = {
   devicesSchema,
   dropCollection,
   createChillerModelAndCollection: createChillersModelAndCollection,
-  loadMongooseModels
+  loadMongooseModels,
+  createChiller
 };

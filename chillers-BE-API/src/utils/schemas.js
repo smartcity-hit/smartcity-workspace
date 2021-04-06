@@ -144,12 +144,8 @@ const countersSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true
-    },
-    updatedAt: {
-      type: Date,
-      required: true,
-      unique: true
     }
+
     },
 
     {timestamps: true, versionKey: false}

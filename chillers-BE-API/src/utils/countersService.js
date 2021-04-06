@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const { devicesSchema, countersSchema } = require('./schemas');
+const logger = require('../utils/logger');
+const { Devices } = require('../models/counters');
 
 
 /**
@@ -26,9 +28,83 @@ const getCounterBasicDetailsByName = async (counterName) => {
 
   return counters[0];
 }
+const getCountersNames = async () => {
+  /**
+   * * This function will get all counter's names from db and return them in array
+   */
+    const CountersNames = mongoose.model('Devices', devicesSchema, 'devices');
+    const collections = await CountersNames.find( { deviceType: "2" } );
+    const names = [];
+  
+    collections.forEach(function (collection) {
+      const name = collection.name;
+      const number = name.match(/\d+/g); // check if string containg numbers
+      if (number) { // if name contain numbers then push name to the names array
+        names.push(name);
+      }
+    });
+    return names;
+}
+  
+const createCountersModelAndCollection = async (name) => {
+  /**
+   * * This function will create a new counters Model & Collection in db
+   */
+    const Counters = await createCountersModel(name);
+    const counters = new Counters({
+      i1: 0,
+      i2: 0,
+      i3: 0,
+      n_v1: 0,
+      n_v2: 0,
+      n_v3: 0,
+      v1_v2: 0,
+      v1_v3: 0,
+      v2_v3: 0,
+      cos: 0,
+      counterName: `${name}`
+    });
+    await counters.save();
+}
+
+const createCountersModel = async () => {
+  /**
+   * * This function will create mongoose model
+   */
+    const Counters = mongoose.model("counters", countersSchema, 'counters');
+  
+  
+    return Counters;
+}
+
+const createCounter = async (req, res) => {
+  try {
+          const countersNames = await getCountersNames();
+          if (countersNames.length === 0) { // no counters in db
+              id = 1;
+          }
+          else {
+              id = Number(countersNames[countersNames.length - 1].split('r')[1]) + 1;
+          }
+          const name = `counter${id}`;
+          const { host, port, unitId, deviceType } = req.body;
+          const counterDeviceSettings = new Devices({ name, host, port, unitId, deviceType });
+          await counterDeviceSettings.save();
+          await createCountersModelAndCollection(id, name);
+          logger.info('createCounter:', counterDeviceSettings);
+          res.status(200).json({ counterrDeviceSettings: counterDeviceSettings });
+  }
+  catch (err) {
+      logger.error(`createDevice counter is failed: ${err.message}`);
+      res.status(400).json({ code: err.code, message: err.message });
+  }
+}
 
 module.exports = {
   getCountersSettings,
   getCounterSamplesByName,
-  getCounterBasicDetailsByName
+  getCounterBasicDetailsByName,
+  getCountersNames,
+  createCountersModelAndCollection,
+  createCounter
 };

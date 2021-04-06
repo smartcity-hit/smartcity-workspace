@@ -91,36 +91,6 @@ const getChillerById = async (req, res) => {
     }
 };
 
-const createChiller = async (req, res) => {
-    /**
-   * * Route: POST '/api/1/chillers/create'
-   * * Response: chiller name-Object
-   * * Description: add new chiller document to the chillers-names collection and create collection from db
-   */
-    try {
-        // const loggedInUser = req.user;
-        // if (loggedInUser.userType !== '1') {
-        //     throw new Error('User is not an Admin.');
-        // }
-        const chillersNames = await getChillersNames();
-        let id;
-        if (chillersNames.length === 0) { // no chillers in db
-            id = 1;
-        } else {
-            id = Number(chillersNames[chillersNames.length - 1].split('r')[1]) + 1;
-        }
-        const name = `chiller${id}`;
-        const { host, port, unitId, deviceType } = req.body;
-        const chillerDeviceSettings = new Devices({ name, host, port, unitId, deviceType });
-        await chillerDeviceSettings.save();
-        await createChillerModelAndCollection(id, name);
-        logger.info('createChiller:', chillerDeviceSettings);
-        res.status(200).json({ chillerDeviceSettings });
-    } catch(err) {
-        logger.error(`createChiller failed: ${err.message}`);
-        res.status(400).json({ code: err.code, message: err.message });
-    }
-}
 
 const deleteChiller = async (req, res) => {
     /**
@@ -252,7 +222,6 @@ const editChiller = async (req, res) => {
 
 router.get('/get/settings', auth, getAllChillersSettings);
 router.get('/get', auth, getAllChillers);
-router.post('/create', createChiller);
 router.delete('/delete/:name', deleteChiller);
 router.get('/get/:id', auth, getChillerById)
 router.get('/history/:id/:startDate/:endDate', auth, getHistoryById);
