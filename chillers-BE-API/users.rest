@@ -83,14 +83,27 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6I
 ### create device
 POST  http://localhost:3200/api/1/devices/createdevice
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjVmZGZhMjRmZWI5NTc2NmM2Y2Y3MzdiMSIsImlkIjoiMzA1NDQwODk0IiwidXNlclR5cGUiOiIxIiwiZnVsbE5hbWUiOiJLb3JhbCBNYXpvciIsImFkZHJlc3MiOiJIaWJhdCBaaW9uIiwicGhvbmUiOiIrOTctMjUwNjkzMzcwNiIsImVtYWlsIjoia29yYWxtYXpvckBnbWFpbC5jb20iLCJjcmVhdGVkQXQiOiIyMDIwLTEyLTIwVDE5OjEzOjE5LjAzOFoiLCJ1cGRhdGVkQXQiOiIyMDIwLTEyLTIwVDE5OjEzOjE5LjAzOFoifSwiaWF0IjoxNjE3NzA3MzEyLCJleHAiOjE2MTgwNjczMTJ9.K5BrL9IcNQSvMD_n406J_k5kKcK3A6YCJ9sN_Y2nOUo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjVmZGZhMjRmZWI5NTc2NmM2Y2Y3MzdiMSIsImlkIjoiMzA1NDQwODk0IiwidXNlclR5cGUiOiIxIiwiZnVsbE5hbWUiOiJLb3JhbCBNYXpvciIsImFkZHJlc3MiOiJIaWJhdCBaaW9uIiwicGhvbmUiOiIrOTctMjUwNjkzMzcwNiIsImVtYWlsIjoia29yYWxtYXpvckBnbWFpbC5jb20iLCJjcmVhdGVkQXQiOiIyMDIwLTEyLTIwVDE5OjEzOjE5LjAzOFoiLCJ1cGRhdGVkQXQiOiIyMDIwLTEyLTIwVDE5OjEzOjE5LjAzOFoifSwiaWF0IjoxNjE3Nzg2Nzg5LCJleHAiOjE2MTgxNDY3ODl9.TsuEIsnqUfuAqjYrdNADyqQ2_cXIMNLyPnftLakfO-s
 
 {
   "host": "111.11.11.111",
   "port": "111",
-  "deviceType": "2",
+  "deviceType": "1",
   "unitId": "1"
   
+}
+
+### edit device
+PATCH   http://localhost:3200/api/1/devices/editdevice/chiller2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjVmZGZhMjRmZWI5NTc2NmM2Y2Y3MzdiMSIsImlkIjoiMzA1NDQwODk0IiwidXNlclR5cGUiOiIxIiwiZnVsbE5hbWUiOiJLb3JhbCBNYXpvciIsImFkZHJlc3MiOiJIaWJhdCBaaW9uIiwicGhvbmUiOiIrOTctMjUwNjkzMzcwNiIsImVtYWlsIjoia29yYWxtYXpvckBnbWFpbC5jb20iLCJjcmVhdGVkQXQiOiIyMDIwLTEyLTIwVDE5OjEzOjE5LjAzOFoiLCJ1cGRhdGVkQXQiOiIyMDIwLTEyLTIwVDE5OjEzOjE5LjAzOFoifSwiaWF0IjoxNjE3Nzg2Nzg5LCJleHAiOjE2MTgxNDY3ODl9.TsuEIsnqUfuAqjYrdNADyqQ2_cXIMNLyPnftLakfO-s
+
+{
+  "host": "111.11.11.111",
+  "port": "111",
+  "deviceType": "1",
+  "unitId": "1"
+
 }
 
 ### delete chiller

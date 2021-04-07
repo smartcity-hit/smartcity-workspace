@@ -155,6 +155,40 @@ const createChiller = async (req, res) => {
   }
 }
 
+const editChiller = async (req, res) => {
+  /**
+ * * Route: PATCH '/edit/:id/'
+ * * Response: Chiller(object)
+ * * Description: editing an exist chiller
+ * * 
+ */
+  try {
+      const id = parseInt(req.params.name.substr(7));
+      const specificChiller = await Devices.find({name: `chiller${id}`}).limit(1);
+      if (!specificChiller) {
+          throw new Error('Couldn\'t find chiller - chiller Model was not found!')
+      }
+      const updates = Object.keys(req.body);
+      const deviceType = req.body.deviceType;
+      const prevDeviceType = specificChiller[0].deviceType;
+      if (deviceType != prevDeviceType){
+        throw Error('Error: You can\'t change deviceType field');
+      }
+      const allowedUpdates = ["host", "port", "unitId", "deviceType"];
+      const isValidOperation = updates.every(update => allowedUpdates.includes(update));
+      if (!isValidOperation) {
+          throw Error('Error: You can\'t change chiller name field');
+      }
+      updates.forEach(update => (specificChiller[0][update] = req.body[update]));
+      await specificChiller[0].save();
+      logger.info('editChiller:', specificChiller[0]);
+      res.status(200).json(specificChiller[0]);
+  } catch (err) {
+      logger.error(`editChiller failed: ${err.message}`);
+      res.status(400).json({ code: err.code, message: err.message });
+  }
+}
+
 module.exports = {
   changeCollectionName,
   getChillersNames,
@@ -166,5 +200,6 @@ module.exports = {
   dropCollection,
   createChillerModelAndCollection: createChillersModelAndCollection,
   loadMongooseModels,
-  createChiller
+  createChiller,
+  editChiller
 };

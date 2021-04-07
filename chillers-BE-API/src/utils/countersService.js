@@ -100,11 +100,41 @@ const createCounter = async (req, res) => {
   }
 }
 
+const editCounter = async (req, res) => {
+  /**
+ * * Route: PATCH '/edit/:id/'
+ * * Response: Counter(object)
+ * * Description: editing an exist counter
+ * * 
+ */
+  try {
+      const id = parseInt(req.params.id);
+      const specificCounter = await Devices.find({name: `counter${id}`}).limit(1);
+      if (!specificCounter) {
+          throw new Error('Couldn\'t find counter - counter Model was not found!')
+      }
+      const updates = Object.keys(req.body);
+      const allowedUpdates = ["host", "port", "unitId"];
+      const isValidOperation = updates.every(update => allowedUpdates.includes(update));
+      if (!isValidOperation) {
+          throw Error('Error: You can\'t change counter name or deviceType fields');
+      }
+      updates.forEach(update => (specificCounter[0][update] = req.body[update]));
+      await specificCounter[0].save();
+      logger.info('editCounter:', specificCounter[0]);
+      res.status(200).json(specificCounter[0]);
+  } catch (err) {
+      logger.error(`editCounter failed: ${err.message}`);
+      res.status(400).json({ code: err.code, message: err.message });
+  }
+}
+
 module.exports = {
   getCountersSettings,
   getCounterSamplesByName,
   getCounterBasicDetailsByName,
   getCountersNames,
   createCountersModelAndCollection,
-  createCounter
+  createCounter,
+  editCounter
 };

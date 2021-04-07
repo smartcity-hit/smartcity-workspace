@@ -185,40 +185,6 @@ const getChillerDateRange = async (req, res) => {
     }
 }
 
-const editChiller = async (req, res) => {
-    /**
-   * * Route: PATCH '/edit/:id/'
-   * * Response: Chiller(object)
-   * * Description: editing an exist chiller
-   * * 
-   */
-    try {
-        const loggedInUser = req.user;
-        if (loggedInUser.userType !== '1') {
-            throw new Error('User is not an Admin.');
-        }
-        const id = parseInt(req.params.id);
-        const specificChiller = await Devices.find({name: `chiller${id}`}).limit(1);
-        if (!specificChiller) {
-            throw new Error('Couldn\'t find chiller - chiller Model was not found!')
-        }
-        const updates = Object.keys(req.body);
-        const allowedUpdates = ["host", "port", "unitId"];
-        const isValidOperation = updates.every(update => allowedUpdates.includes(update));
-        if (!isValidOperation) {
-            throw Error('Error: You can\'t change chiller name');
-        }
-        updates.forEach(update => (specificChiller[0][update] = req.body[update]));
-        await specificChiller[0].save();
-        logger.info('editChiller:', specificChiller[0]);
-        res.status(200).json(specificChiller[0]);
-    } catch (err) {
-        logger.error(`editChiller failed: ${err.message}`);
-        res.status(400).json({ code: err.code, message: err.message });
-    }
-}
-
-
 
 router.get('/get/settings', auth, getAllChillersSettings);
 router.get('/get', auth, getAllChillers);
@@ -226,6 +192,5 @@ router.delete('/delete/:name', deleteChiller);
 router.get('/get/:id', auth, getChillerById)
 router.get('/history/:id/:startDate/:endDate', auth, getHistoryById);
 router.get('/daterange/:id', auth, getChillerDateRange);
-router.patch('/edit/:id', auth, editChiller);
 
 module.exports = router;
