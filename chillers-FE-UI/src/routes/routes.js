@@ -12,6 +12,7 @@ import chillerHistory from '../Pages/ChillerHistory';
 import { MenuAppBar } from "../Components/MenuAppBar/MenuAppBar";
 import LocationManagement from '../Pages/LocationManagement/LocationManagement';
 import CounterDetails from '../Pages/CounterDetails/CounterDetails';
+import ChillerDevices from '../Pages/ChillerDevices/ChillerDevices';
 
 const Routes = () => {
   const { userData } = useSelector((state) => state.user);
@@ -81,6 +82,14 @@ const Routes = () => {
         isAuthorized={!!userData}
         component={AdminPanel}
       />
+      
+      <PrivateRoute
+        path='/chillers/chillers-devices'
+        exact
+        isAuthorized={!!userData}
+        component={ChillerDevices}
+      />
+
       
     </div>
   );

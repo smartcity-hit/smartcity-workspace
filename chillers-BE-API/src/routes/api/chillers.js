@@ -43,6 +43,8 @@ const getAllChillers = async (req, res) => {
     }
 }
 
+
+
 const getAllChillersSettings= async (req, res) => {
     /**
    * * Route: GET '/api/1/chillers/get/settings'

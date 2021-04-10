@@ -109,6 +109,19 @@ const ChillersMenuItem = () => {
           </List>
         </Collapse>
       </Link>
+
+      <Link to="/chillers/chillers-devices">
+        <Collapse in={open} timeout="auto" unmountOnExit>
+          <List className="menu-app-bar" component="div" disablePadding>
+            <ListItem button className={`nav-link ${pathname.includes('/chillers/chillers-devices') && activeTab === 2 ? 'active' : ''}`} onClick={() => { onClickTab(3) }}>
+              <ListItemIcon onClick={handelClose}>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText primary="Devices" />
+            </ListItem>
+          </List>
+        </Collapse>
+      </Link>
     </div>
   )
 };
