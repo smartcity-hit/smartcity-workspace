@@ -33,10 +33,12 @@ Content-Type: application/json
 
 
 {
- 
   "userId": "305440894",
-  "password": "123456"
-  
+  "password": "123456" 
+},
+{
+  "userId": "222222222",
+  "password": "123456" 
 }
 
 ### get all users

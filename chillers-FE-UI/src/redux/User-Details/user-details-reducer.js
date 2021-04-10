@@ -19,6 +19,10 @@ export default (state = initialState, action) => {
                 error: null,
             };
         case actionTypes.USER_LOADED:
+            return {
+                ...state,
+                loading: false
+            };
         case actionTypes.SIGN_IN_SUCCESS:
             console.log('SignIn payload: ', payload);
             return {
