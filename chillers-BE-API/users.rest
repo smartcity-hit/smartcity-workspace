@@ -93,6 +93,19 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6I
   
 }
 
+### create chiller
+POST  http://localhost:3200/api/1/chillers/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjVmZGZhMjRmZWI5NTc2NmM2Y2Y3MzdiMSIsImlkIjoiMzA1NDQwODk0IiwidXNlclR5cGUiOiIxIiwiZnVsbE5hbWUiOiJLb3JhbCBNYXpvciIsImFkZHJlc3MiOiJIaWJhdCBaaW9uIiwicGhvbmUiOiIrOTctMjUwNjkzMzcwNiIsImVtYWlsIjoia29yYWxtYXpvckBnbWFpbC5jb20iLCJjcmVhdGVkQXQiOiIyMDIwLTEyLTIwVDE5OjEzOjE5LjAzOFoiLCJ1cGRhdGVkQXQiOiIyMDIwLTEyLTIwVDE5OjEzOjE5LjAzOFoifSwiaWF0IjoxNjE3NzA3MzEyLCJleHAiOjE2MTgwNjczMTJ9.K5BrL9IcNQSvMD_n406J_k5kKcK3A6YCJ9sN_Y2nOUo
+
+{
+  "host": "111.11.11.111",
+  "port": "111",
+  "deviceType": "1",
+  "unitId": "1"
+  
+}
+
 ### delete chiller
 DELETE  http://localhost:3200/api/1/chillers/delete/chiller1
 Content-Type: application/json

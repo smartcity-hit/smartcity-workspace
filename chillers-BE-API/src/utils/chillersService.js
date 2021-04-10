@@ -135,6 +135,10 @@ const createChiller = async (req, res) => {
  * * Description: add new chiller document to the chillers-names collection and create collection from db
  */
   try {
+      const loggedInUser = req.user;
+      if (loggedInUser.userType !== '1') {
+          throw new Error('User is not an Admin.');
+      }
       const chillersNames = await getChillersNames();
       let id;
       if (chillersNames.length === 0) { // no chillers in db
@@ -164,7 +168,7 @@ module.exports = {
   chillersNamesSchema,
   devicesSchema,
   dropCollection,
-  createChillerModelAndCollection: createChillersModelAndCollection,
+  createChillersModelAndCollection,
   loadMongooseModels,
   createChiller
 };
