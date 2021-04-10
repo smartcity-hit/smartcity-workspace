@@ -26,7 +26,6 @@ export const getAllChillersData = () => async (dispatch) => {
         dispatch({ type: actionTypes.SET_CHILLER_LOADING });
         const res = await fetch(appApiBaseUrl + '/api/1/chillers/get', getRequestOptions());
         const data = await res.json();
-        console.log('chillersActions getChillersData Chillers:', data);
         if (res && res.status === 200) {
             const allChillers = data;
             insertFakeCoolingCircuitData(allChillers);

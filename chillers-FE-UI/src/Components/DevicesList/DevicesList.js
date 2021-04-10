@@ -26,12 +26,12 @@ const useStyles = makeStyles({
     padding: '0px',
   },
   row: {
-    height: 100,
+    height: 50,
     textAlign: 'inherit',
   },
   cell: {
-    height: 100,
-    padding: '50px',
+    height: 50,
+    padding: '25px',
   },
 
 });
@@ -57,15 +57,17 @@ const DevicesList = ({ rows, cols }) => {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {cols.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
+              {cols.map((column) => {
+                return (
+                  <TableCell
+                    key={column.id}
+                    align={column.align}
+                    style={{ minWidth: column.minWidth }}
+                  >
+                    {column.label}
+                  </TableCell>
+                );
+              })}
             </TableRow>
           </TableHead>
           <TableBody>

@@ -6,7 +6,7 @@ import CounterDevices from "../Pages/CounterDevices/CounterDevices";
 import CoolingCircuit from '../Pages/CoolingCircuit';
 import WaterCircuit from '../Pages/WaterCircuit';
 import LoginPage from '../Pages/LoginPage';
-import AdminPanel from '../Pages/AdminPanel';
+import AdminPanel from '../Pages/AdminPanel/index';
 import PrivateRoute from './privateRoute';
 import chillerHistory from '../Pages/ChillerHistory';
 import LocationManagement from '../Pages/LocationManagement/LocationManagement';
@@ -54,12 +54,7 @@ const Routes = () => {
         isAuthorized={!!userData}
         component={CoolingCircuit}
       />
-      <PrivateRoute
-        path="/admin-panel"
-        exact
-        isAuthorized={!!userData && userData.userType === 1}
-        component={AdminPanel}
-      />
+     
       <PrivateRoute
         path='/chillers/chiller-history'
         exact
@@ -71,6 +66,13 @@ const Routes = () => {
         exact
         isAuthorized={!!userData}
         component={CounterDetails}
+      />
+
+    <PrivateRoute
+        path='/user-management'
+        exact
+        isAuthorized={!!userData}
+        component={AdminPanel}
       />
       
     </div>

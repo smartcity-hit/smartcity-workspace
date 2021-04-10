@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { devicesSchema, countersSchema } = require('../utils/schemas')
+const { devicesSchema, countersSamplesSchema } = require('../utils/schemas')
 
 /**
  * * all is imported from Counters
@@ -9,7 +9,7 @@ const { devicesSchema, countersSchema } = require('../utils/schemas')
 const Devices = mongoose.model('Devices', devicesSchema, 'devices');
 const collections = Devices.find({ deviceType: "2" });
 
-const Counters = mongoose.model('Counters', countersSchema, 'counters');
+const Counters = mongoose.model('Counters', countersSamplesSchema, 'counters');
 
 
 module.exports = { Devices , Counters};

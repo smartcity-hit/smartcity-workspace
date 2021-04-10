@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
  * * All the Schemas
  */
 
-const chillersSchema = new mongoose.Schema(
+const chillersSamplesSchema = new mongoose.Schema(
   {
       dateTime: {
         type: Date
@@ -90,6 +90,10 @@ const devicesSchema = new mongoose.Schema(
       type: Number,
       required: true
     },
+    isAlive: {
+      type: Boolean,
+      required: false
+    },
     deviceType: {
       type: Number,
       required: true
@@ -98,7 +102,7 @@ const devicesSchema = new mongoose.Schema(
   { timestamps: true, versionKey: false}
 );
 
-const countersSchema = new mongoose.Schema(
+const countersSamplesSchema = new mongoose.Schema(
   {
     i1: {
       type: Number,
@@ -144,14 +148,20 @@ const countersSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true
+    },
+    updatedAt: {
+      type: Date,
+      required: true,
+      unique: true
     }
-  },
-  { timestamps: true, versionKey: false}
+    },
+
+    {timestamps: true, versionKey: false}
 );
 
 module.exports = {
-  chillersSchema,
+  chillersSamplesSchema,
   chillersNamesSchema,
   devicesSchema,
-  countersSchema
+  countersSamplesSchema
 };

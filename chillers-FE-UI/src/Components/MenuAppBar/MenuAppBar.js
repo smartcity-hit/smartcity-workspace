@@ -180,10 +180,9 @@ const MenuAppBar = () => {
         </List>
         <Divider />
 
-        <Link to="/admin-panel">
+        <Link to="/user-management">
           <List className="menu-app-bar">
-
-            <ListItem button className={`nav-link ${pathname.includes('/admin-panel') && activeTab === 0 ? 'active' : ''}`} onClick={() => { onClickTab(0) }}>
+            <ListItem button className={`nav-link ${pathname.includes('/user-management') && activeTab === 0 ? 'active' : ''}`} onClick={() => { onClickTab(0) }}>
               <ListItemIcon>
                 <PeopleOutlinedIcon />
               </ListItemIcon>

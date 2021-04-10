@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react';
 import DevicesList from '../../Components/DevicesList/DevicesList';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCounters } from '../../redux/Counters-List/counters-list-actions';
-import "./CounterDevices.scss"; 
+import "./ChillerDevices.scss";
+import { getChillers } from '../../redux/Chillers-List/chillers-list-actions';
+import chillersListReducer from '../../redux/Chillers-List/chillers-list-reducer';
 
-const CounterDevices = () => {
-  const counters = useSelector((state) => state.countersList.counters);
+const ChillerDevices = () => {
+  const chillers = useSelector((state) => state.chillersList.chillers);
   const dispatch = useDispatch();
 
 
   useEffect(() => {
-    dispatch(getCounters());
+    dispatch(getChillers());
   }, [dispatch]);
 
   const columns = [
@@ -36,12 +37,10 @@ const CounterDevices = () => {
 
   return (
     <div className="body">
-      
-      <h1 className="counter-title">COUNTERS</h1>
-      <DevicesList rows={counters} cols={columns} />
-    
+      <h1 className="counter-title">CHILLERS</h1>
+      <DevicesList rows={chillers} cols={columns} />
     </div>
   );
 };
 
-export default CounterDevices;
+export default ChillerDevices;
