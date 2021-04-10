@@ -1,0 +1,97 @@
+$error-red-color: #ff1c49;
+$button-bg-blue: #5fb2ce;
+
+.add-user-wrapper {
+  width: 90%;
+  margin: auto;
+  .add-user-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+   // background: linear-gradient(135deg, #17ead9 0%, #6078ea 100%);
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    transition: 0.3s;
+    color: white;
+    &:hover {
+      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    }
+    .add-user-title {
+      margin: 10px 0px;
+      font-size: 46px;
+      color: rgba(76, 132, 177, 0.726);
+    }
+    .fields-wrapper {
+      display: flex;
+      align-items: center;
+      .column {
+        margin-right: 40px;
+        margin-left: 30px;
+      }
+      .field-wrapper {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+        .row {
+          align-items: center;
+        }
+        label.field-label {
+          display: inline-block;
+          min-width: 125px;
+          margin-right: 20px;
+          font-weight: bold;
+          text-align: left;
+        }
+        .field-input {
+          &::placeholder {
+            font-size: 11px;
+          }
+        }
+        .field-select {
+          cursor: pointer;
+        }
+        .field-error {
+          align-self: start;
+          margin-left: 145px;
+          margin-top: 4px;
+          color: $error-red-color;
+          font-size: 10px;
+          font-weight: bold;
+          font-family: OpenSans;
+          cursor: default;
+          height: 10px;
+        }
+      }
+    }
+    .add-user-btn {
+      margin: auto 0 30px;
+      font-size: 16px;
+      border-radius: 15px;
+      padding: 6px 35px;
+      background-color: $button-bg-blue;
+      color: white;
+      box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.5);
+      &:hover {
+        box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.5);
+      }
+    }
+    .main-error {
+      margin: 17px 0px;
+      color: $error-red-color;
+      font-size: 13px;
+      font-weight: bold;
+      font-family: OpenSans;
+      cursor: default;
+      height: 10px;
+    }
+  }
+}
+
+@media all and (max-height: 750px) {
+  .add-user-wrapper {
+    .add-user-card {
+      margin-bottom: 70px;
+    }
+  }
+}
