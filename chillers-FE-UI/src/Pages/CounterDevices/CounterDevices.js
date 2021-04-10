@@ -56,7 +56,7 @@ const CounterDevices = () => {
         </div>
          </div>
       <div className='active-tab'>
-      {activeTab === 0 ? <DevicesList rows={counters} cols={columns} /> : activeTab === 1 ? <AddDevice deviceTypeId={2}/> : ''}
+      {activeTab === 0 ? <DevicesList rows={counters} cols={columns} /> : activeTab === 1 ? <AddDevice unitId={1} deviceTypeId={2}/> : ''}
       </div>
     </div>
   );

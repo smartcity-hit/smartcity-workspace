@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import {signUpUser} from '../../redux/User-Details/user-details-actions';
+import {addCounter} from '../../redux/Counter-Details/counter-details-actions';
 
 
 import './AddDevice.scss';
 
-const AddDevice = ({deviceTypeId}) => {
+const AddDevice = ({unitId, deviceTypeId}) => {
   const [host, setHost] = useState('');
   const [port, setPort] = useState('');
   const [mainError, setMainError] = useState('');
@@ -63,9 +63,11 @@ const AddDevice = ({deviceTypeId}) => {
     } else {
       setMainError('');
       dispatch(
-        signUpUser({
-          host,
-          port,
+        addCounter({
+            host,
+            port,
+            unitId,
+            deviceTypeId,
         })
       );
     }
@@ -120,9 +122,9 @@ const AddDevice = ({deviceTypeId}) => {
   };
 
   return (
-    <div className="add-user-wrapper">
-      <div className="add-user-card">
-        <h1 className="add-user-title">Add New {deviceTypeId === 1 ? 'Chiller' : 'Counter'}</h1>
+    <div className="add-counter-wrapper">
+      <div className="add-counter-card">
+        <h1 className="add-counter-title">Add New {deviceTypeId === 1 ? 'Chiller' : 'Counter'}</h1>
         <div className="fields-wrapper">
           <div className="column">
             {renderFields(fields.slice(0, fields.length / 2))}
@@ -132,7 +134,7 @@ const AddDevice = ({deviceTypeId}) => {
           </div>
         </div>
         <div className="main-error">{mainError}</div>
-        <button type="submit" className="add-user-btn" onClick={onClickSubmit}>
+        <button type="submit" className="add-counter-btn" onClick={onClickSubmit}>
           Add
         </button>
       </div>
