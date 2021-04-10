@@ -22,7 +22,7 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 chillers: action.payload.chillers,
-                numOfCHILLERS: action.payload && action.payload.chillers.length,
+                numOfChillers: action.payload && action.payload.chillers.length,
                 isLoading: false
             };
         case actionTypes.GET_CHILLERS_FAIL:
