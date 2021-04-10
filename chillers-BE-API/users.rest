@@ -80,19 +80,6 @@ GET  http://localhost:3200/api/1/chillers/get/2
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjVmZGZhMjRmZWI5NTc2NmM2Y2Y3MzdiMSIsImlkIjoiMzA1NDQwODk0IiwidXNlclR5cGUiOiIxIiwiZnVsbE5hbWUiOiJLb3JhbCBNYXpvciIsImFkZHJlc3MiOiJIaWJhdCBaaW9uIiwicGhvbmUiOiIrOTctMjUwNjkzMzcwNiIsImVtYWlsIjoia29yYWxtYXpvckBnbWFpbC5jb20iLCJjcmVhdGVkQXQiOiIyMDIwLTEyLTIwVDE5OjEzOjE5LjAzOFoiLCJ1cGRhdGVkQXQiOiIyMDIwLTEyLTIwVDE5OjEzOjE5LjAzOFoifSwiaWF0IjoxNjEzMDQyMzIwLCJleHAiOjE2MTM0MDIzMjB9.EfZv0pT5FG16E0cSiF0ECBB48cjF_sFkj4Z_4Sy1WQ8
 
-### create device
-POST  http://localhost:3200/api/1/devices/createdevice
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjVmZGZhMjRmZWI5NTc2NmM2Y2Y3MzdiMSIsImlkIjoiMzA1NDQwODk0IiwidXNlclR5cGUiOiIxIiwiZnVsbE5hbWUiOiJLb3JhbCBNYXpvciIsImFkZHJlc3MiOiJIaWJhdCBaaW9uIiwicGhvbmUiOiIrOTctMjUwNjkzMzcwNiIsImVtYWlsIjoia29yYWxtYXpvckBnbWFpbC5jb20iLCJjcmVhdGVkQXQiOiIyMDIwLTEyLTIwVDE5OjEzOjE5LjAzOFoiLCJ1cGRhdGVkQXQiOiIyMDIwLTEyLTIwVDE5OjEzOjE5LjAzOFoifSwiaWF0IjoxNjE3NzA3MzEyLCJleHAiOjE2MTgwNjczMTJ9.K5BrL9IcNQSvMD_n406J_k5kKcK3A6YCJ9sN_Y2nOUo
-
-{
-  "host": "111.11.11.111",
-  "port": "111",
-  "deviceType": "2",
-  "unitId": "1"
-  
-}
-
 ### create chiller
 POST  http://localhost:3200/api/1/chillers/create
 Content-Type: application/json
