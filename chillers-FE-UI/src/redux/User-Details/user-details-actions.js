@@ -14,7 +14,6 @@ export const initEnvironment = () => async (dispatch) => {
         dispatch({ type: actionTypes.SET_LOADING });
         const res = await fetch(appApiBaseUrl + '/api/1/users/get', getRequestOptions());
         const data = await res.json();
-        console.log('ChillerActions InitEnvironment User: ', data);
         if (res && res.status === 200) {
             const user = userUtils.parseUserObject(data);
             dispatch({
@@ -67,7 +66,6 @@ export const signInUser = ({ userId, password }) => async (dispatch) => {
             const { token } = data;
             const user = userUtils.parseUserObject(data.user);
             localStorage.setItem('token', token);
-            console.log('SignIn Success User:', user);
             dispatch({
                 type: actionTypes.SIGN_IN_SUCCESS,
                 payload: { user, token },
