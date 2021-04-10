@@ -1,9 +1,9 @@
 const express = require('express');
 const myDbConnection = require('./db/database');
 const app = express();
-
-
-// app.use(express.urlencoded({ extended: false }));
+//copy these lines to MODBUS
+const pi = require('./utils/pingToCountersService');
+pi.countersHealthCheck();
 app.use(express.json());
 
 app.use(function (req, res, next) {
@@ -16,5 +16,5 @@ app.use(function (req, res, next) {
 const router = require('./routes/routes');
 
 app.use('/api/1', router);
-// const createTable = require('../createTables');
+
 module.exports = app;

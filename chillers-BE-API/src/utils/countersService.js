@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { devicesSchema, countersSchema } = require('./schemas');
+const { devicesSchema, countersSamplesSchema } = require('./schemas');
 
 
 /**
@@ -14,7 +14,7 @@ const getCountersSettings = async () => {
 }
 
 const getCounterSamplesByName = async (counterName) => {
-    const Counter = mongoose.model('Counters', countersSchema, 'counters');
+    const Counter = mongoose.model('Counters', countersSamplesSchema, 'counters');
     const counters = await Counter.find( { counterName: counterName } );
   
     return counters;
