@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import DevicesList from '../../Components/DevicesList/DevicesList';
 import { useDispatch, useSelector } from 'react-redux';
-import "./ChillerDevices.scss"; 
+import "./ChillerDevices.scss";
 import { getChillers } from '../../redux/Chillers-List/chillers-list-actions';
 import chillersListReducer from '../../redux/Chillers-List/chillers-list-reducer';
 
@@ -37,10 +37,8 @@ const ChillerDevices = () => {
 
   return (
     <div className="body">
-      
       <h1 className="counter-title">CHILLERS</h1>
       <DevicesList rows={chillers} cols={columns} />
-    
     </div>
   );
 };

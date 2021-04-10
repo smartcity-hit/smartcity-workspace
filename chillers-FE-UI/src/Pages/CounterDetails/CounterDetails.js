@@ -11,11 +11,17 @@ const CounterDetails = (props) => {
   const name = useSelector((state) => state.counterDetails.counterName);
   const createdDate = useSelector((state) => state.counterDetails.createdDate);
   const ip = useSelector((state) => state.counterDetails.counterIP);
-  console.log(props.location.counterName)
+  const isAlive = useSelector((state) => state.counterDetails.isAlive);
   const dispatch = useDispatch();
 
   const createCol = [
-    { counterName: name, counterIP: ip, counterLocation: location, createdDate: createdDate }
+    {
+      counterName: name,
+      counterIP: ip,
+      counterLocation: location,
+      createdDate: createdDate,
+      isAlive: isAlive
+    }
   ];
 
   useEffect(() => {
@@ -24,7 +30,6 @@ const CounterDetails = (props) => {
   }, [dispatch]);
 
   const columns = [
- 
     {
       id: 'name',
       label: 'Name',
@@ -68,7 +73,7 @@ const CounterDetails = (props) => {
       align: 'center',
     },
     {
-      id:  'v1v2',
+      id: 'v1v2',
       label: 'V1/V2',
       minWidth: 100,
       align: 'center',
@@ -87,7 +92,7 @@ const CounterDetails = (props) => {
     },
     {
       id: ' cos',
-      label:  'CosΦ',
+      label: 'CosΦ',
       minWidth: 100,
       align: 'center',
     },
@@ -104,11 +109,11 @@ const CounterDetails = (props) => {
   return (
     <div className="counter-wrapper">
       <div>
-      <DetailsCard cols={createCol} />
+        <DetailsCard cols={createCol} />
       </div>
       <p></p>
       <div>
-      <HistoryCard rows={samples} cols={columns} />
+        <HistoryCard rows={samples} cols={columns} />
       </div>
     </div>
   );
