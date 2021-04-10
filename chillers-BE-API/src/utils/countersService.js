@@ -77,34 +77,11 @@ const createCountersModel = async () => {
     return Counters;
 }
 
-const createCounter = async (req, res) => {
-  try {
-          const countersNames = await getCountersNames();
-          if (countersNames.length === 0) { // no counters in db
-              id = 1;
-          }
-          else {
-              id = Number(countersNames[countersNames.length - 1].split('r')[1]) + 1;
-          }
-          const name = `counter${id}`;
-          const { host, port, unitId, deviceType } = req.body;
-          const counterDeviceSettings = new Devices({ name, host, port, unitId, deviceType });
-          await counterDeviceSettings.save();
-          await createCountersModelAndCollection(id, name);
-          logger.info('createCounter:', counterDeviceSettings);
-          res.status(200).json({ counterrDeviceSettings: counterDeviceSettings });
-  }
-  catch (err) {
-      logger.error(`createDevice counter is failed: ${err.message}`);
-      res.status(400).json({ code: err.code, message: err.message });
-  }
-}
 
 module.exports = {
   getCountersSettings,
   getCounterSamplesByName,
   getCounterBasicDetailsByName,
   getCountersNames,
-  createCountersModelAndCollection,
-  createCounter
+  createCountersModelAndCollection
 };
