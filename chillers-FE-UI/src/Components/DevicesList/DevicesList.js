@@ -14,12 +14,11 @@ import { useLocation } from 'react-router-dom';
 const useStyles = makeStyles({
   root: {
     width: '100%',
-    height: '400%',
     align: "center",
 
   },
   Pagination: {
-    display: 'flex',
+    display: 'flax',
     justifyContent: 'center',
     width: "100%",
     alignItems: 'left',
