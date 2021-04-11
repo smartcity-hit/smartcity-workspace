@@ -1,11 +1,15 @@
 const mongoose = require('mongoose');
-const { chillersSchema, chillersNamesSchema } = require('../utils/chillersService')
+const { devicesSchema, chillersSamplesSchema } = require('../utils/schemas')
 
 /**
  * * all is imported from Chiller Service
  */
 
 
-const ChillersNames = mongoose.model('ChillersNames', chillersNamesSchema, 'chillers-names');
+const Devices = mongoose.model('Devices', devicesSchema, 'devices');
+const collections = Devices.find({ deviceType: "1" });
 
-module.exports = { ChillersNames };
+const Chillers = mongoose.model('Chillers', chillersSamplesSchema, 'chillers');
+
+
+module.exports = { Devices , Chillers};

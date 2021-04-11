@@ -4,15 +4,16 @@ const Users = require('../models/users');
 const logger = require('../utils/logger');
 const { loadMongooseModels } = require('../utils/chillersService');
 
+
 async function myDbConnection() {
   try {
     mongoose.set('useNewUrlParser', true);
     mongoose.set('useCreateIndex', true);
     const uri = process.env.DB_URI;
-    // const uri = 'mongodb://localhost:27017/chillers';
     let connectionPromise = await mongoose.connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      useFindAndModify: false
     });
     if (mongoose.connection) {
       logger.info('Connected Successfully to DB');
@@ -25,7 +26,7 @@ async function myDbConnection() {
     }
     return connectionPromise;
   } catch (error) {
-    logger.error('Error connecting to DB ::', error);
+    logger.error('Error connecting to DB :', error);
   }
 }
 

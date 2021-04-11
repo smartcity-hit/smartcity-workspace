@@ -1,12 +1,12 @@
-import React from "react";
+import React, { useState } from 'react';
 import clsx from "clsx";
+import './MenuAppBar.scss';
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -17,14 +17,14 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import LocationOnOutlinedIcon from '@material-ui/icons/LocationOnOutlined';
 import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
-import AccountTreeOutlinedIcon from '@material-ui/icons/AccountTreeOutlined';
 import PeopleOutlinedIcon from '@material-ui/icons/PeopleOutlined';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import Collapse from '@material-ui/core/Collapse';
-import StarBorder from '@material-ui/icons/StarBorder';
-import ChillersMenuItem from "./MenuItems/ChillersMenuItem";
-import CountersMenuItem from "./MenuItems/CountersMenuItem";
+import ChillersMenuItem from "../MenuAppBar/MenuItems/ChillersMenuItem";
+import CountersMenuItem from "../MenuAppBar/MenuItems/CountersMenuItem";
+import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { signOutUser } from '../../redux/User-Details/user-details-actions';
+
 
 const drawerWidth = 240;
 
@@ -89,11 +89,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MenuAppBar() {
+const MenuAppBar = () => {
+  const [activeTab, setActiveTab] = useState(0);
   const classes = useStyles();
+  const { pathname } = useLocation();
   const theme = useTheme();
   const [openMenuAppBar, setOpenMenuAppBar] = React.useState(false);
   const [openCollapsed, setOpenCollapsed] = React.useState(true);
+  const dispatch = useDispatch();
 
   const handleClick = () => {
     setOpenCollapsed(!openCollapsed);
@@ -107,16 +110,30 @@ export default function MenuAppBar() {
     setOpenMenuAppBar(false);
   };
 
+  const handleMenuClose = () => {
+    setOpenCollapsed(false);
+  };
+
+  const onClickSignOut = () => {
+    dispatch(signOutUser());
+  }
+
+  const onClickTab = (tabClicked) => {
+    setActiveTab(tabClicked);
+  }
+
   return (
     <div className={classes.root}>
+
       <CssBaseline />
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: openMenuAppBar
         })}
+
       >
-        <Toolbar className={classes.temp}>
+        <Toolbar className={classes.temp + " menu-app-bar"}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -131,9 +148,13 @@ export default function MenuAppBar() {
               <li><a href="/home">H.I.T Smart City</a></li>
             </ul>
           </nav>
-          <ExitToAppOutlinedIcon />
+          <IconButton onClick={onClickSignOut} color="inherit" className={classes.menuButton}>
+            <ExitToAppOutlinedIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
+
+
       <Drawer
         className={classes.drawer}
         variant="persistent"
@@ -158,27 +179,42 @@ export default function MenuAppBar() {
           <ChillersMenuItem />
         </List>
         <Divider />
-        <List>
-          {["User Management", "Location Management"].map((text, index) => (
-            <ListItem button key={text}>
+
+        <Link to="/user-management">
+          <List className="menu-app-bar">
+            <ListItem button className={`nav-link ${pathname.includes('/user-management') && activeTab === 0 ? 'active' : ''}`} onClick={() => { onClickTab(0) }}>
               <ListItemIcon>
-                {index % 2 === 0 ? <PeopleOutlinedIcon /> : <LocationOnOutlinedIcon />}
+                <PeopleOutlinedIcon />
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary="User Management" />
             </ListItem>
-          ))}
-        </List>
+          </List>
+        </Link>
+
+        <Link to="/locationManagement">
+          <List className="menu-app-bar">
+            <ListItem button className={`nav-link ${pathname.includes('locationManagement') && activeTab === 1 ? 'active' : ''}`} onClick={() => { onClickTab(1) }}>
+              <ListItemIcon>
+                <LocationOnOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary="Location Management" />
+            </ListItem>
+          </List>
+        </Link>
+
       </Drawer>
+
+
       <main
         className={clsx(classes.content, {
           [classes.contentShift]: openMenuAppBar
         })}
       >
         <div className={classes.drawerHeader} />
-        <Typography paragraph>
-          Hello, Admin.
-        </Typography>
+
       </main>
     </div>
   );
 }
+
+export { MenuAppBar };

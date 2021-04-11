@@ -1,74 +1,14 @@
 const mongoose = require('mongoose');
 const fahrenheitToCelcius = require('./data');
+const { chillersNamesSchema, devicesSchema, chillersSamplesSchema } = require('../utils/schemas');
+
 
 /**
- * * All the Schemas and their (methods & statics)
+ * * All  of the methods & statics related to schemas
  */
 
-const chillersSchema = new mongoose.Schema(
-  {
-      dateTime: {
-        type: Date
-      },
-      enteringWaterTemp: {
-        type: Number
-      },
-      leavingWaterTemp: {
-        type: Number
-      },
-      enteringGasTemp: {
-        type: Number
-      },
-      leavingGasTemp: {
-        type: Number
-      },
-      firstCircuitPressure: {
-        type: Number
-      },
-      secondCiruitPressure: {
-        type: Number
-      },
-      controlPoint: {
-        type: Number
-      },
-      unitPrecentActiveCapacity: {
-        type: Number
-      },
-      demandLimit: {
-        type: Number
-      },
-      chillerState: {
-        type: Number,
-        required: true
-      },
-  },
-  { timestamps: true, versionKey: false}
-);
 
-const chillersNamesSchema = new mongoose.Schema(
-  {
-    name: {
-      type: String,
-      required: true,
-      unique: true
-    },
-    host: {
-      type: String,
-      required: true
-    },
-    port: {
-      type: Number,
-      required: true
-    },
-    unitId: {
-      type: Number,
-      required: true
-    }
-  },
-  { timestamps: true, versionKey: false}
-);
-
-chillersSchema.methods.convertData = function() {
+ chillersSamplesSchema.methods.convertData = function() {
   const chiller = this;
   console.log(chiller['dateTime']);
   // if (!chiller.enteringWaterTemp && !chiller.leavingWaterTemp && !chiller.enteringGasTemp, !chiller.leavingGasTemp) {
@@ -117,12 +57,12 @@ const dropCollection = async (collectionName) => {
   delete mongoose.connections[0].collections[collectionName]; // remove the collection from the current mongoose instance
 }
 
-const getChillersCollections = async () => {
+const getChillersNames = async () => {
 /**
  * * This function will get all chiller's names from db and return them in array
  */
-  const ChillersNames = mongoose.model('ChillersNames', chillersNamesSchema, 'chillers-names');
-  const collections = await ChillersNames.find();
+  const ChillersNames = mongoose.model('Devices', devicesSchema, 'devices');
+  const collections = await ChillersNames.find( { deviceType: "1" } );
   const names = [];
 
   collections.forEach(function (collection) {
@@ -139,37 +79,29 @@ const getChillersSettings= async () => {
   /**
    * * This function will get all chiller's settings from db and return them in array
    */
-    const ChillersNames = mongoose.model('ChillersNames', chillersNamesSchema, 'chillers-names');
-    const collections = await ChillersNames.find();
-    const names = [];
+    const ChillersDeviceSettings = mongoose.model('Devices', devicesSchema, 'devices');
+    const collections = await ChillersDeviceSettings.find( { deviceType: "1" } );
   
-    // collections.forEach(function (collection) {
-    //   const name = collection.name;
-    //   const number = name.match(/\d+/g); // check if string containg numbers
-    //   if (number) { // if name contain numbers then push name to the names array
-    //     names.push(name);
-    //   }
-    // });
     return collections;
-  }
-
+}
+  
 const loadMongooseModels = async () => {
   /**
    * * This function runs when connecting to db successfuly
    */
-  const chillersNames = await getChillersCollections();
-  chillersNames.forEach((name, index) => {
+  const chillersNames = await getChillersNames();
+  chillersNames.forEach((index) => {
     const id = index + 1;
-    createChillerModel(id, name);
+    createChillersModel();
   });
 }
 
-const createChillerModelAndCollection = async (id, name) => {
+const createChillersModelAndCollection = async (name) => {
 /**
- * * This function will create a new Chiller Model & Collection in db
+ * * This function will create a new Chillers Model & Collection in db
  */
-  const ChillerI = await createChillerModel(id,name);
-  const chiller = new ChillerI({
+  const Chillers = await createChillersModel(name);
+  const chillers = new Chillers({
     enteringWaterTemp: 0,
     leavingWaterTemp: 0,
     enteringGasTemp: 0,
@@ -177,26 +109,31 @@ const createChillerModelAndCollection = async (id, name) => {
     firstCircuitPressure: 0,
     controlPoint: 0,
     demandLimit: 0,
-    chillerState: 0
+    chillerState: 0,
+    chillerName: `${name}`
   });
-  await chiller.save();
+  await chillers.save();
 }
-const createChillerModel = async (id, name) => {
+
+const createChillersModel = async () => {
 /**
- * * This function will create mongoose model by id and name
+ * * This function will create mongoose model
  */
-  const ChillerI = mongoose.model(`Chiller${id}`, chillersSchema, name);
-  return ChillerI;
+  const Chillers = mongoose.model("chillers", chillersSamplesSchema, 'chillers');
+
+
+  return Chillers;
 }
 
 module.exports = {
   changeCollectionName,
-  getChillersCollections,
+  getChillersNames,
   getChillersSettings,
-  createChillerModel,
-  chillersSchema,
+  createChillerModel: createChillersModel,
+  chillersSamplesSchema,
   chillersNamesSchema,
+  devicesSchema,
   dropCollection,
-  createChillerModelAndCollection,
+  createChillerModelAndCollection: createChillersModelAndCollection,
   loadMongooseModels
 };
