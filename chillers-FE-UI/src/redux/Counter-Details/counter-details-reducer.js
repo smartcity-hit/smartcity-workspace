@@ -29,7 +29,7 @@ export default (state = initialState, action) => {
                 counterLocation: action.payload.location ? action.payload.location : 'No location set',
                 counterIP: action.payload.host,
                 createdDate: action.payload.createdAt,
-                isAlive: action.payload.isAlive.toString()
+                isAlive: action.payload.isAlive ? action.payload.isAlive.toString() : 'No Status'
             };
         case actionTypes.GET_COUNTER_BASIC_DETAILS_FAIL:
             return {
