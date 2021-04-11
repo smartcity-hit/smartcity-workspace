@@ -134,6 +134,6 @@ module.exports = {
   chillersNamesSchema,
   devicesSchema,
   dropCollection,
-  createChillerModelAndCollection: createChillersModelAndCollection,
+  createChillersModelAndCollection,
   loadMongooseModels
 };

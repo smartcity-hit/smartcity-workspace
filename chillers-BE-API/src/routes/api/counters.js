@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const auth = require('../../middleware/auth');
 const logger = require('../../utils/logger');
 const { Devices, Counters } = require('../../models/counters');
-const { getCountersSettings, getCounterSamplesByName, getCounterBasicDetailsByName } = require('../../utils/countersService');
+const { getCountersSettings, getCounterSamplesByName, getCounterBasicDetailsByName, getCountersNames, createCountersModelAndCollection } = require('../../utils/countersService');
 
 
 const getCounterDevicesById = async (req, res) => {
@@ -119,10 +119,39 @@ const getCounterBasicDetails = async (req, res) => {
     }
 }
 
+const createCounter = async (req, res) => {
+    try {
+            const loggedInUser = req.user;
+            if (loggedInUser.userType !== '1') {
+                throw new Error('User is not an Admin.');
+            }
+            const countersNames = await getCountersNames();
+            if (countersNames.length === 0) { // no counters in db
+                id = 1;
+            }
+            else {
+                id = Number(countersNames[countersNames.length - 1].split('r')[1]) + 1;
+            }
+            const name = `counter${id}`;
+            const { host, port, unitId, deviceType } = req.body;
+            const counterDeviceSettings = new Devices({ name, host, port, unitId, deviceType });
+            await counterDeviceSettings.save();
+            await createCountersModelAndCollection(id, name);
+            logger.info('createCounter:', counterDeviceSettings);
+            res.status(200).json({ counterrDeviceSettings: counterDeviceSettings });
+    }
+    catch (err) {
+        logger.error(`createDevice counter is failed: ${err.message}`);
+        res.status(400).json({ code: err.code, message: err.message });
+    }
+  }
+
+
 router.get('/get/basicDetails/:counterName', auth, getCounterBasicDetails)
 router.get('/get/samples/:counterName', auth, getCounterSamples);
 router.get('/data/:id/:startDate/:endDate', auth, getCounterById);
 router.get('/get/devices', auth, getCounterDevicesById);
 router.get('/daterange/:id', auth, getCounterDateRange);
+router.post('/create', auth, createCounter);
 
 module.exports = router;
