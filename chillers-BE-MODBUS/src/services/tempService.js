@@ -2,6 +2,8 @@ const Modbus = require('jsmodbus');
 const net = require('net');
 const mongoose = require('mongoose');
 const { countersSchema } = require('../utils/schemas');
+const DBobj = mongoose.model('counters', countersSchema, 'counters');
+const myDbConnection = require('../db/database'); // connection to db
 
 function connectToCounter(counter) {
   const socket = new net.Socket();
@@ -14,6 +16,7 @@ function connectToCounter(counter) {
   }
 
   socket.on('connect', async function () {
+    console.log("connect")
     const c1 = client.readHoldingRegisters(7537, 2);
     const c2 = client.readHoldingRegisters(7136, 2);
     const c3 = client.readHoldingRegisters(7138, 2);
@@ -26,7 +29,6 @@ function connectToCounter(counter) {
 
     Promise.all([c1, c2, c3, c4, c5, c6]).then(async (values) => {
       values.map(value => {
-        console.log(value.response._body._values);
         value.response._body._values.map(val => data.push(val));
       });
 
@@ -46,36 +48,29 @@ function connectToCounter(counter) {
       }
 
       if(dataToStore){
-        const DBobj = mongoose.model('counters', countersSchema, 'counters');
+        console.log(dataToStore)
         const counterData = new DBobj(dataToStore);
         await counterData.save();
         console.log('SAVED_DATA');
-        
       }
     }).catch(error => {
       console.log(error);
     });
   });
-  
-  socket.on('error', (error) => {
-    console.log(error);
-    socket.end('socket can send some more data but it will be ended');
-  });
 
   socket.on('timeout', () => {
     console.log('on timeout');
+    socket.destroy()
   });
   
   socket.on('end', () => {
     console.log('on end');
   });
   
-  socket.on('data', (data) => {
-    socket.write('Server Reply: ' + data);
-  });
-  
   socket.on('close', () => {
     console.log('on close');
+    console.log('Reconnecting..');
+    socket.connect(options);
   });
   
   socket.on('error', (error) => {
@@ -83,6 +78,7 @@ function connectToCounter(counter) {
     socket.end('socket can send some more data but it will be ended');
   });
 
+  socket.setTimeout(10000);
   socket.connect(options);
 };
 
