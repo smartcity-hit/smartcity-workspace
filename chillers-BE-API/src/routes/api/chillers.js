@@ -28,8 +28,10 @@ const getAllChillers = async (req, res) => {
             // foreach chillerName -> get latest data -> push to chillers array
             const chillerName = chillersNames[index];
             let chillerInfo = await ChillersData.find( { chillerName: `${chillerName}` }).limit(1).sort({ _id: -1 });
-            chillerInfo = chillerInfo[0].convertData();
-            chillers.push(chillerInfo);
+            if(chillerInfo.length > 0){
+                chillerInfo = chillerInfo[0].convertData();
+                chillers.push(chillerInfo);
+            }
         }
        
         logger.info('getAllChillers:', chillers);

@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const fahrenheitToCelcius = require('./data');
-const { chillersNamesSchema, devicesSchema, chillersSchema } = require('../utils/schemas');
-const logger = require('../utils/logger');
-const { Devices } = require('../models/counters');
+const { chillersNamesSchema, devicesSchema, chillersSamplesSchema } = require('../utils/schemas');
 
 
 /**
@@ -10,7 +8,7 @@ const { Devices } = require('../models/counters');
  */
 
 
-chillersSchema.methods.convertData = function() {
+ chillersSamplesSchema.methods.convertData = function() {
   const chiller = this;
   console.log(chiller['dateTime']);
   // if (!chiller.enteringWaterTemp && !chiller.leavingWaterTemp && !chiller.enteringGasTemp, !chiller.leavingGasTemp) {
@@ -121,7 +119,7 @@ const createChillersModel = async () => {
 /**
  * * This function will create mongoose model
  */
-  const Chillers = mongoose.model("chillers", chillersSchema, 'chillers');
+  const Chillers = mongoose.model("chillers", chillersSamplesSchema, 'chillers');
 
 
   return Chillers;
@@ -132,7 +130,7 @@ module.exports = {
   getChillersNames,
   getChillersSettings,
   createChillerModel: createChillersModel,
-  chillersSchema,
+  chillersSamplesSchema,
   chillersNamesSchema,
   devicesSchema,
   dropCollection,
