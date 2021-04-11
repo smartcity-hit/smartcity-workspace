@@ -2,8 +2,8 @@ const express = require('express');
 const myDbConnection = require('./db/database');
 const app = express();
 //copy these lines to MODBUS
-const pi = require('./utils/pingToCountersService');
-pi.countersHealthCheck();
+//const pi = require('./utils/pingToCountersService');
+//pi.countersHealthCheck();
 app.use(express.json());
 
 app.use(function (req, res, next) {

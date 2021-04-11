@@ -1,9 +1,5 @@
 const mongoose = require('mongoose');
 
-/**
- * * All the Schemas
- */
-
 const chillersSamplesSchema = new mongoose.Schema(
   {
       dateTime: {
@@ -45,7 +41,10 @@ const chillersSamplesSchema = new mongoose.Schema(
         required: true
       }
   },
-  { timestamps: true, versionKey: false}
+  { 
+    timestamps: true, 
+    versionKey: false 
+  }
 );
 
 const chillersNamesSchema = new mongoose.Schema(
@@ -68,7 +67,10 @@ const chillersNamesSchema = new mongoose.Schema(
       required: true
     }
   },
-  { timestamps: true, versionKey: false}
+  { 
+    timestamps: true, 
+    versionKey: false
+  }
 );
 
 const devicesSchema = new mongoose.Schema(
@@ -99,7 +101,10 @@ const devicesSchema = new mongoose.Schema(
       required: true
     }
   },
-  { timestamps: true, versionKey: false}
+  { 
+    timestamps: true, 
+    versionKey: false
+  }
 );
 
 const countersSamplesSchema = new mongoose.Schema(
@@ -154,9 +159,11 @@ const countersSamplesSchema = new mongoose.Schema(
       required: true,
       unique: true
     }
-    },
-
-    {timestamps: true, versionKey: false}
+  },
+  {
+    timestamps: true, 
+    versionKey: false
+  }
 );
 
 module.exports = {
