@@ -1,69 +1,53 @@
-import * as actionTypes from './chiller-details-types';
 import { appApiBaseUrl, getRequestOptions } from '../../utils/apiUtils';
-import store from '../store';
+import * as actionTypes from './chiller-details-types';
 
-/* Temporary */
-
-const insertFakeCoolingCircuitData = (chillersArray) => {
-    chillersArray.forEach((chiller) => {
-        // Temporary - hardcoded
-        chiller.coolingCircuit = { compressors: [true, false, true, true, false, true, false, true] };
-    });
-};
-
-/* Chiller Actions */
-
-export const initChiller = () => async (dispatch) => {
-    dispatch(getAllChillersData());
+export const initChillers = () => async (dispatch) => {
     dispatch({
         type: actionTypes.INIT_CHILLER,
         payload: null,
     });
 };
 
-export const getAllChillersData = () => async (dispatch) => {
+export const getChillerBasicDetails = (id) => async (dispatch) => {
     try {
-        dispatch({ type: actionTypes.SET_CHILLER_LOADING });
-        const res = await fetch(appApiBaseUrl + '/api/chillers/get', getRequestOptions());
-        const data = await res.json();
-        if (res && res.status === 200) {
-            const allChillers = data;
-            insertFakeCoolingCircuitData(allChillers);
-            dispatch({
-                type: actionTypes.ALL_CHILLERS_DATA_FETCHED,
-                payload: { allChillers },
-            });
-        }
-    } catch (err) {
-        console.log('ChillerActions getAllChillersData Error: ', err);
-        dispatch({ type: actionTypes.STOP_CHILLER_LODAING });
-        // throw data;
-    }
-};
-
-export const setActiveChiller = (chillerIndex) => async (dispatch) => {
-    try {
-        dispatch({ type: actionTypes.SET_CHILLER_LOADING });
-        const chillerNumber = chillerIndex + 1;
+        dispatch({ type: actionTypes.GET_CHILLER_BASIC_DETAILS_REQUEST });
         const res = await fetch(
-            appApiBaseUrl + `/api/chillers/get/${chillerNumber}`,
-            getRequestOptions()
+            appApiBaseUrl + `/api/chillers/${id}/basicDetails`,
+            getRequestOptions('GET')
         );
         const data = await res.json();
         if (res && res.status === 200) {
-            console.log('chillersActions setActiveChiller Chiller:', data);
-            const { allChillers } = store.getState().chiller;
-            allChillers[chillerIndex] = data;
-            insertFakeCoolingCircuitData(allChillers);
             dispatch({
-                type: actionTypes.CHILLER_DATA_FETCHED,
-                payload: { allChillers, activeChillerIndex: chillerIndex },
+                type: actionTypes.GET_CHILLER_BASIC_DETAILS_SUCCESS,
+                payload: data
             });
-        } else {
-            throw data;
         }
     } catch (err) {
-        console.log('ChillerActions setActiveChiller Error: ', err);
-        dispatch({ type: actionTypes.STOP_CHILLER_LODAING, payload: err });
+        return dispatch({
+            type: actionTypes.GET_CHILLER_BASIC_DETAILS_FAIL,
+            payload: err
+        });
+    }
+};
+
+export const getChillerSamples = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: actionTypes.GET_CHILLER_SAMPLES_REQUEST });
+        const res = await fetch(
+            appApiBaseUrl + `/api/chillers/${id}/samples`,
+            getRequestOptions('GET')
+        );
+        const data = await res.json();
+        if (res && res.status === 200) {
+            dispatch({
+                type: actionTypes.GET_CHILLER_SAMPLES_SUCCESS,
+                payload: data
+            });
+        }
+    } catch (err) {
+        return dispatch({
+            type: actionTypes.GET_CHILLER_SAMPLES_FAIL,
+            payload: err
+        });
     }
 };

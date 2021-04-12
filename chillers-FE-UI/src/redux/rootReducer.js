@@ -7,8 +7,8 @@ import chillersListReducer from './Chillers-List/chillers-list-reducer';
 
 export default combineReducers({
     chillersList: chillersListReducer,
-    counterDetails: counterDetailsReducer,
-    countersList: countersListReducer,
     chillerDetails: chillerDetailsReducer,
+    countersList: countersListReducer,
+    counterDetails: counterDetailsReducer,
     user: userReducer
 });

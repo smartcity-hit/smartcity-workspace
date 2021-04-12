@@ -12,7 +12,7 @@ export const getChillers = () => async (dispatch) => {
     try {
         dispatch({ type: actionTypes.GET_CHILLERS_REQUEST });
         const res = await fetch(
-            appApiBaseUrl + `/api/chillers/`,
+            appApiBaseUrl + `/api/chillers`,
             getRequestOptions('GET')
         );
         const data = await res.json();
