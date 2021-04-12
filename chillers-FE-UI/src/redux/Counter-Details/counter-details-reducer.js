@@ -3,6 +3,7 @@ import * as actionTypes from './counter-details-types';
 const initialState = {
     isLoading: false,
     counterName: '',
+    counterId: 0,
     counterLocation: '',
     counterIP: '',
     createdDate: null,
@@ -26,6 +27,7 @@ export default (state = initialState, action) => {
                 ...state,
                 isLoading: false,
                 counterName: action.payload.name,
+                counterId: action.payload.deviceId,
                 counterLocation: action.payload.location ? action.payload.location : 'No location set',
                 counterIP: action.payload.host,
                 createdDate: action.payload.createdAt,

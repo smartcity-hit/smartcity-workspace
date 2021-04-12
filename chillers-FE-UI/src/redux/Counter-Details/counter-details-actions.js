@@ -12,7 +12,7 @@ export const getCounterBasicDetails = (id) => async (dispatch) => {
     try {
         dispatch({ type: actionTypes.GET_COUNTER_BASIC_DETAILS_REQUEST });
         const res = await fetch(
-            appApiBaseUrl + `/api/1/counters/get/basicDetails/${id}`,
+            appApiBaseUrl + `/api/counter/${id}/basicDetails`,
             getRequestOptions('GET')
         );
         const data = await res.json();
@@ -34,7 +34,7 @@ export const getCounterSamples = (id) => async (dispatch) => {
     try {
         dispatch({ type: actionTypes.GET_COUNTER_SAMPLES_REQUEST });
         const res = await fetch(
-            appApiBaseUrl + `/api/1/counters/get/samples/${id}`,
+            appApiBaseUrl + `/api/counter/${id}/samples`,
             getRequestOptions('GET')
         );
         const data = await res.json();
@@ -53,10 +53,10 @@ export const getCounterSamples = (id) => async (dispatch) => {
 };
 
 export const addCounter = (counterData) => async (dispatch) => {
-    const { host, port, unitId,deviceType, } = counterData;
+    const { host, port, unitId, deviceType, } = counterData;
     try {
         dispatch({ type: actionTypes.SET_LOADING });
-        const res = await fetch(appApiBaseUrl + '/api/1/counters/create', {
+        const res = await fetch(appApiBaseUrl + '/api/counter', {
             ...getRequestOptions('POST'),
             body: JSON.stringify({
                 host,

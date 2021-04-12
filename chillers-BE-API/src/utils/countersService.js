@@ -1,34 +1,29 @@
 const mongoose = require('mongoose');
 const { devicesSchema, countersSamplesSchema } = require('./schemas');
 
-
-/**
- * * All the exported functions, All  of the methods & statics related to schemas
- */
-
-const getCountersSettings = async () => {
+const getAllCounters = async () => {
     const CountersDevices = mongoose.model('Devices', devicesSchema, 'devices');
-    const collections = await CountersDevices.find( { deviceType: '2' } );
-  
-    return collections;
-}
-
-const getCounterSamplesByName = async (counterName) => {
-    const Counter = mongoose.model('Counters', countersSamplesSchema, 'counters');
-    const counters = await Counter.find( { counterName: counterName } );
+    const counters = await CountersDevices.find( { deviceType: '2' } );
   
     return counters;
 }
 
-const getCounterBasicDetailsByName = async (counterName) => {
-  const CountersDevices = mongoose.model('Devices', devicesSchema, 'devices');
-  const counters = await CountersDevices.find( { deviceType: '2' , name: counterName } );
+const getCounterSamplesById = async (id) => {
+    const Counters = mongoose.model('Counters', countersSamplesSchema, 'counters');
+    const counterSamples = await Counters.find( { counterName: id } ); // counterName --> counterId
+  
+    return counterSamples;
+}
 
-  return counters[0];
+const getCounterBasicDetailsById = async (id) => {
+  const CountersDevices = mongoose.model('Devices', devicesSchema, 'devices');
+  const basicDetails = await CountersDevices.find( { deviceType: '2' , name: id } );// name --> deviceId
+
+  return basicDetails[0];
 }
 
 module.exports = {
-  getCountersSettings,
-  getCounterSamplesByName,
-  getCounterBasicDetailsByName
+  getAllCounters,
+  getCounterSamplesById,
+  getCounterBasicDetailsById
 };

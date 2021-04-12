@@ -2,15 +2,8 @@ const mongoose = require('mongoose');
 const fahrenheitToCelcius = require('./data');
 const { chillersNamesSchema, devicesSchema, chillersSamplesSchema } = require('../utils/schemas');
 
-
-/**
- * * All  of the methods & statics related to schemas
- */
-
-
- chillersSamplesSchema.methods.convertData = function() {
+chillersSamplesSchema.methods.convertData = function() {
   const chiller = this;
-  console.log(chiller['dateTime']);
   // if (!chiller.enteringWaterTemp && !chiller.leavingWaterTemp && !chiller.enteringGasTemp, !chiller.leavingGasTemp) {
     // return chiller;
   // }
@@ -19,7 +12,7 @@ const { chillersNamesSchema, devicesSchema, chillersSamplesSchema } = require('.
   chiller.set({ leavingWaterTemp: fahrenheitToCelcius(chiller.leavingWaterTemp) });
   chiller.set({ enteringGasTemp: fahrenheitToCelcius(chiller.enteringGasTemp) });
   chiller.set({ leavingGasTemp: fahrenheitToCelcius(chiller.leavingGasTemp) });
-  console.log(chiller);
+
   return chiller;
 };
 
@@ -32,7 +25,7 @@ const changeCollectionName = async (collectionName, newName) => {
     let db = mongoose.connection.db;
       return await db.collection(collectionName).rename(newName)
       .then(() => {
-      console.log('Collection rename successful!');
+        console.log('Collection rename successful!');
       });
   
   } catch (err) {

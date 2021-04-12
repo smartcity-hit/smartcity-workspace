@@ -13,7 +13,7 @@ export default {
 				return console.log('getChillerDateRange must recieve chiller id');
 			}
 			const res = await fetch(
-				appApiBaseUrl + `/api/1/chillers/daterange/${chillerId}`,
+				appApiBaseUrl + `/api/chillers/daterange/${chillerId}`,
 				getRequestOptions('GET')
 			);
 			if (res) {
@@ -35,7 +35,7 @@ export default {
 		try {
 			store.dispatch({ type: SET_CHILLER_LOADING });
 			const res = await fetch(
-				appApiBaseUrl + `/api/1/chillers/history/${id}/${startDate}/${endDate}`,
+				appApiBaseUrl + `/api/chillers/history/${id}/${startDate}/${endDate}`,
 				getRequestOptions('GET')
 			);
 			if (res) {
