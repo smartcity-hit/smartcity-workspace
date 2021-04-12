@@ -70,7 +70,6 @@ export const signInUser = ({ userId, password }) => async (dispatch) => {
                 type: actionTypes.SIGN_IN_SUCCESS,
                 payload: { user, token },
             });
-            dispatch(getAllChillersData())
         } else {
             throw data;
         }

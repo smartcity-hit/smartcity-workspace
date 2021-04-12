@@ -13,18 +13,18 @@ import './App.scss';
 
 const App = () => {
 	const { userData, loading } = useSelector((state) => state.user);
-	const { chillerLoading } = useSelector((state) => state.chiller);
+	//const { chillerLoading } = useSelector((state) => state.chiller);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(initEnvironment());
-		dispatch(initChiller());
+		//dispatch(initChiller());
 		//dispatch(initCounters());
 	}, [dispatch]);
 
 	return (
 		<div className="App">
-			<LoadingModal isModalOpen={loading || chillerLoading} />
+			<LoadingModal isModalOpen={loading} />
 			<BrowserRouter>
 				{userData ? < MenuAppBar /> : ''}
 				<Routes />
