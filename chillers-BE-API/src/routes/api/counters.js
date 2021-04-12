@@ -50,8 +50,8 @@ const getCounterBasicDetails = async (req, res) => {
     }
 }
 
-router.get('/get/basicDetails/:counterName', auth, getCounterBasicDetails)
-router.get('/get/samples/:counterName', auth, getCounterSamples);
-router.get('/get/devices', auth, getCounters);
+router.get('/', auth, getCounters);
+router.get('/:counterName/basicDetails', auth, getCounterBasicDetails)
+router.get('/:counterName/samples', auth, getCounterSamples);
 
 module.exports = router;

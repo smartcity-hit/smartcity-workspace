@@ -9,8 +9,8 @@ const getAllCounters = async () => {
 }
 
 const getCounterSamplesById = async (id) => {
-    const Counter = mongoose.model('Counters', countersSamplesSchema, 'counters');
-    const counterSamples = await Counter.find( { counterName: id } ); // counterName --> counterId
+    const Counters = mongoose.model('Counters', countersSamplesSchema, 'counters');
+    const counterSamples = await Counters.find( { counterName: id } ); // counterName --> counterId
   
     return counterSamples;
 }

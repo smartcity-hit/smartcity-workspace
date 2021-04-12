@@ -4,7 +4,7 @@ export default {
     getCounters: async () => {
         try {
             const res = await fetch(
-                appApiBaseUrl + `/api/1/counters/get`,
+                appApiBaseUrl + `/api/counters/get`,
                 getRequestOptions('GET')
             );
             if (res) {
@@ -22,7 +22,7 @@ export default {
                 return console.log('getCounterById must recieve counter id');
             }
             const res = await fetch(
-                appApiBaseUrl + `/api/1/counters/getCounterById/${counterId}`,
+                appApiBaseUrl + `/api/counters/getCounterById/${counterId}`,
                 getRequestOptions('GET')
             );
             if (res) {

@@ -1,9 +1,6 @@
 const express = require('express');
 const myDbConnection = require('./db/database');
 const app = express();
-//copy these lines to MODBUS
-//const pi = require('./utils/pingToCountersService');
-//pi.countersHealthCheck();
 app.use(express.json());
 
 app.use(function (req, res, next) {
@@ -15,6 +12,6 @@ app.use(function (req, res, next) {
 
 const router = require('./routes/routes');
 
-app.use('/api/1', router);
+app.use('/api', router);
 
 module.exports = app;

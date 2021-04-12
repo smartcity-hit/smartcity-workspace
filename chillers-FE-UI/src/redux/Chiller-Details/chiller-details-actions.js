@@ -24,7 +24,7 @@ export const initChiller = () => async (dispatch) => {
 export const getAllChillersData = () => async (dispatch) => {
     try {
         dispatch({ type: actionTypes.SET_CHILLER_LOADING });
-        const res = await fetch(appApiBaseUrl + '/api/1/chillers/get', getRequestOptions());
+        const res = await fetch(appApiBaseUrl + '/api/chillers/get', getRequestOptions());
         const data = await res.json();
         if (res && res.status === 200) {
             const allChillers = data;
@@ -46,7 +46,7 @@ export const setActiveChiller = (chillerIndex) => async (dispatch) => {
         dispatch({ type: actionTypes.SET_CHILLER_LOADING });
         const chillerNumber = chillerIndex + 1;
         const res = await fetch(
-            appApiBaseUrl + `/api/1/chillers/get/${chillerNumber}`,
+            appApiBaseUrl + `/api/chillers/get/${chillerNumber}`,
             getRequestOptions()
         );
         const data = await res.json();
