@@ -8,10 +8,11 @@ import WaterCircuit from '../Pages/WaterCircuit';
 import LoginPage from '../Pages/LoginPage';
 import AdminPanel from '../Pages/AdminPanel/index';
 import PrivateRoute from './privateRoute';
-import chillerHistory from '../Pages/ChillerHistory';
+import ChillerDetails from '../Pages/ChillerDetails/ChillerDetails';
 import { MenuAppBar } from "../Components/MenuAppBar/MenuAppBar";
 import LocationManagement from '../Pages/LocationManagement/LocationManagement';
 import CounterDetails from '../Pages/CounterDetails/CounterDetails';
+import ChillerDevices from '../Pages/ChillerDevices/ChillerDevices';
 
 const Routes = () => {
   const { userData } = useSelector((state) => state.user);
@@ -56,17 +57,16 @@ const Routes = () => {
         component={WaterCircuit}
       />
       <PrivateRoute
-        path="/chillers/cooling-circuit"
+        path="/chillers"
         exact
         isAuthorized={!!userData}
-        component={CoolingCircuit}
+        component={ChillerDevices}
       />
-     
       <PrivateRoute
-        path='/chillers/chiller-history'
+        path='/chiller/:id'
         exact
         isAuthorized={!!userData}
-        component={chillerHistory}
+        component={ChillerDetails}
       />
       <PrivateRoute
         path='/counter/details'
@@ -74,14 +74,13 @@ const Routes = () => {
         isAuthorized={!!userData}
         component={CounterDetails}
       />
-
-    <PrivateRoute
+      <PrivateRoute
         path='/user-management'
         exact
         isAuthorized={!!userData}
         component={AdminPanel}
       />
-      
+
     </div>
   );
 };

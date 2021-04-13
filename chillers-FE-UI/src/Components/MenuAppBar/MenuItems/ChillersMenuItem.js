@@ -83,14 +83,14 @@ const ChillersMenuItem = () => {
       </Link>
 
 
-      <Link to="/chillers/cooling-circuit">
+      <Link to="/chillers">
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List className="menu-app-bar" component="div" disablePadding>
-            <ListItem button className={`nav-link ${pathname.includes('/chillers/cooling-circuit') && activeTab === 1 ? 'active' : ''}`} onClick={() => { onClickTab(1) }}>
+            <ListItem button className={`nav-link ${pathname.includes('/chillers') && activeTab === 1 ? 'active' : ''}`} onClick={() => { onClickTab(1) }}>
               <ListItemIcon onClick={handelClose}>
                 <StarBorder />
               </ListItemIcon>
-              <ListItemText primary="Cooling circuit" />
+              <ListItemText primary="Devices" />
             </ListItem>
           </List>
         </Collapse>
