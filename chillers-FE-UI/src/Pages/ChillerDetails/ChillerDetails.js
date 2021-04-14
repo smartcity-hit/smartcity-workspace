@@ -1,19 +1,24 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getChillerBasicDetails } from '../../redux/Chiller-Details/chiller-details-actions';
-import DetailsCard from '../../Components/DetailsCard/DetailsCard';
+import {
+    getChillerSamples,
+    getChillerBasicDetails
+} from '../../redux/Chiller-Details/chiller-details-actions';
 
 const ChillerDetails = (props) => {
+    const chillerId = parseInt(props.match.params.id);
     const chillerDetails = useSelector((state) => state.chillerDetails);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        debugger
-        dispatch(getChillerBasicDetails('chiller1'));
+        dispatch(getChillerBasicDetails(chillerId));
+        dispatch(getChillerSamples(chillerId));
     }, [dispatch]);
 
     return (
-        <div>{console.log('moria')}</div>
+        <div>
+            <h1>{chillerDetails.chillerName}</h1>
+        </div>
     );
 }
 
