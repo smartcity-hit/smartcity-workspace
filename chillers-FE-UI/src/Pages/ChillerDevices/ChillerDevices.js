@@ -15,11 +15,13 @@ const ChillerDevices = () => {
     dispatch(getChillers());
   }, [dispatch]);
 
-  function ListItemLink(props) {
-    return <ListItem button component="a" {...props} />;
-  }
-
-  const CustomLink = props => <Link to={`/chiller/${props.chillerId}`} {...props} />;
+  const CustomLink = React.useMemo(
+    () =>
+      React.forwardRef((linkProps, ref) => (
+        <Link ref={ref} to={`/chiller/${linkProps.chillerid}`} {...linkProps} />
+      )),
+    [],
+  );
 
   return (
     <div className="list-container">
@@ -28,9 +30,9 @@ const ChillerDevices = () => {
         <List>
           {chillers.map(c => (
             <div key={c.host}>
-              <ListItemLink button component={CustomLink} chillerId={c.deviceId}>
+              <ListItem button component={CustomLink} chillerid={c.deviceId} >
                 <ListItemText primary={c.name} secondary={c.host} />
-              </ListItemLink>
+              </ListItem>
               <Divider component="li" />
             </div>
           ))}
