@@ -42,8 +42,6 @@ const getChillerSamples = async (req, res) => {
         else {
             throw new Error('no samples found.')
         }
-        
-
     } catch (err) {
         logger.error(`Error getChillerSamples: ${err.message}`);
         res.status(400).json({ code: err.code, message: err.message });
