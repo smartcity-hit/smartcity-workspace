@@ -6,6 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import { Link } from 'react-router-dom';
+import Container from '@material-ui/core/Container';
 
 const ChillerDevices = () => {
   const chillers = useSelector((state) => state.chillersList.chillers);
@@ -27,16 +28,18 @@ const ChillerDevices = () => {
     <div className="list-container">
       <h1>Chillers</h1>
       <div className="devices">
-        <List>
-          {chillers.map(c => (
-            <div key={c.host}>
-              <ListItem button component={CustomLink} chillerid={c.deviceId} >
-                <ListItemText primary={c.name} secondary={c.host} />
-              </ListItem>
-              <Divider component="li" />
-            </div>
-          ))}
-        </List>
+        <Container maxWidth="sm">
+          <List>
+            {chillers.map(c => (
+              <div key={c.host}>
+                <ListItem button component={CustomLink} chillerid={c.deviceId} >
+                  <ListItemText primary={c.name} secondary={c.host} />
+                </ListItem>
+                <Divider component="li" />
+              </div>
+            ))}
+          </List>
+        </Container>
       </div>
     </div>
   );
