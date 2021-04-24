@@ -12,7 +12,7 @@ export const initEnvironment = () => async (dispatch) => {
 
     try {
         dispatch({ type: actionTypes.SET_LOADING });
-        const res = await fetch(appApiBaseUrl + '/api/1/users/get', getRequestOptions());
+        const res = await fetch(appApiBaseUrl + '/api/users/get', getRequestOptions());
         const data = await res.json();
         if (res && res.status === 200) {
             const user = userUtils.parseUserObject(data);
@@ -48,7 +48,7 @@ export const initEnvironment = () => async (dispatch) => {
 export const signInUser = ({ userId, password }) => async (dispatch) => {
     try {
         dispatch({ type: actionTypes.SET_LOADING });
-        const res = await fetch(appApiBaseUrl + '/api/1/users/login', {
+        const res = await fetch(appApiBaseUrl + '/api/users/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ export const signInUser = ({ userId, password }) => async (dispatch) => {
 export const getAllUsers = () => async (dispatch) => {
     try {
         dispatch({ type: actionTypes.SET_LOADING });
-        const res = await fetch(appApiBaseUrl + '/api/1/users/get/all', getRequestOptions());
+        const res = await fetch(appApiBaseUrl + '/api/users/get/all', getRequestOptions());
         const data = await res.json();
         if (res && res.status === 200) {
             console.log('getAllUsers Users:', data);
@@ -114,7 +114,7 @@ export const signUpUser = (userData) => async (dispatch) => {
     const { userId, userType, fullName, address, phone, email, password } = userData;
     try {
         dispatch({ type: actionTypes.SET_LOADING });
-        const res = await fetch(appApiBaseUrl + '/api/1/users/create', {
+        const res = await fetch(appApiBaseUrl + '/api/users/create', {
             ...getRequestOptions('POST'),
             body: JSON.stringify({
                 userId,
@@ -148,7 +148,7 @@ export const deleteUserById = (id) => async (dispatch) => {
         dispatch({ type: actionTypes.SET_LOADING });
         console.log('userActions deleteUserById user:', data);
         const res = await fetch(
-            appApiBaseUrl + `/api/1/users/delete/${id}`,
+            appApiBaseUrl + `/api/users/delete/${id}`,
             getRequestOptions('DELETE')
         );
         const data = await res.json();
@@ -171,7 +171,7 @@ export const editUser = (userId, userNewData) => async (dispatch) => {
     try {
         dispatch({ type: actionTypes.SET_LOADING });
         console.log('userActions editUser userNewData:', userNewData);
-        const res = await fetch(appApiBaseUrl + `/api/1/users/edit/${userId}`, {
+        const res = await fetch(appApiBaseUrl + `/api/users/edit/${userId}`, {
             ...getRequestOptions('PATCH'),
             body: JSON.stringify(userNewData),
         });
