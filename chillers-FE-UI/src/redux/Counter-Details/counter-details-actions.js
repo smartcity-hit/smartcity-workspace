@@ -53,29 +53,5 @@ export const getCounterSamples = (id) => async (dispatch) => {
 };
 
 export const addCounter = (counterData) => async (dispatch) => {
-    const { host, port, unitId, deviceType, } = counterData;
-    try {
-        dispatch({ type: actionTypes.SET_LOADING });
-        const res = await fetch(appApiBaseUrl + '/api/counter', {
-            ...getRequestOptions('POST'),
-            body: JSON.stringify({
-                host,
-                port,
-                unitId,
-                deviceType,
-            }),
-        });
-        const data = await res.json();
-        if (res && res.status === 200) {
-            dispatch({
-                type: actionTypes.ADD_COUNTER_SUCCESS,
-                payload: { user: data },
-            });
-        }
-    } catch (error) {
-        dispatch({
-            type: actionTypes.ADD_COUNTER_ERROR,
-            payload: { error },
-        });
-    }
+
 };

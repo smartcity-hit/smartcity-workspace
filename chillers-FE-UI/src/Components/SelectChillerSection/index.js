@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getAllChillersData, setActiveChiller } from '../../redux/Chiller-Details/chiller-details-actions';
+import { getChillers } from '../../redux/Chillers-List/chillers-list-actions';
 
 import './index.scss';
 
@@ -16,7 +16,7 @@ const SelectChillerSection = () => {
 	};
 
 	const onClickRefreshBtn = () => {
-		dispatch(getAllChillersData());
+		dispatch(getChillers());
 	};
 
 	return allChillers.length ? (
@@ -32,8 +32,8 @@ const SelectChillerSection = () => {
 			</button>
 		</div>
 	) : (
-			''
-		);
+		''
+	);
 };
 
 export default SelectChillerSection;

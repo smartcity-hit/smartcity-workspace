@@ -1,51 +1,61 @@
 import * as actionTypes from './chiller-details-types';
 
 const initialState = {
-    chillerLoading: false,
-    allChillers: [],
-    activeChillerIndex: 0,
-    numOfChillers: 0,
-};
+    isLoading: false,
+    chillerName: '',
+    chillerId: 0,
+    chillerLocation: '',
+    chillerIP: '',
+    createdDate: null,
+    isAlive: false,
+    chillerSamples: []
+}
 
 export default (state = initialState, action) => {
-    const { type, payload } = action;
-    let chillerIndex;
-    if (payload && payload.chillerIndex) {
-        chillerIndex = payload.chillerIndex;
-    }
-    switch (type) {
+    switch (action.type) {
         case actionTypes.INIT_CHILLER:
-            return { ...state };
-        case actionTypes.SET_CHILLER_LOADING:
+            return {
+                ...state
+            };
+        case actionTypes.GET_CHILLER_BASIC_DETAILS_REQUEST:
             return {
                 ...state,
-                chillerLoading: true,
+                isLoading: true,
             };
-        case actionTypes.STOP_CHILLER_LODAING:
+        case actionTypes.GET_CHILLER_BASIC_DETAILS_SUCCESS:
             return {
                 ...state,
-                chillerLoading: false,
+                isLoading: false,
+                chillerName: action.payload.name,
+                chillerId: action.payload.deviceId,
+                chillerLocation: action.payload.location ? action.payload.location : 'No location set',
+                chillerIP: action.payload.host,
+                createdDate: action.payload.createdAt,
+                isAlive: action.payload.isAlive !== undefined ? action.payload.isAlive.toString() : 'No Status'
             };
-        case actionTypes.ALL_CHILLERS_DATA_FETCHED: {
-            const { allChillers } = payload;
+        case actionTypes.GET_CHILLER_BASIC_DETAILS_FAIL:
             return {
                 ...state,
-                chillerLoading: false,
-                allChillers,
-                numOfChillers: allChillers && allChillers.length,
-                activeChillerIndex: 0,
+                isLoading: false,
+                error: action.payload
             };
-        }
-        case actionTypes.CHILLER_DATA_FETCHED: {
-            const { allChillers, activeChillerIndex } = payload;
+        case actionTypes.GET_CHILLER_SAMPLES_REQUEST:
             return {
                 ...state,
-                chillerLoading: false,
-                allChillers,
-                activeChillerIndex,
-            };
-        }
-
+                isLoading: true
+            }
+        case actionTypes.GET_CHILLER_SAMPLES_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                chillerSamples: action.payload.chillerSamples
+            }
+        case actionTypes.GET_CHILLER_SAMPLES_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            }
         default:
             return state;
     }

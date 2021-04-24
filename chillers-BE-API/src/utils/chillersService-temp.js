@@ -10,14 +10,14 @@ const getAllChillers = async () => {
 
 const getChillerSamplesById = async (id) => {
     const Chillers = mongoose.model('Chillers', countersSamplesSchema, 'chillers');
-    const chillerSamples = await Chillers.find( { chillerName: id } ); // counterName --> counterId
+    const chillerSamples = await Chillers.find( { chillerId: id } ); // chillerName --> chillerId
   
     return chillerSamples;
 }
 
 const getChillerBasicDetailsById = async (id) => {
   const ChillersDevices = mongoose.model('Devices', devicesSchema, 'devices');
-  const basicDetails = await ChillersDevices.find( { deviceType: '1' , name: id } );// name --> deviceId
+  const basicDetails = await ChillersDevices.find( { deviceType: '1' , deviceId: id } );// name --> deviceId
 
   return basicDetails[0];
 }

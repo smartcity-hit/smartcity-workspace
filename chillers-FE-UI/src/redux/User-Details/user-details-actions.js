@@ -2,7 +2,6 @@ import store from '../store';
 import * as actionTypes from './user-details-types';
 import userUtils from '../../utils/userUtils';
 import { appApiBaseUrl, getRequestOptions } from '../../utils/apiUtils';
-import { getAllChillersData } from '../Chiller-Details/chiller-details-actions';
 
 export const initEnvironment = () => async (dispatch) => {
     const token = localStorage.getItem('token');
@@ -70,7 +69,6 @@ export const signInUser = ({ userId, password }) => async (dispatch) => {
                 type: actionTypes.SIGN_IN_SUCCESS,
                 payload: { user, token },
             });
-            dispatch(getAllChillersData())
         } else {
             throw data;
         }
