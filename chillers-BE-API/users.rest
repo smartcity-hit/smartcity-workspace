@@ -28,16 +28,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6I
 
 
 ### login
-POST http://localhost:3200/api/1/users/login
+POST http://localhost:3200/api/users/login
 Content-Type: application/json
 
 
 {
   "userId": "305440894",
-  "password": "123456" 
-},
-{
-  "userId": "222222222",
   "password": "123456" 
 }
 
