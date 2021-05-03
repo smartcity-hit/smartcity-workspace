@@ -26,17 +26,13 @@ const Routes = () => {
           userData ? <Redirect to="/" exact /> : <Redirect to="/signin" />
         }
       />
-
-
       <Route path="/signin" exact component={LoginPage} />
-
       <PrivateRoute
         path="/counters/alerts"
         exact
         isAuthorized={!!userData}
         component={Alert}
       />
-
       <PrivateRoute
         path="/location-management"
         exact
@@ -48,6 +44,12 @@ const Routes = () => {
         exact
         isAuthorized={!!userData}
         component={CounterDevices}
+      />
+      <PrivateRoute
+        path='/counter/:id'
+        exact
+        isAuthorized={!!userData}
+        component={CounterDetails}
       />
       <PrivateRoute
         main
@@ -67,12 +69,6 @@ const Routes = () => {
         exact
         isAuthorized={!!userData}
         component={ChillerDetails}
-      />
-      <PrivateRoute
-        path='/counter/details'
-        exact
-        isAuthorized={!!userData}
-        component={CounterDetails}
       />
       <PrivateRoute
         path='/user-management'

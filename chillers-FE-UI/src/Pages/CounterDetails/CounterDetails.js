@@ -1,33 +1,32 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCounterBasicDetails, getCounterSamples } from '../../redux/Counter-Details/counter-details-actions';
+import {
+  getCounterBasicDetails,
+  getCounterSamples
+} from '../../redux/Counter-Details/counter-details-actions';
 import DetailsCard from '../../Components/DetailsCard/DetailsCard'
 import HistoryCard from '../../Components/HistoryCard/HistoryCard'
 import './CounterDetails.scss';
 
 const CounterDetails = (props) => {
-  const samples = useSelector((state) => state.counterDetails.counterSamples);
-  const location = useSelector((state) => state.counterDetails.counterLocation);
-  const name = useSelector((state) => state.counterDetails.counterName);
-  const createdDate = useSelector((state) => state.counterDetails.createdDate);
-  const ip = useSelector((state) => state.counterDetails.counterIP);
-  const isAlive = useSelector((state) => state.counterDetails.isAlive);
+  debugger
+  const counterId = parseInt(props.match.params.id);
+  const counterDetails = useSelector((state) => state.counterDetails);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getCounterBasicDetails(counterId));
+    dispatch(getCounterSamples(counterId));
+  }, [dispatch]);
 
   const createCol = [
     {
-      counterName: name,
-      counterIP: ip,
-      counterLocation: location,
-      createdDate: createdDate,
-      isAlive: isAlive
+      counterIP: counterDetails.ip,
+      counterLocation: counterDetails.location,
+      createdDate: counterDetails.createdDate,
+      isAlive: counterDetails.isAlive
     }
   ];
-
-  useEffect(() => {
-    dispatch(getCounterSamples(props.location.counterName)),
-      dispatch(getCounterBasicDetails(props.location.counterName));
-  }, [dispatch]);
 
   const columns = [
     {
@@ -104,16 +103,14 @@ const CounterDetails = (props) => {
     },
   ];
 
-
-
   return (
     <div className="counter-wrapper">
+      <h1>{counterDetails.counterName}</h1>
       <div>
         <DetailsCard cols={createCol} />
       </div>
-      <p></p>
       <div>
-        <HistoryCard rows={samples} cols={columns} />
+        <HistoryCard rows={counterDetails.counterSamples} cols={columns} />
       </div>
     </div>
   );
