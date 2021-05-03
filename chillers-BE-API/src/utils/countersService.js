@@ -10,14 +10,14 @@ const getAllCounters = async () => {
 
 const getCounterSamplesById = async (id) => {
     const Counters = mongoose.model('Counters', countersSamplesSchema, 'counters');
-    const counterSamples = await Counters.find( { counterName: id } ); // counterName --> counterId
+    const counterSamples = await Counters.find( { counterId: id } );
   
     return counterSamples;
 }
 
 const getCounterBasicDetailsById = async (id) => {
   const CountersDevices = mongoose.model('Devices', devicesSchema, 'devices');
-  const basicDetails = await CountersDevices.find( { deviceType: '2' , name: id } );// name --> deviceId
+  const basicDetails = await CountersDevices.find( { deviceType: '2' , deviceId: id } );
 
   return basicDetails[0];
 }

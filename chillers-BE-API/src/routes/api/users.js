@@ -62,10 +62,11 @@ const deleteUserById = async (req, res) => {
 
 const loginUser = async (req, res) => {
     try {
-        const { userId: id, password } = req.body;
+        var { id, password } = req.body;
+        id = parseInt(id);
         const user = await User.findByCredentials(id, password);
-        const token = await user.generateAuthToken();
-        res.status(200).json({ user, token });
+        const idToken = await user.generateAuthToken();
+        res.status(200).json({ user, idToken });
     } catch (err) {
         logger.error(`loginUser failed: ${err.message}`);
         res.status(400).json({ code: err.code, message: err.message });
