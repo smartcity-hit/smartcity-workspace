@@ -5,6 +5,12 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Attach to Process",
+      "type": "node",
+      "request": "attach",
+      "processId": "${command:PickProcess}"
+    },    
+    {
       "type": "node",
       "request": "launch",
       "name": "Launch node server 3100",
@@ -14,14 +20,5 @@
       "program": "${workspaceFolder}\\src\\index.js",
       "outputCapture": "std"
     }
-    // {
-    //   "type": "node",
-    //   "request": "launch",
-    //   "name": "Launch modbus",
-    //   "skipFiles": [
-    //     "<node_internals>/**"
-    //   ],
-    //   "program": "${workspaceFolder}\\modbus.js"
-    // }
   ]
 }

@@ -1,18 +1,10 @@
-const express = require('express');
 const myDbConnection = require('./db/database'); // connection to db
-const modbusConnection = require('./modbus'); // connection to modbus
+const chillersService = require('./services/chillersService');
+//const countersService = require('./services/countersService');
+const countersService = require('./services/tempService');
+const pi = require('./services/countersHealthCheckService');
+pi.countersHealthCheck();
 
-const app = express();
-
-app.use(express.json());
-
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  next();
-});
-
- //modbusConnection()
-
-module.exports = app;
+countersService({'host': '172.16.11.218', 'name': 'cellcom'});
+countersService({'host': '172.16.11.217', 'name': 'pelephone'});
+countersService({'host': '172.16.11.219', 'name': 'orange'});

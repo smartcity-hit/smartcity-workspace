@@ -44,6 +44,59 @@ const chillersSchema = new mongoose.Schema(
   { timestamps: true, versionKey: false}
 );
 
+const countersSchema = new mongoose.Schema(
+  {
+    dateTime: {
+      type: Date
+    },
+    i1: {
+      type: Number,
+      required: false
+    },
+    i2: {
+      type: Number,
+      required: false
+    },
+    i3: {
+      type: Number,
+      required: false
+    },
+    n_v1: {
+      type: Number,
+      required: false
+    },
+    n_v2: {
+      type: Number,
+      required: false
+    },
+    n_v3: {
+      type: Number,
+      required: false
+    },
+    v1_v2: {
+      type: Number,
+      required: false
+    },
+    v1_v3: {
+      type: Number,
+      required: false
+    },
+    v2_v3: {
+      type: Number,
+      required: false
+    },
+    cos: {
+      type: Number,
+      required: false
+    },
+    counterName: {
+      type: String,
+      required: true
+    }
+  },
+  { timestamps: true, versionKey: false}
+);
+
 const chillersNamesSchema = new mongoose.Schema(
   {
     name: {
@@ -97,5 +150,6 @@ const devicesSchema = new mongoose.Schema(
 module.exports = {
   chillersSchema, 
   chillersNamesSchema,
+  countersSchema,
   devicesSchema
 };

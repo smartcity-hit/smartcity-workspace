@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
-const {devicesSchema, chillersSchema} = require('./schemas');
+const {devicesSchema, chillersSchema} = require('../utils/schemas');
 
 /**
  * * All the exported functions
  */
 
- 
 const getAllChillers = async () => {
   /**
    * * This function will get all chiller's names from db and return them in array

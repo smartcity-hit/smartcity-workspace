@@ -1,6 +1,6 @@
 const Modbus = require('jsmodbus');
 const mongoose = require('mongoose');
-const { chillersSchema } = require('./utils/schemas');
+const { chillersSchema } = require('../utils/schemas');
 
 // Initialize of TCP ModBus connection.
 const net = require('net');
@@ -60,7 +60,6 @@ socket.on('connect', async function () {
 
   socket.on('data', (data)=> {
     socket.write('Server Reply: ' + data);
-    // socket.emit('error', new Error('forcefully injected error'));
   });
 
   socket.on('close', ()=> {
@@ -76,5 +75,4 @@ socket.on('connect', async function () {
     socket.end('socket can send some more data but it will be ended');
   });
 
-  module.exports = socket.connect(options);
-  // socket.connect(options);
+module.exports = socket.connect(options);
