@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const { devicesSchema } = require('../utils/schemas');
 
 const pingToCounters = () => {
+    
     // if host document does not exist on db - it will not be created.
     var hosts = ['172.16.11.195'];
     hosts.forEach(function(host){
